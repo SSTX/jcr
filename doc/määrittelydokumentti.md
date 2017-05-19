@@ -21,4 +21,4 @@ on käsiteltävän datan suuruus. O(n) on tavoitteena myös tässä toteutuksess
 Tarkoituksena on 
 1. verrata omien toteutuksieni suorituskykyä javan valmiiden kirjastojen toteutuksiin
 2. analysoida omien toteutuksieni vaativuuksia eripituisilla syötteillä
-3. tutkia syötteen koon vaikutuksen eroja javan valmiisiin toteutuksiin verrattuna
+3. tutkia, miten kohdan 2. tulokset vertautuvat javan kirjastojen vastaaviin

@@ -18,7 +18,7 @@ DES ja useat muut salausalgoritmit toimivat aika- ja tilavaativuudella O(n), mis
 on käsiteltävän datan suuruus. O(n) on tavoitteena myös tässä toteutuksessa. 
 
 ## Vaativuuksien testaus ja analysointi
-Tarkoituksena on 
-1. verrata omien toteutuksieni suorituskykyä javan valmiiden kirjastojen toteutuksiin
-2. analysoida omien toteutuksieni vaativuuksia eripituisilla syötteillä
-3. tutkia, miten kohdan 2. tulokset vertautuvat javan kirjastojen vastaaviin
+Tarkoituksena on testata omien toteutuksieni suorituskykyä verrattuna javan valmiiden kirjastojen toteutuksiin.
+Minkälainen ero on pienillä syötteillä? Suurilla syötteillä?
+
+Lisäksi, jos aikaa riittää useamman algoritmin toteuttamiseen, aion verrata niiden aikavaativuuksia toisiinsa.

@@ -9,3 +9,6 @@ Lueskelin myös eri salausalgoritmien yksityiskohtia netistä.
 
 Seuraavaksi toteutan ohjelman rungon käyttäen valmiita kirjastoja, minkä jälkeen aloitan 
 oman DES-toteutukseni.
+
+Vaikeata tällä viikolla oli yrittää ymmärtää esim. DES:ssä käytettäviä Substitution Boxeja (S-Box). 
+Miten ne luodaan, mitä pitää ottaa huomioon?

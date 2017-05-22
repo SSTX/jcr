@@ -12,7 +12,13 @@ joko näppäimistöltä tai tiedostosta, salaa tai purkaa sen riippuen käyttäj
 ja lopuksi tallentaa tuloksen tiedostoon tai tulostaa sen näytölle. Syötteenä annettu 
 data voi olla mikä tahansa jono bittejä. 
 
-# Tavoitteelliset aika- ja tilavaativuudet
+# Aika- ja tilavaativuus
+## Tavoitteellinen vaativuus
 DES ja useat muut salausalgoritmit toimivat aika- ja tilavaativuudella O(n), missä n 
 on käsiteltävän datan suuruus. O(n) on tavoitteena myös tässä toteutuksessa. 
 
+## Vaativuuksien testaus ja analysointi
+Tarkoituksena on testata omien toteutuksieni suorituskykyä verrattuna javan valmiiden kirjastojen toteutuksiin.
+Minkälainen ero on pienillä syötteillä? Suurilla syötteillä?
+
+Lisäksi, jos aikaa riittää useamman algoritmin toteuttamiseen, aion verrata niiden aikavaativuuksia toisiinsa.

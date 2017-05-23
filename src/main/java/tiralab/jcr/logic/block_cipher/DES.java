@@ -6,6 +6,7 @@
 package tiralab.jcr.logic.block_cipher;
 
 import java.security.Key;
+
 import javax.crypto.Cipher;
 
 /**
@@ -21,8 +22,42 @@ public class DES implements BlockCipher {
      */
     public DES(Key k) {
         this.k = k;
+
     }
-    
+
+    public byte[] permuteBits(byte[] data, int[] permTable) {
+        byte[] permuted = new byte[permTable.length / 8];
+        for (int i = 0; i < data.length; i++) {
+            int nbyte = permTable[i] / 8;
+            int nbit = permTable[i] % 8;
+            byte b = data[nbyte];
+            b <<= nbit - 1;
+            b >>= 7;
+            nbyte = i / 8;
+            nbit = i % 8;
+            permuted[nbyte] |= b << 7 - nbit;
+        }
+        return permuted;
+    }
+
+    public byte[] expand(byte[] data) {
+        int[] permTable = {
+            31, 0, 1, 2, 3, 4,
+            3, 4, 5, 6, 7, 8,
+            7, 8, 9, 10, 11, 12,
+            11, 12, 13, 14, 15, 16,
+            15, 16, 17, 18, 19, 20,
+            19, 20, 21, 22, 23, 24,
+            23, 24, 25, 26, 27, 28,
+            27, 28, 29, 30, 31, 0
+        };
+        return this.permuteBits(data, permTable);
+    }
+
+    private byte[] feistelFunction(byte[] data, byte[] subkey) {
+        return null;
+    }
+
     /**
      * Encrypt a single block of data.
      * @param data Block of data to be encrypted.
@@ -57,5 +92,5 @@ public class DES implements BlockCipher {
             return new byte[0];
         }
     }
-    
+
 }

@@ -2,7 +2,7 @@
 
 ## Tunteja käytetty
 * Maanantai: 6
-* Tiistai:
+* Tiistai: 6
 * Keskiviikko:
 
 

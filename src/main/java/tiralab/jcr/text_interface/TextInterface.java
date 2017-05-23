@@ -18,11 +18,17 @@ public class TextInterface {
     private Scanner scan;
     private CryptoHandler crypt;
 
+    /**
+     *
+     */
     public TextInterface() {
         this.scan = new Scanner(System.in);
         this.crypt = new CryptoHandler();
     }
 
+    /**
+     *
+     */
     public void run() {
         while (true) {
             System.out.print("> ");
@@ -35,6 +41,10 @@ public class TextInterface {
         }
     }
 
+    /**
+     *
+     * @param command
+     */
     public void handleCommand(String command) {
         if (command.equals("e")) {
             System.out.println("File to encrypt:");
@@ -57,6 +67,9 @@ public class TextInterface {
         }
     }
 
+    /**
+     *
+     */
     public void printHelpText() {
         System.out.println("The following commands are supported:");
         System.out.println("e\tencrypt");

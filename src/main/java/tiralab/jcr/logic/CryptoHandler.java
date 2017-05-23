@@ -24,6 +24,9 @@ public class CryptoHandler {
     private Key k;
     private FileIO fileIo;
 
+    /**
+     *
+     */
     public CryptoHandler() {
         try {
             this.k = KeyGenerator.getInstance("DES").generateKey();
@@ -35,6 +38,14 @@ public class CryptoHandler {
         this.ciphers.put("DES", new DES(this.k));
     }
     
+    /**
+     *
+     * @param filePath
+     * @param keyPath
+     * @param cipherName
+     * @return
+     * @throws IOException
+     */
     public byte[] encrypt(String filePath, String keyPath, String cipherName)
             throws IOException {
         byte[] data = this.fileIo.readData(filePath);
@@ -42,6 +53,14 @@ public class CryptoHandler {
         return null;
     }
     
+    /**
+     *
+     * @param filePath
+     * @param keyPath
+     * @param cipherName
+     * @return
+     * @throws IOException
+     */
     public String decrypt(String filePath, String keyPath, String cipherName) 
             throws IOException{
         byte[] data = this.fileIo.readData(filePath);

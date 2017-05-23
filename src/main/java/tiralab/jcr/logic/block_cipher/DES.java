@@ -7,19 +7,28 @@ package tiralab.jcr.logic.block_cipher;
 
 import java.security.Key;
 import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
 
 /**
- *
+ * Implementation of the Data Encryption Standard (DES) block cipher.
  * @author ttiira
  */
 public class DES implements BlockCipher {
     private Key k;
     
+    /**
+     *
+     * @param k
+     */
     public DES(Key k) {
         this.k = k;
     }
     
+    /**
+     * Encrypt a single block of data.
+     * @param data Block of data to be encrypted.
+     * @param key Encryption key.
+     * @return Encrypted block.
+     */
     @Override
     public byte[] encrypt(byte[] data, byte[] key) {
         try {
@@ -31,6 +40,12 @@ public class DES implements BlockCipher {
         }
     }
 
+    /**
+     * Decrypt a single block of data.
+     * @param data Block of data to be decrypted.
+     * @param key Decryption key.
+     * @return Decrypted block.
+     */
     @Override
     public byte[] decrypt(byte[] data, byte[] key) {
         try {

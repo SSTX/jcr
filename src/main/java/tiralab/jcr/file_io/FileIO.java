@@ -10,14 +10,27 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 /**
- *
+ * A simple class for reading and writing files.
  * @author ttiira
  */
 public class FileIO {
+
+    /**
+     *
+     * @param filePath Path to the file to be read.
+     * @return Raw bytes read from file.
+     * @throws IOException
+     */
     public byte[] readData(String filePath) throws IOException {
         return Files.readAllBytes(Paths.get(filePath));
     }
     
+    /**
+     *
+     * @param filePath Path to the file to be written.
+     * @param data Raw bytes to be written to the file.
+     * @throws IOException
+     */
     public void writeData(String filePath, byte[] data) throws IOException {
         Files.write(Paths.get(filePath), data);
     }

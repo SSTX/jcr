@@ -45,7 +45,7 @@ public abstract class ModeOfOperation {
      * @param bytes Byte array to be padded.
      * @return PKCS#7 padded byte array.
      */
-    protected byte[] padBytes(byte[] bytes) {
+    public byte[] padBytes(byte[] bytes) {
         int padNeed = this.blockSize - (bytes.length % this.blockSize);
         byte pad = (byte) padNeed;
         byte[] paddedBytes = new byte[bytes.length + padNeed];
@@ -66,7 +66,7 @@ public abstract class ModeOfOperation {
      */
     public byte[][] makeBlocks(byte[] bytes) {
         bytes = this.padBytes(bytes);
-        int blockNum = bytes.length / this.blockSize;
+        int blockNum = bytes.length / this.blockSize;//bytes.length is a multiple of blockSize
         byte[][] blocks = new byte[blockNum][this.blockSize];
         int b = 0;
         for (int i = 0; i < blockNum; i++) {

@@ -12,17 +12,17 @@ package tiralab.jcr.logic.block_cipher;
 public interface BlockCipher {
 
     /**
-     *
-     * @param data
-     * @param key
+     * Encrypt a single block.
+     * @param data Block to encrypt.
+     * @param key Encryption key.
      * @return
      */
     byte[] encrypt(byte[] data, byte[] key);
 
     /**
-     *
-     * @param data
-     * @param key
+     * Decrypt a single block.
+     * @param data Block to decrypt.
+     * @param key Decryption key.
      * @return
      */
     byte[] decrypt(byte[] data, byte[] key);

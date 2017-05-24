@@ -40,7 +40,7 @@ public class ECBTest {
 
     @Before
     public void setUp() {
-        ecb = new ECB(new DES(null), 8);
+        ecb = new ECB(new DES(), 8);
         testBytes = new byte[70];
         for (int i = 0; i < 70; i++) {
             testBytes[i] += i; //{0,1,2,...,69}
@@ -55,7 +55,7 @@ public class ECBTest {
     @Test
     public void blockSizeNotZero() {
         try {
-            ECB test = new ECB(new DES(null), 0);
+            ECB test = new ECB(new DES(), 0);
             assertFalse(true);
         } catch (IllegalArgumentException e) {
             assertTrue(true);
@@ -65,7 +65,7 @@ public class ECBTest {
     @Test
     public void blockSizeNotNegative() {
         try {
-            ECB test = new ECB(new DES(null), -1);
+            ECB test = new ECB(new DES(), -1);
             assertFalse(true);
         } catch (IllegalArgumentException e) {
             assertTrue(true);

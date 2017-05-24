@@ -20,16 +20,22 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        ECB e = new ECB(new DES(null), 8);
-        byte[] testBytes = new byte[70];
-        Arrays.fill(testBytes, (byte) 0);
-        for (int i = 0; i < 70; i++) {
-            testBytes[i] += i; //0,1,2,3,4,5,6...
-        }
-        System.out.println(Arrays.toString(testBytes));
-        for (byte[] b : e.makeBlocks(testBytes)) {
-            System.out.println(Arrays.toString(b));
-        }
-        System.out.println(Integer.divideUnsigned(4, 2));
+
+        DES des = new DES();
+        byte[] test = new byte[]{
+            (byte) 0, 
+            (byte) 0, 
+            (byte) 0b11111111, 
+            (byte) 0b11111111
+        };
+        byte[] key = new byte[]{
+            (byte) 1,
+            (byte) 1,
+            (byte) 1,
+            (byte) 1,
+            (byte) 1,
+            (byte) 1
+        };
+        System.out.println(Arrays.toString(des.feistelFunction(test, key)));
     }
 }

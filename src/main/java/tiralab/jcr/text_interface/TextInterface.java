@@ -7,7 +7,6 @@ package tiralab.jcr.text_interface;
 
 import java.io.IOException;
 import java.util.Scanner;
-import tiralab.jcr.logic.CryptoHandler;
 
 /**
  *

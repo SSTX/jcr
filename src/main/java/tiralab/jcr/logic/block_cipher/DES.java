@@ -36,7 +36,7 @@ public class DES implements BlockCipher {
             byte b = data[nbyteData];
             b >>>= (7 - nbitData); //push the desired bit all the way to the right
             b &= 1;
-            b <<= (7 - nbitPerm); //push the bit to it's correct position in the byte
+            b <<= (7 - nbitPerm); //push the bit to its correct position in the byte
             permuted[nbytePerm] |= b;
         }
         return permuted;

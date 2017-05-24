@@ -76,4 +76,26 @@ public class DESTest {
         assertEquals(0, des.getBitByOffset(14, testBytes));
         assertEquals(1, des.getBitByOffset(8, testBytes));
     }
+
+    @Test
+    public void afterSubstitutionCompressReturnCorrect1() {
+        byte a = (byte) 0b00000001;
+        byte b = (byte) 0b00001111;
+        assertEquals(31, des.afterSubstitutionCompress(a,b));
+    }
+
+    @Test
+    public void afterSubstitutionCompressReturnCorrect2() {
+        byte a = (byte) 0b00000101;
+        byte b = (byte) 0b00001011;
+        assertEquals(91, des.afterSubstitutionCompress(a,b));
+    }
+
+    @Test
+    public void afterSubstitutionCompressIgnoreHighOrderBits() {
+        byte a = (byte) 0b11000101;
+        byte b = (byte) 0b01101011;
+        assertEquals(91, des.afterSubstitutionCompress(a,b));
+    }
+
 }

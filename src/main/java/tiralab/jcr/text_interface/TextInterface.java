@@ -5,6 +5,7 @@
  */
 package tiralab.jcr.text_interface;
 
+import tiralab.jcr.logic.Cryptographer;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -15,14 +16,14 @@ import java.util.Scanner;
 public class TextInterface {
 
     private Scanner scan;
-    private CryptoHandler crypt;
+    private Cryptographer crypt;
 
     /**
      *
      */
     public TextInterface() {
         this.scan = new Scanner(System.in);
-        this.crypt = new CryptoHandler();
+        this.crypt = new Cryptographer();
     }
 
     /**

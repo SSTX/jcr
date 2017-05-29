@@ -5,9 +5,7 @@
  */
 package tiralab.jcr.logic.block_cipher;
 
-import java.security.Key;
-
-import javax.crypto.Cipher;
+import tiralab.jcr.logic.BitFunctions;
 
 /**
  * Implementation of the Data Encryption Standard (DES) block cipher.
@@ -16,31 +14,6 @@ import javax.crypto.Cipher;
  */
 public class DES implements BlockCipher {
 
-    /**
-     * Function for modifying blocks at bit level.
-     *
-     * @param data Block to be modified. 
-     * Length in bits must be greater than the largest number in permTable.
-     * @param permTable Array of integers that specifies which bits go where in
-     * the new block. Each integer is a 0-based index for some bit.
-     * @return New block the same size as permTable, with n-th bit from the left
-     * being the m-th bit in the original block, where m = permTable[n]
-     */
-    public byte[] permuteBits(byte[] data, int[] permTable) {
-        byte[] permuted = new byte[permTable.length / 8];
-        for (int i = 0; i < permTable.length; i++) {
-            int nbyteData = permTable[i] / 8;
-            int nbitData = permTable[i] % 8;
-            int nbytePerm = i / 8;
-            int nbitPerm = i % 8;
-            byte b = data[nbyteData];
-            b >>>= (7 - nbitData); //push the desired bit all the way to the right
-            b &= 1;
-            b <<= (7 - nbitPerm); //push the bit to its correct position in the byte
-            permuted[nbytePerm] |= b;
-        }
-        return permuted;
-    }
 
     /**
      * Expand function (E) from the DES cipher. Used in the Feistel function to
@@ -60,7 +33,7 @@ public class DES implements BlockCipher {
             23, 24, 25, 26, 27, 28,
             27, 28, 29, 30, 31, 0
         };
-        return this.permuteBits(data, permTable);
+        return BitFunctions.permuteBits(data, permTable);
     }
 
     /**
@@ -80,7 +53,7 @@ public class DES implements BlockCipher {
             60, 52, 44, 36, 28, 20, 12, 4,
             62, 54, 46, 38, 30, 22, 14, 6
         };
-        return this.permuteBits(data, permTable);
+        return BitFunctions.permuteBits(data, permTable);
     }
 
     /**
@@ -100,41 +73,9 @@ public class DES implements BlockCipher {
             33, 1, 41, 9, 49, 17, 57, 25,
             32, 0, 40, 8, 48, 16, 56, 24
         };
-        return this.permuteBits(data, permTable);
+        return BitFunctions.permuteBits(data, permTable);
     }
 
-    /**
-     * Get the nth bit from a byte array.
-     *
-     * @param n Index of the desired bit (0-based).
-     * @param data The byte array containing the bit.
-     * @return Byte with the rightmost bit being the desired bit and the rest
-     * being zero bits.
-     */
-    public byte getBitByOffset(int n, byte[] data) {
-        int nbyte = n / 8;
-        int nbit = n % 8;
-        byte b = data[nbyte];
-        b >>>= (7 - nbit);
-        b &= 1;
-        return b;
-    }
-
-    /**
-     * Helper function to make a whole byte from two 4-bit halves given by the
-     * substitution box.
-     *
-     * @param b1 First half. Four low-order bits are used.
-     * @param b2 Second half. Four low-order bits are used.
-     * @return Byte with the four bits from b1 as the high-order bits and four
-     * bits from b2 as the low-order bits.
-     */
-    public byte afterSubstitutionCompress(byte b1, byte b2) {
-        b1 <<= 4;
-        b2 &= 0b00001111;
-        b1 |= b2;
-        return b1;
-    }
 
     /**
      * Feistel function for DES. 
@@ -154,12 +95,15 @@ public class DES implements BlockCipher {
 
         //substitution
         byte[] subs = new byte[8];
-        for (int i = 0; i < block.length; i += 6) {
+        for (int i = 0; i < block.length * 6; i += 6) {
+            //process the block in six bit parts
             byte substitutionInput = 0;
             for (int j = 0; j < 6; j++) {
-                byte b = this.getBitByOffset(i + j, block);
+                //collect six bits for the s-box
+                byte b = BitFunctions.getBitByOffset(i + j, block);
                 substitutionInput |= (b << (5 - j));
             }
+            // i/6 goes through {0,1,2,3,4,5,6,7}
             subs[i / 6] = this.substitute(i / 6, substitutionInput);
         }
 
@@ -167,7 +111,7 @@ public class DES implements BlockCipher {
         byte[] pInput = new byte[4];
         for (int i = 0; i < subs.length; i += 2) {
             //combine the 4-bit values from the s-boxes into bytes
-            pInput[i / 2] = this.afterSubstitutionCompress(subs[i], subs[i + 1]);
+            pInput[i / 2] = BitFunctions.combineHalfBytes(subs[i], subs[i + 1]);
         }
         byte[] out = this.permutationP(pInput);
         return out;
@@ -176,7 +120,7 @@ public class DES implements BlockCipher {
     /**
      * Substitution function for DES.
      * @param n Number of the s-box used (0-based).
-     * @param data Six bits of data to be fed into the s-box. Two high-order bits are ignored.
+     * @param data Six bits of data to be fed into the s-box. Two high-order bits are unused.
      * @return 4-bit value from the s-box. Four high-order bits are unused.
      */
     public byte substitute(int n, byte data) {
@@ -265,7 +209,7 @@ public class DES implements BlockCipher {
             1, 7, 23, 13, 31, 26, 2, 8,
             18, 12, 29, 5, 21, 10, 3, 24
         };
-        return this.permuteBits(data, permTable);
+        return BitFunctions.permuteBits(data, permTable);
     }
 
     private void round(byte[] left, byte[] right, byte[] roundKey) {

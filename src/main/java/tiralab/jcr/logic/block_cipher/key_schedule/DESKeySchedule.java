@@ -7,10 +7,17 @@ public class DESKeySchedule {
     private byte[] encryptionKey;
     private byte[] left;
     private byte[] right;
-
+    private int iteration;
+    
     public DESKeySchedule(byte[] key) {
         this.encryptionKey = this.permutedChoice1(key);
-        
+        this.init();
+    }
+    
+    public void init() {
+        this.left = BitFunctions.copyBits(0, 28, this.encryptionKey);
+        this.right = BitFunctions.copyBits(28,56,this.encryptionKey);
+        this.iteration = 0;
     }
 
     private byte[] permutedChoice1(byte[] block) {
@@ -43,10 +50,27 @@ public class DESKeySchedule {
         return BitFunctions.permuteBits(state, permTable);
     }
     
+    private int nLeftShift(int iteration) {
+        switch (iteration) {
+            case 0:
+            case 1:
+            case 8:
+            case 15:
+                return 1;
+            default:
+                return 2;
+        }
+    }
+    
     public byte[] nextKey() {
-        //todo
-        this.left = BitFunctions.rotateLeft(0, 0, this.left);
-        this.right = BitFunctions.rotateLeft(0, 0, this.right);
-        return null;
+        int shift = this.nLeftShift(this.iteration);
+        this.left = BitFunctions.rotateLeft(shift, 28, this.left);
+        this.right = BitFunctions.rotateLeft(shift, 28, this.right);
+        byte[] key = BitFunctions.concatBits(left, right, 28, 28);
+        this.iteration++;
+        if (this.iteration >= 16) {
+            this.init();
+        }
+        return this.permutedChoice2(key);
     }
 }

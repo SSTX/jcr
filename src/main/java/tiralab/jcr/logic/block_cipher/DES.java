@@ -6,6 +6,7 @@
 package tiralab.jcr.logic.block_cipher;
 
 import tiralab.jcr.logic.BitFunctions;
+import tiralab.jcr.logic.block_cipher.key_schedule.DESKeySchedule;
 
 /**
  * Implementation of the Data Encryption Standard (DES) block cipher.
@@ -13,7 +14,15 @@ import tiralab.jcr.logic.BitFunctions;
  * @author ttiira
  */
 public class DES implements BlockCipher {
-
+    private int round;
+    private byte[] key;
+    private DESKeySchedule keySched;
+    
+    public DES(byte[] key) {
+        this.key = key;
+        this.round = 0;
+        this.keySched = new DESKeySchedule(this.key);
+    }
 
     /**
      * Expand function (E) from the DES cipher. Used in the Feistel function to
@@ -212,7 +221,7 @@ public class DES implements BlockCipher {
         return BitFunctions.permuteBits(data, permTable);
     }
 
-    private void round(byte[] left, byte[] right, byte[] roundKey) {
+    private void round() {
 
     }
 

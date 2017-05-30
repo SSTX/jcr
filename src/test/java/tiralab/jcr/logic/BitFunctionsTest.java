@@ -134,22 +134,21 @@ public class BitFunctionsTest {
         assertArrayEquals(testBytes, BitFunctions.rotateLeft(230, -1, testBytes));
         assertArrayEquals(testBytes, BitFunctions.rotateLeft(119, 0, testBytes));
     }
-    
+
     @Test
     public void copyBitsReturnCorrect1() {
         testBytes[0] = (byte) 0b00110011;
         assertArrayEquals(testBytes, BitFunctions.copyBits(0, 32, testBytes));
     }
-    
+
     @Test
     public void copyBitsReturnCorrect2() {
         testBytes[0] = (byte) 0b11001010;
         byte[] expected = new byte[]{
-            (byte) 0b00101000,
-        };
+            (byte) 0b00101000,};
         assertArrayEquals(expected, BitFunctions.copyBits(2, 8, testBytes));
     }
-    
+
     @Test
     public void copyBitsReturnCorrect3() {
         testBytes[0] = (byte) 0b10101010;
@@ -158,5 +157,43 @@ public class BitFunctionsTest {
             (byte) 0b10000000
         };
         assertArrayEquals(expected, BitFunctions.copyBits(6, 9, testBytes));
+    }
+
+    @Test
+    public void concatBitsReturnCorrect1() {
+        testBytes[0] = (byte) 0b11111111;
+        byte[] test = new byte[]{0b01000000};
+        byte[] expected = new byte[]{(byte) 0b11101000};
+        assertArrayEquals(expected, BitFunctions.concatBits(testBytes, test, 3, 2));
+    }
+
+    @Test
+    public void concatBitsReturnCorrect2() {
+        testBytes[0] = (byte) 0b11011111;
+        byte[] test = new byte[]{0b01000000};
+        byte[] expected = new byte[]{
+            (byte) 0b01011011,
+            (byte) 0b10000000
+        };
+        assertArrayEquals(expected, BitFunctions.concatBits(test, testBytes, 3, 6));
+    }
+    
+    @Test
+    public void concatBitsReturnCorrect3() {
+        testBytes[0] = (byte) 0b00000001;
+        testBytes[1] = (byte) 0b10101010;
+        byte[] test = new byte[]{
+            (byte) 0b11110111,
+            (byte) 0b00001010,
+            (byte) 0b00001000
+        };
+        byte[] expected = new byte[]{
+            (byte) 0b00000001,
+            (byte) 0b10101011,
+            (byte) 0b11011100,
+            (byte) 0b00101000,
+            (byte) 0b00100000
+        };
+        assertArrayEquals(expected, BitFunctions.concatBits(testBytes, test, 14, 22));
     }
 }

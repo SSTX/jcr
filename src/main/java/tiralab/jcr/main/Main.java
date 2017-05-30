@@ -22,11 +22,11 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        DES des = new DES();
+        DES des = new DES(new byte[]{0, 0, 0, 0, 0, 0, 0, 0});
         byte[] test = new byte[]{
-            (byte) 0, 
-            (byte) 0, 
-            (byte) 0b11111111, 
+            (byte) 0,
+            (byte) 0,
+            (byte) 0b11111111,
             (byte) 0b11111111
         };
         byte[] key = new byte[]{

@@ -7,7 +7,9 @@ package tiralab.jcr.text_interface;
 
 import tiralab.jcr.logic.Cryptographer;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
+import tiralab.jcr.logic.BitFunctions;
 
 /**
  *
@@ -54,7 +56,7 @@ public class TextInterface {
             System.out.println("Keyfile:");
             String k = this.scan.nextLine();
             try {
-                System.out.println(this.crypt.encrypt(s, k, c));
+                System.out.println(BitFunctions.bitRepresentation(this.crypt.encrypt(s, k, c)));
             } catch (IOException e) {
                 System.out.println("Error reading file");
             }

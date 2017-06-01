@@ -75,6 +75,14 @@ public class BitFunctionsTest {
     }
 
     @Test
+    public void getBitByOffsetReturnsCorrectBit3() {
+        testBytes[0] = (byte) 0b11111111;
+        testBytes[1] = (byte) 0b10101111;
+        assertEquals(1, BitFunctions.getBitByOffset(10, testBytes));
+        assertEquals(0, BitFunctions.getBitByOffset(9, testBytes));
+    }
+
+    @Test
     public void combineHalfBytesReturnCorrect1() {
         byte a = (byte) 0b00000001;
         byte b = (byte) 0b00001111;
@@ -177,7 +185,7 @@ public class BitFunctionsTest {
         };
         assertArrayEquals(expected, BitFunctions.concatBits(test, testBytes, 3, 6));
     }
-    
+
     @Test
     public void concatBitsReturnCorrect3() {
         testBytes[0] = (byte) 0b00000001;
@@ -195,5 +203,34 @@ public class BitFunctionsTest {
             (byte) 0b00100000
         };
         assertArrayEquals(expected, BitFunctions.concatBits(testBytes, test, 14, 22));
+    }
+
+    @Test
+    public void bitwiseXORReturnCorrect() {
+        byte[] in1 = new byte[]{
+            (byte) 0b00011011,
+            (byte) 0b00000010,
+            (byte) 0b11101111,
+            (byte) 0b11111100,
+            (byte) 0b01110000,
+            (byte) 0b01110010
+        };
+        byte[] in2 = new byte[]{
+            (byte) 0b01111010,
+            (byte) 0b00010101,
+            (byte) 0b01010101,
+            (byte) 0b01111010,
+            (byte) 0b00010101,
+            (byte) 0b01010101
+        };
+        byte[] expected = new byte[]{
+            (byte) 0b01100001,
+            (byte) 0b00010111,
+            (byte) 0b10111010,
+            (byte) 0b10000110,
+            (byte) 0b01100101,
+            (byte) 0b00100111
+        };
+        assertArrayEquals(expected, BitFunctions.bitwiseXOR(in1, in2));
     }
 }

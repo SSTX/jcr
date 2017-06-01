@@ -5,6 +5,7 @@
  */
 package tiralab.jcr.logic.block_cipher;
 
+import java.util.Arrays;
 import tiralab.jcr.logic.BitFunctions;
 import tiralab.jcr.logic.block_cipher.key_schedule.DESKeySchedule;
 
@@ -31,7 +32,7 @@ public class DES implements BlockCipher {
      * @param data 32-bit half-block to be expanded.
      * @return 48-bit block.
      */
-    private byte[] expand(byte[] data) {
+    public byte[] expand(byte[] data) {
         int[] permTable = {
             31, 0, 1, 2, 3, 4,
             3, 4, 5, 6, 7, 8,
@@ -51,7 +52,7 @@ public class DES implements BlockCipher {
      * @param data 64-bit block to undergo IP.
      * @return Permuted 64-bit block.
      */
-    private byte[] initialPermutation(byte[] data) {
+    public byte[] initialPermutation(byte[] data) {
         int[] permTable = {
             57, 49, 41, 33, 25, 17, 9, 1,
             59, 51, 43, 35, 27, 19, 11, 3,
@@ -98,9 +99,7 @@ public class DES implements BlockCipher {
         byte[] block = this.expand(data);
 
         //key mixing
-        for (int i = 0; i < block.length; i++) {
-            block[i] ^= subkey[i];
-        }
+        block = BitFunctions.bitwiseXOR(block, subkey);
 
         //substitution
         byte[] subs = new byte[8];
@@ -222,34 +221,38 @@ public class DES implements BlockCipher {
     }
 
     private void round() {
-
+        
     }
 
     /**
      * Encrypt a single block of data.
      *
      * @param data Block of data to be encrypted.
-     * @param key Encryption key.
      * @return Encrypted block.
      */
     @Override
-    public byte[] encrypt(byte[] data, byte[] key) {
+    public byte[] encrypt(byte[] data) {
         byte[] permutedInput = this.initialPermutation(data);
+        byte[] left = BitFunctions.copyBits(0, 32, permutedInput);
+        byte[] right = BitFunctions.copyBits(32, 64, permutedInput);
         for (int i = 0; i < 16; i++) {
-
+            byte[] roundKey = this.keySched.nextKey();
+            byte[] newRight = BitFunctions.bitwiseXOR(left, this.feistelFunction(right, roundKey));
+            left = right;
+            right = newRight;
         }
-        return null;
+        byte[] out = BitFunctions.concatBits(left, right, 32, 32);
+        return this.finalPermutation(out);
     }
 
     /**
      * Decrypt a single block of data.
      *
      * @param data Block of data to be decrypted.
-     * @param key Decryption key.
      * @return Decrypted block.
      */
     @Override
-    public byte[] decrypt(byte[] data, byte[] key) {
+    public byte[] decrypt(byte[] data) {
         return null;
     }
 

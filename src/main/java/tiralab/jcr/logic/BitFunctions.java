@@ -163,4 +163,32 @@ public class BitFunctions {
         }
         return arr;
     }
+    
+    /**
+     * Bitwise exclusive-or operation for two byte arrays.
+     * @param arr1 First operand.
+     * @param arr2 Second operand.
+     * @return Byte array constructed by XORing the bits of arr1 and arr2.
+     */
+    public static byte[] bitwiseXOR(byte[] arr1, byte[] arr2) {
+        if (arr1.length != arr2.length) {
+            throw new IllegalArgumentException();
+        }
+        for (int i = 0; i < arr1.length; i++) {
+            arr1[i] ^= arr2[i];
+        }
+        return arr1;
+    }
+    
+    public static String bitRepresentation(byte[] data) {
+        StringBuilder b = new StringBuilder();
+        for (int i = 0; i < data.length; i++) {
+            for (int j = 0; j < 8; j++) {
+                b.append(BitFunctions.getBitByOffset(8*i + j, data));
+            }
+            b.append(" ");
+        }
+        return b.toString();
+    }
+    
 }

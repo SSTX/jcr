@@ -8,19 +8,19 @@ public class DESKeySchedule {
     private byte[] left;
     private byte[] right;
     private int iteration;
-    
+
     public DESKeySchedule(byte[] key) {
         this.encryptionKey = this.permutedChoice1(key);
         this.init();
     }
-    
+
     public void init() {
         this.left = BitFunctions.copyBits(0, 28, this.encryptionKey);
-        this.right = BitFunctions.copyBits(28,56,this.encryptionKey);
+        this.right = BitFunctions.copyBits(28, 56, this.encryptionKey);
         this.iteration = 0;
     }
 
-    private byte[] permutedChoice1(byte[] block) {
+    public byte[] permutedChoice1(byte[] block) {
         int[] permTable = new int[]{
             //left 28 bits
             56, 48, 40, 32, 24, 16, 8,
@@ -36,7 +36,7 @@ public class DESKeySchedule {
         return BitFunctions.permuteBits(block, permTable);
     }
 
-    private byte[] permutedChoice2(byte[] state) {
+    public byte[] permutedChoice2(byte[] state) {
         int[] permTable = new int[]{
             13, 16, 10, 23, 0, 4,
             2, 27, 14, 5, 20, 9,
@@ -49,7 +49,7 @@ public class DESKeySchedule {
         };
         return BitFunctions.permuteBits(state, permTable);
     }
-    
+
     private int nLeftShift(int iteration) {
         switch (iteration) {
             case 0:
@@ -61,12 +61,12 @@ public class DESKeySchedule {
                 return 2;
         }
     }
-    
+
     public byte[] nextKey() {
         int shift = this.nLeftShift(this.iteration);
         this.left = BitFunctions.rotateLeft(shift, 28, this.left);
         this.right = BitFunctions.rotateLeft(shift, 28, this.right);
-        byte[] key = BitFunctions.concatBits(left, right, 28, 28);
+        byte[] key = BitFunctions.concatBits(this.left, this.right, 28, 28);
         this.iteration++;
         if (this.iteration >= 16) {
             this.init();

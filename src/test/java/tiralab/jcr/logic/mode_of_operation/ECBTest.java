@@ -6,6 +6,9 @@
 package tiralab.jcr.logic.mode_of_operation;
 
 import java.util.Arrays;
+import javax.crypto.Cipher;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.DESKeySpec;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertArrayEquals;
@@ -24,6 +27,7 @@ import tiralab.jcr.logic.block_cipher.DES;
 public class ECBTest {
 
     ECB ecb;
+    Cipher testCipher;
     byte[] testBytes;
     byte[] testBytes2;
 
@@ -40,7 +44,8 @@ public class ECBTest {
 
     @Before
     public void setUp() {
-        ecb = new ECB(new DES(), 8);
+        DES des = new DES("aaaaaaaa".getBytes());
+        ecb = new ECB(new DES(new byte[8]), 8);
         testBytes = new byte[70];
         for (int i = 0; i < 70; i++) {
             testBytes[i] += i; //{0,1,2,...,69}
@@ -55,7 +60,7 @@ public class ECBTest {
     @Test
     public void blockSizeNotZero() {
         try {
-            ECB test = new ECB(new DES(), 0);
+            ECB test = new ECB(new DES(new byte[8]), 0);
             assertFalse(true);
         } catch (IllegalArgumentException e) {
             assertTrue(true);
@@ -65,7 +70,7 @@ public class ECBTest {
     @Test
     public void blockSizeNotNegative() {
         try {
-            ECB test = new ECB(new DES(), -1);
+            ECB test = new ECB(new DES(new byte[8]), -1);
             assertFalse(true);
         } catch (IllegalArgumentException e) {
             assertTrue(true);

@@ -14,16 +14,14 @@ public interface BlockCipher {
     /**
      * Encrypt a single block.
      * @param data Block to encrypt.
-     * @param key Encryption key.
      * @return
      */
-    byte[] encrypt(byte[] data, byte[] key);
+    byte[] encrypt(byte[] data);
 
     /**
      * Decrypt a single block.
      * @param data Block to decrypt.
-     * @param key Decryption key.
      * @return
      */
-    byte[] decrypt(byte[] data, byte[] key);
+    byte[] decrypt(byte[] data);
 }

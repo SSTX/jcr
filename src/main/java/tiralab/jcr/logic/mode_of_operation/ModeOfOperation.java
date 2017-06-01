@@ -5,7 +5,6 @@
  */
 package tiralab.jcr.logic.mode_of_operation;
 
-import java.util.Arrays;
 import tiralab.jcr.logic.block_cipher.BlockCipher;
 
 /**
@@ -85,18 +84,16 @@ public abstract class ModeOfOperation {
      * instantiation.
      *
      * @param data Array of bytes to be encrypted.
-     * @param key Encryption key.
      * @return Encrypted byte array.
      */
-    public abstract byte[] encrypt(byte[] data, byte[] key);
+    public abstract byte[] encrypt(byte[] data);
 
     /**
      * Decrypts an array of bytes. Block cipher used is determined on class
      * instantiation.
      *
      * @param data Array of bytes to be decrypted.
-     * @param key Decryption key.
      * @return Decrypted byte array.
      */
-    public abstract byte[] decrypt(byte[] data, byte[] key);
+    public abstract byte[] decrypt(byte[] data);
 }

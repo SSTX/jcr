@@ -196,4 +196,27 @@ public class BitFunctions {
         b.deleteCharAt(b.length() - 1);
         return b.toString();
     }
+    
+    /**
+     * Stretch a byte array by using only some of the bits in each byte.
+     * @param data Array to be stretched.
+     * @param bitsPerByte How many bits to put in each byte.
+     * @return Stretched byte array.
+     */
+    public static byte[] stretch(byte[] data, int bitsPerByte) {
+        //todo
+        return null;
+    }
+
+    /**
+     * Compress a byte array that is using less than 8 bits in each byte.
+     * Inverse operation to stretch().
+     * @param data Array to be compressed.
+     * @param bitsPerByte How many bits are used in each byte of input data.
+     * @return Compressed byte array, with every bit used.
+     */
+    public static byte[] compress(byte[] data, int bitsPerByte) {
+        //todo
+        return null;
+    }
 }

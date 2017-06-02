@@ -210,7 +210,7 @@ public class DES implements BlockCipher {
      * @param data 32-bit half-block.
      * @return permuted half-block.
      */
-    private byte[] permutationP(byte[] data) {
+    public byte[] permutationP(byte[] data) {
         int[] permTable = new int[]{
             15, 6, 19, 20, 28, 11, 27, 16,
             0, 14, 22, 25, 4, 17, 30, 9,

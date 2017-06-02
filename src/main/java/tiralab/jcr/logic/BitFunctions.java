@@ -130,7 +130,7 @@ public class BitFunctions {
 
     /**
      * Compresses a byte array with each byte representing a single bit, into
-     * a denseley packed byte array with the bits starting from the left.
+     * a densely packed byte array with the bits starting from the left.
      * @param bits Byte array with each byte representing a single bit
      * (rightmost bit in the byte).
      * @return Dense byte array with the bits starting from the left.
@@ -180,6 +180,11 @@ public class BitFunctions {
         return arr1;
     }
     
+    /**
+     * Make a string representation of the bits in a byte array.
+     * @param data Bits to convert.
+     * @return String with bits represented as '0' and '1' and spaces between bytes.
+     */
     public static String bitRepresentation(byte[] data) {
         StringBuilder b = new StringBuilder();
         for (int i = 0; i < data.length; i++) {
@@ -188,7 +193,7 @@ public class BitFunctions {
             }
             b.append(" ");
         }
+        b.deleteCharAt(b.length() - 1);
         return b.toString();
     }
-    
 }

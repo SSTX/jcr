@@ -109,4 +109,21 @@ public class DESTest {
         };
         assertArrayEquals(expected, des.feistelFunction(input, key));
     }
+
+    @Test
+    public void permutationPReturnCorrect() {
+        byte[] expected = new byte[]{
+            (byte)0b00100011,
+            (byte)0b01001010,
+            (byte)0b10101001,
+            (byte)0b10111011 
+        };
+        byte[] input = new byte[]{
+            (byte)0b01011100, 
+            (byte)0b10000010,
+            (byte)0b10110101,
+            (byte)0b10010111 
+        };
+        assertArrayEquals(expected, des.permutationP(input));
+    }
 }

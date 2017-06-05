@@ -93,13 +93,28 @@ public class BitFunctions {
      * Make a byte array just large enough to hold a specified number of bits.
      *
      * @param bits Amount of bits needed.
-     * @return New byte array initialized to all zeroes.
+     * @return New byte array initialized to all zeroes, big enough to hold the needed bits.
      */
     public static byte[] nBitByteArray(int bits) {
         if (bits % 8 == 0) {
             return new byte[bits / 8];
         } else {
             return new byte[bits / 8 + 1];
+        }
+    }
+
+    /**
+     * Make a byte array just large enough to hold a specified number of bits, only using
+     * some of the bits in each byte.
+     * @param bits How many bits to store.
+     * @param bitsPerByte How many bits to put in each byte.
+     * @return New byte array initialized to all zeroes, big enough to hold the needed bits.
+     */
+    public static byte[] nBitByteArray(int bits, int bitsPerByte) {
+        if (bits % bitsPerByte == 0) {
+            return new byte[bits / bitsPerByte];
+        } else {
+            return new byte[bits / bitsPerByte + 1];
         }
     }
 
@@ -163,7 +178,7 @@ public class BitFunctions {
         }
         return arr;
     }
-    
+
     /**
      * Bitwise exclusive-or operation for two byte arrays.
      * @param arr1 First operand.
@@ -171,10 +186,11 @@ public class BitFunctions {
      * @return Byte array constructed by XORing the bits of arr1 and arr2.
      */
     public static byte[] bitwiseXOR(byte[] arr1, byte[] arr2) {
-        if (arr1.length != arr2.length) {
-            throw new IllegalArgumentException();
+        int len = arr1.length;
+        if (arr2.length < len) {
+            len = arr2.length;
         }
-        for (int i = 0; i < arr1.length; i++) {
+        for (int i = 0; i < len; i++) {
             arr1[i] ^= arr2[i];
         }
         return arr1;
@@ -198,25 +214,23 @@ public class BitFunctions {
     }
     
     /**
-     * Stretch a byte array by using only some of the bits in each byte.
-     * @param data Array to be stretched.
-     * @param bitsPerByte How many bits to put in each byte.
-     * @return Stretched byte array.
+     * Stretch or compress a byte array by using a specified amount of bits in each byte.
+     * Bit count n means n low-order bits.
+     * @param data Array to be stretched/compressed.
+     * @param currentBitCount How many bits are currently used per byte (low-order bits).
+     * @param targetBitCount How many bits to put in each byte (low-order bits).
+     * @return Stretched/compressed byte array.
      */
-    public static byte[] stretch(byte[] data, int bitsPerByte) {
-        //todo
+    public static byte[] chBitsPerByte(byte[] data, int currentBitCount, int targetBitCount) {
+        byte[] arr = BitFunctions.nBitByteArray(data.length * currentBitCount);
+        int skip = 8 - currentBitCount;
+        int bitsCopied = 0;
+        for (int i = 0; i < data.length; i++) {
+            byte[] bits = BitFunctions.copyBits(i * 8 + skip, i * 9);
+            arr = BitFunctions.concatBits(arr, bits, bitsCopied, currentBitCount); 
+            bitsCopied += currentBitCount;
+        }
         return null;
     }
 
-    /**
-     * Compress a byte array that is using less than 8 bits in each byte.
-     * Inverse operation to stretch().
-     * @param data Array to be compressed.
-     * @param bitsPerByte How many bits are used in each byte of input data.
-     * @return Compressed byte array, with every bit used.
-     */
-    public static byte[] compress(byte[] data, int bitsPerByte) {
-        //todo
-        return null;
-    }
 }

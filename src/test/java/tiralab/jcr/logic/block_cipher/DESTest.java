@@ -113,17 +113,67 @@ public class DESTest {
     @Test
     public void permutationPReturnCorrect() {
         byte[] expected = new byte[]{
-            (byte)0b00100011,
-            (byte)0b01001010,
-            (byte)0b10101001,
-            (byte)0b10111011 
+            (byte) 0b00100011,
+            (byte) 0b01001010,
+            (byte) 0b10101001,
+            (byte) 0b10111011
         };
         byte[] input = new byte[]{
-            (byte)0b01011100, 
-            (byte)0b10000010,
-            (byte)0b10110101,
-            (byte)0b10010111 
+            (byte) 0b01011100,
+            (byte) 0b10000010,
+            (byte) 0b10110101,
+            (byte) 0b10010111
         };
         assertArrayEquals(expected, des.permutationP(input));
+    }
+
+    @Test
+    public void finalPermutationReturnCorrect() {
+        byte[] input = new byte[]{
+            (byte) 0b00001010,
+            (byte) 0b01001100,
+            (byte) 0b11011001,
+            (byte) 0b10010101,
+            (byte) 0b01000011,
+            (byte) 0b01000010,
+            (byte) 0b00110010,
+            (byte) 0b00110100
+        };
+        byte[] expected = new byte[]{
+            (byte) 0b10000101,
+            (byte) 0b11101000,
+            (byte) 0b00010011,
+            (byte) 0b01010100,
+            (byte) 0b00001111,
+            (byte) 0b00001010,
+            (byte) 0b10110100,
+            (byte) 0b00000101
+        };
+        assertArrayEquals(expected, des.finalPermutation(input));
+    }
+
+    @Test
+    public void desEncryptionCorrect() {
+        byte[] expected = new byte[]{
+            (byte) 0b10000101,
+            (byte) 0b11101000,
+            (byte) 0b00010011,
+            (byte) 0b01010100,
+            (byte) 0b00001111,
+            (byte) 0b00001010,
+            (byte) 0b10110100,
+            (byte) 0b00000101
+        };
+        byte[] input = new byte[]{
+            (byte) 0b00000001,
+            (byte) 0b00100011,
+            (byte) 0b01000101,
+            (byte) 0b01100111,
+            (byte) 0b10001001,
+            (byte) 0b10101011,
+            (byte) 0b11001101,
+            (byte) 0b11101111
+        };
+        assertArrayEquals(expected, des.encrypt(input));
     }
 }

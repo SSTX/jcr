@@ -5,10 +5,7 @@
  */
 package tiralab.jcr.logic.block_cipher.key_schedule;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -40,7 +37,7 @@ public class DESKeyScheduleTest {
     }
 
     @Test
-    public void PC1ReturnCorrect() {
+    public void permutedChoice1ReturnCorrect() {
         byte[] bytes = new byte[]{
             (byte) 0b00010011,
             (byte) 0b00110100,
@@ -64,7 +61,7 @@ public class DESKeyScheduleTest {
     }
 
     @Test
-    public void PC2ReturnCorrect() {
+    public void permutedChoice2ReturnCorrect() {
         byte[] bytes = new byte[]{
             (byte) 0b11100001,
             (byte) 0b10011001,
@@ -86,7 +83,7 @@ public class DESKeyScheduleTest {
     }
 
     @Test
-    public void nextKeyReturnCorrectKey1() {
+    public void encryptionSubKeysReturnCorrectKeys1() {
         byte[] expected = new byte[]{
             (byte) 0b00011011,
             (byte) 0b00000010,
@@ -95,11 +92,11 @@ public class DESKeyScheduleTest {
             (byte) 0b01110000,
             (byte) 0b01110010
         };
-        assertArrayEquals(expected, sched.nextKey());
+        assertArrayEquals(expected, sched.encryptionSubKeys()[0]);
     }
 
     @Test
-    public void nextKeyReturnCorrectKey2() {
+    public void encryptionSubKeysReturnCorrectKeys2() {
         byte[] expected = new byte[]{
             (byte) 0b01111001,
             (byte) 0b10101110,
@@ -108,7 +105,18 @@ public class DESKeyScheduleTest {
             (byte) 0b11001001,
             (byte) 0b11100101
         };
-        sched.nextKey();
-        assertArrayEquals(expected, sched.nextKey());
+        assertArrayEquals(expected, sched.encryptionSubKeys()[1]);
+    }
+    
+    @Test
+    public void decryptionSubKeysReturnCorrectKeys1() {
+        byte[] expected = sched.encryptionSubKeys()[15];
+        assertArrayEquals(expected, sched.decryptionSubKeys()[0]);
+    }
+    
+    @Test
+    public void decryptionSubKeysReturnCorrectKeys2() {
+        byte[] expected = sched.encryptionSubKeys()[10];
+        assertArrayEquals(expected, sched.decryptionSubKeys()[5]);
     }
 }

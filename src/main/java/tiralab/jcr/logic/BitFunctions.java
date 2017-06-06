@@ -17,7 +17,8 @@ public class BitFunctions {
      * @param data Block to be modified. Length in bits must be greater than the
      * largest number in permTable.
      * @param permTable Array of integers that specifies which bits go where in
-     * the new block. Each integer is a 0-based index for some bit.
+     * the new block. Each bit-index i in the new block will have permTable[i]
+     * as its value.
      * @return New block with enough bytes to hold permTable.length bits, with
      * n-th bit from the left being the m-th bit in the original block, where m
      * = permTable[n].
@@ -36,21 +37,6 @@ public class BitFunctions {
             permuted[nbytePerm] |= b;
         }
         return permuted;
-    }
-
-    /**
-     * Helper function to make a whole byte from two 4-bit halves.
-     *
-     * @param b1 First half. Four low-order bits are used.
-     * @param b2 Second half. Four low-order bits are used.
-     * @return Byte with the four bits from b1 as the high-order bits and four
-     * bits from b2 as the low-order bits.
-     */
-    public static byte combineHalfBytes(byte b1, byte b2) {
-        b1 <<= 4;
-        b2 &= 0b00001111;
-        b1 |= b2;
-        return b1;
     }
 
     /**
@@ -74,7 +60,8 @@ public class BitFunctions {
      * Rotate a byte array bitwise to the left.
      *
      * @param rotN How many positions to rotate.
-     * @param lengthInBits How many bits to be considered.
+     * @param lengthInBits How many bits from the left to be considered as part
+     * of the array.
      * @param data Byte array to rotate.
      * @return Bitwise-rotated byte array.
      */
@@ -129,38 +116,17 @@ public class BitFunctions {
      * @param nBitsLeft Number of bits in the left array.
      * @param nBitsRight Number of bits in the right array.
      * @return Byte array with nBitsLeft bits from the left array starting from
-     * left (0,0) and nBitsRigth bits from the right array after them.
+     * the left and nBitsRight bits from the right array after them.
      */
     public static byte[] concatBits(byte[] left, byte[] right, int nBitsLeft, int nBitsRight) {
-        byte[] bits = new byte[nBitsLeft + nBitsRight];
-        int i = 0;
-        while (i < nBitsLeft) {
-            bits[i] = BitFunctions.getBitByOffset(i, left);
-            i++;
+        byte[] arr = BitFunctions.nBitByteArray(nBitsLeft + nBitsRight);
+        for (int i = 0; i < nBitsLeft; i++) {
+            byte b = BitFunctions.getBitByOffset(i, left);
+            BitFunctions.insertBit(b, i, arr);
         }
-        int j = 0;
-        while (j < nBitsRight) {
-            bits[i] = BitFunctions.getBitByOffset(j, right);
-            j++;
-            i++;
-        }
-        return BitFunctions.bitsToBytes(bits);
-    }
-
-    /**
-     * Compresses a byte array with each byte representing a single bit, into a
-     * densely packed byte array with the bits starting from the left.
-     *
-     * @param bits Byte array with each byte representing a single bit
-     * (rightmost bit in the byte).
-     * @return Dense byte array with the bits starting from the left.
-     */
-    public static byte[] bitsToBytes(byte[] bits) {
-        byte[] arr = BitFunctions.nBitByteArray(bits.length);
-        for (int i = 0; i < bits.length; i++) {
-            byte b = bits[i];
-            b <<= 7 - (i % 8);
-            arr[i / 8] |= b;
+        for (int i = 0; i < nBitsRight; i++) {
+            byte b = BitFunctions.getBitByOffset(i, right);
+            BitFunctions.insertBit(b, nBitsLeft + i, arr);
         }
         return arr;
     }
@@ -256,23 +222,29 @@ public class BitFunctions {
      */
     public static byte[] chBitsPerByte(byte[] source, int currentBitCount, int targetBitCount) {
         int bits = source.length * currentBitCount;
+        //how many high-order bits to ignore in each byte
         int sourceSkip = 8 - currentBitCount;
         int targetSkip = 8 - targetBitCount;
+        //start from the first bit position to read and write
         int sourceIdx = sourceSkip;
         int targetIdx = targetSkip;
         byte[] arr = BitFunctions.nBitByteArray(bits, targetBitCount);
+        //loop through each bit in the source array
         while (sourceIdx < 8 * source.length) {
             byte b = BitFunctions.getBitByOffset(sourceIdx, source);
             arr = BitFunctions.insertBit(b, targetIdx, arr);
             sourceIdx++;
             targetIdx++;
+            //if we have read currentBitCount bits, skip to the start of the next
+            //piece of bits to read
             if (sourceIdx % 8 == 0) {
                 sourceIdx += sourceSkip;
             }
+            //if we have written targetBitCount bits, skip to the start of the next
+            //piece of bits to write
             if (targetIdx % 8 == 0) {
                 targetIdx += targetSkip;
             }
-            System.out.println(BitFunctions.bitRepresentation(arr));
         }
         return arr;
     }

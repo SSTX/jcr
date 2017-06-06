@@ -83,27 +83,6 @@ public class BitFunctionsTest {
     }
 
     @Test
-    public void combineHalfBytesReturnCorrect1() {
-        byte a = (byte) 0b00000001;
-        byte b = (byte) 0b00001111;
-        assertEquals(31, BitFunctions.combineHalfBytes(a, b));
-    }
-
-    @Test
-    public void combineHalfBytesReturnCorrect2() {
-        byte a = (byte) 0b00000101;
-        byte b = (byte) 0b00001011;
-        assertEquals(91, BitFunctions.combineHalfBytes(a, b));
-    }
-
-    @Test
-    public void combineHalfBytesIgnoreHighOrderBits() {
-        byte a = (byte) 0b11000101;
-        byte b = (byte) 0b01101011;
-        assertEquals(91, BitFunctions.combineHalfBytes(a, b));
-    }
-
-    @Test
     public void rotateLeftReturnsCorrect1() {
         testBytes[0] = (byte) 0b00001111;
         byte[] expected = new byte[]{

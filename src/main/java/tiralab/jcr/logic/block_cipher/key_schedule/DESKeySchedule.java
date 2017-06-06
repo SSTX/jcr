@@ -62,15 +62,25 @@ public class DESKeySchedule {
         }
     }
 
-    public byte[] nextKey() {
-        int shift = this.nLeftShift(this.iteration);
-        this.left = BitFunctions.rotateLeft(shift, 28, this.left);
-        this.right = BitFunctions.rotateLeft(shift, 28, this.right);
-        byte[] key = BitFunctions.concatBits(this.left, this.right, 28, 28);
-        this.iteration++;
-        if (this.iteration >= 16) {
-            this.init();
+    public byte[][] encryptionSubKeys() {
+        byte[][] keys = new byte[16][];
+        for (int i = 0; i < 16; i++) {
+            int shift = this.nLeftShift(i);
+            this.left = BitFunctions.rotateLeft(shift, 28, this.left);
+            this.right = BitFunctions.rotateLeft(shift, 28, this.right);
+            byte[] key = BitFunctions.concatBits(this.left, this.right, 28, 28);
+            keys[i] = this.permutedChoice2(key);
         }
-        return this.permutedChoice2(key);
+        this.init();
+        return keys;
+    }
+
+    public byte[][] decryptionSubKeys() {
+        byte[][] keys = this.encryptionSubKeys();
+        byte[][] ret = new byte[16][6];
+        for (int i = 0; i < keys.length; i++) {
+            ret[15 - i] = keys[i];
+        }
+        return ret;
     }
 }

@@ -17,6 +17,7 @@ public class Cryptographer {
      * @param filePath Path to the file in the filesystem.
      * @param keyPath Path to the key file.
      * @param cipherName Name of the cipher to use.
+     * @return Encrypted byte array.
      */
     public byte[] encrypt(String filePath, String keyPath, String cipherName) throws IOException {
         byte[] data = this.io.readData(filePath);
@@ -31,6 +32,7 @@ public class Cryptographer {
      * @param filePath Path to the file in the filesystem.
      * @param keyPath Path to the key file.
      * @param cipherName Name of the cipher to use.
+     * @return Decrypted byte array.
      */
     public byte[] decrypt(String filePath, String keyPath, String cipherName) throws IOException {
         //todo

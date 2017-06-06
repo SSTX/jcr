@@ -5,7 +5,6 @@
  */
 package tiralab.jcr.logic.block_cipher;
 
-import java.util.Arrays;
 import tiralab.jcr.logic.BitFunctions;
 import tiralab.jcr.logic.block_cipher.key_schedule.DESKeySchedule;
 
@@ -73,7 +72,7 @@ public class DES implements BlockCipher {
      * @param data 64-bit block to undergo FP.
      * @return Permuted 64-bit block.
      */
-    private byte[] finalPermutation(byte[] data) {
+    public byte[] finalPermutation(byte[] data) {
         int[] permTable = {
             39, 7, 47, 15, 55, 23, 63, 31,
             38, 6, 46, 14, 54, 22, 62, 30,
@@ -107,7 +106,7 @@ public class DES implements BlockCipher {
         for (int i = 0; i < subs.length; i++) {
             subs[i] = this.substitute(i, stretched[i]);
         }
-        
+
         //permutation
         subs = BitFunctions.chBitsPerByte(subs, 4, 8);
         byte[] out = this.permutationP(subs);
@@ -212,8 +211,23 @@ public class DES implements BlockCipher {
         return BitFunctions.permuteBits(data, permTable);
     }
 
-    private void round() {
-
+    private byte[] process(byte[] data, byte[][] keys) {
+        byte[] permutedInput = this.initialPermutation(data);
+        byte[] left = BitFunctions.copyBits(0, 32, permutedInput);
+        byte[] right = BitFunctions.copyBits(32, 64, permutedInput);
+        for (int i = 0; i < 16; i++) {
+            byte[] roundKey = keys[i];
+            byte[] newRight = this.feistelFunction(right, roundKey);
+            newRight = BitFunctions.bitwiseXOR(left, newRight);
+            left = right;
+            right = newRight;
+        }
+        byte[] out = BitFunctions.concatBits(left, right, 32, 32);
+        return this.finalPermutation(out);
+    }
+    
+    public byte[] round(byte[] roundKey, byte[] left, byte[] right) {
+        return null;
     }
 
     /**
@@ -224,17 +238,8 @@ public class DES implements BlockCipher {
      */
     @Override
     public byte[] encrypt(byte[] data) {
-        byte[] permutedInput = this.initialPermutation(data);
-        byte[] left = BitFunctions.copyBits(0, 32, permutedInput);
-        byte[] right = BitFunctions.copyBits(32, 64, permutedInput);
-        for (int i = 0; i < 16; i++) {
-            byte[] roundKey = this.keySched.nextKey();
-            byte[] newRight = BitFunctions.bitwiseXOR(left, this.feistelFunction(right, roundKey));
-            left = right;
-            right = newRight;
-        }
-        byte[] out = BitFunctions.concatBits(left, right, 32, 32);
-        return this.finalPermutation(out);
+        byte[][] keys = this.keySched.encryptionSubKeys();
+        return this.process(data, keys);
     }
 
     /**
@@ -245,7 +250,8 @@ public class DES implements BlockCipher {
      */
     @Override
     public byte[] decrypt(byte[] data) {
-        return null;
+        byte[][] keys = this.keySched.decryptionSubKeys();
+        return this.process(data, keys);
     }
 
 }

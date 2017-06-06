@@ -5,7 +5,9 @@
  */
 package tiralab.jcr.main;
 
+import java.io.IOException;
 import tiralab.jcr.logic.BitFunctions;
+import tiralab.jcr.logic.Cryptographer;
 
 /**
  *
@@ -23,6 +25,11 @@ public class Main {
             (byte) 0b11101101,
             (byte) 0b00100001
         };
-        BitFunctions.bitRepresentation(BitFunctions.chBitsPerByte(test, 4, 6));
+        Cryptographer g = new Cryptographer();
+        try {
+            System.out.println(BitFunctions.bitRepresentation(g.encrypt("/home/ttiira/testfile.txt", "/home/ttiira/testkey.txt", "asd")));
+        } catch (IOException e) {
+            System.out.println("io error");
+        }
     }
 }

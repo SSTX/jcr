@@ -2,11 +2,11 @@
 
 ## Tuntikirjanpito
 * Maanantai: 1
-* Tiistai: 2
+* Tiistai: 4
 
 Maanantaina aloitin kirjoittamaan metodia, joka pidentää tai lyhentää byte[] -tyyppistä
 taulukkoa käyttämällä (vain) tietyn määrän bittejä joka tavusta. Tarvitsin sitä 
 selventämään feistel-funktion toimintaa.
 
 Tiistaina tein maanantaina aloittamani toteutuksen loppuun ja testasin. Nyt 
-Feistel-funktio toimii oikein.
+Feistel-funktio toimii oikein. Algoritmissa on kuitenkin jotain muutakin vikaa.

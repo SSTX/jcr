@@ -227,7 +227,10 @@ public class DES implements BlockCipher {
     }
     
     public byte[] round(byte[] roundKey, byte[] left, byte[] right) {
-        return null;
+        byte[] newRight = BitFunctions.bitwiseXOR(left, this.feistelFunction(right, roundKey));
+        left = right;
+        right = newRight
+        return BitFunctions.bitwiseConcat(left, right, 32, 32);
     }
 
     /**

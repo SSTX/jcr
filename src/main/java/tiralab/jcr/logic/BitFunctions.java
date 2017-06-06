@@ -93,7 +93,8 @@ public class BitFunctions {
      * Make a byte array just large enough to hold a specified number of bits.
      *
      * @param bits Amount of bits needed.
-     * @return New byte array initialized to all zeroes, big enough to hold the needed bits.
+     * @return New byte array initialized to all zeroes, big enough to hold the
+     * needed bits.
      */
     public static byte[] nBitByteArray(int bits) {
         if (bits % 8 == 0) {
@@ -104,11 +105,13 @@ public class BitFunctions {
     }
 
     /**
-     * Make a byte array just large enough to hold a specified number of bits, only using
-     * some of the bits in each byte.
+     * Make a byte array just large enough to hold a specified number of bits,
+     * only using some of the bits in each byte.
+     *
      * @param bits How many bits to store.
      * @param bitsPerByte How many bits to put in each byte.
-     * @return New byte array initialized to all zeroes, big enough to hold the needed bits.
+     * @return New byte array initialized to all zeroes, big enough to hold the
+     * needed bits.
      */
     public static byte[] nBitByteArray(int bits, int bitsPerByte) {
         if (bits % bitsPerByte == 0) {
@@ -120,12 +123,13 @@ public class BitFunctions {
 
     /**
      * Concatenates two byte arrays bitwise.
+     *
      * @param left Array whose bits to put left in the concatenation.
      * @param right Array whose bits to put right in the concatenation.
      * @param nBitsLeft Number of bits in the left array.
      * @param nBitsRight Number of bits in the right array.
-     * @return Byte array with nBitsLeft bits from the left array starting from left (0,0)
-     * and nBitsRigth bits from the right array after them.
+     * @return Byte array with nBitsLeft bits from the left array starting from
+     * left (0,0) and nBitsRigth bits from the right array after them.
      */
     public static byte[] concatBits(byte[] left, byte[] right, int nBitsLeft, int nBitsRight) {
         byte[] bits = new byte[nBitsLeft + nBitsRight];
@@ -144,8 +148,9 @@ public class BitFunctions {
     }
 
     /**
-     * Compresses a byte array with each byte representing a single bit, into
-     * a densely packed byte array with the bits starting from the left.
+     * Compresses a byte array with each byte representing a single bit, into a
+     * densely packed byte array with the bits starting from the left.
+     *
      * @param bits Byte array with each byte representing a single bit
      * (rightmost bit in the byte).
      * @return Dense byte array with the bits starting from the left.
@@ -181,6 +186,7 @@ public class BitFunctions {
 
     /**
      * Bitwise exclusive-or operation for two byte arrays.
+     *
      * @param arr1 First operand.
      * @param arr2 Second operand.
      * @return Byte array constructed by XORing the bits of arr1 and arr2.
@@ -195,42 +201,80 @@ public class BitFunctions {
         }
         return arr1;
     }
-    
+
     /**
      * Make a string representation of the bits in a byte array.
+     *
      * @param data Bits to convert.
-     * @return String with bits represented as '0' and '1' and spaces between bytes.
+     * @return String with bits represented as '0' and '1' and spaces between
+     * bytes.
      */
     public static String bitRepresentation(byte[] data) {
         StringBuilder b = new StringBuilder();
         for (int i = 0; i < data.length; i++) {
             for (int j = 0; j < 8; j++) {
-                b.append(BitFunctions.getBitByOffset(8*i + j, data));
+                b.append(BitFunctions.getBitByOffset(8 * i + j, data));
             }
             b.append(" ");
         }
         b.deleteCharAt(b.length() - 1);
         return b.toString();
     }
-    
+
     /**
-     * Stretch or compress a byte array by using a specified amount of bits in each byte.
-     * Bit count n means n low-order bits.
-     * @param data Array to be stretched/compressed.
-     * @param currentBitCount How many bits are currently used per byte (low-order bits).
+     * Insert a single bit into a specified 0-based index from the left.
+     *
+     * @param bit Byte representing the bit to insert. 1 or 0.
+     * @param bitIndex How many bits from the left should be bit be inserted.
+     * @param array Array to insert the bit in.
+     * @return Array with the bit inserted.
+     */
+    public static byte[] insertBit(byte bit, int bitIndex, byte[] array) {
+        int nByte = bitIndex / 8;
+        int nBit = bitIndex % 8;
+        if (bit == 0) {
+            bit = (byte) 1;
+            bit <<= (7 - nBit);
+            bit = (byte) (~bit & 0x000000ff);
+            array[nByte] &= bit;
+        } else {
+            bit <<= (7 - nBit);
+            array[nByte] |= bit;
+        }
+        return array;
+    }
+
+    /**
+     * Stretch or compress a byte array by using a specified amount of bits in
+     * each byte. Bit count n means n low-order bits.
+     *
+     * @param source Array to be stretched/compressed.
+     * @param currentBitCount How many bits are currently used per byte
+     * (low-order bits).
      * @param targetBitCount How many bits to put in each byte (low-order bits).
      * @return Stretched/compressed byte array.
      */
-    public static byte[] chBitsPerByte(byte[] data, int currentBitCount, int targetBitCount) {
-        byte[] arr = BitFunctions.nBitByteArray(data.length * currentBitCount);
-        int skip = 8 - currentBitCount;
-        int bitsCopied = 0;
-        for (int i = 0; i < data.length; i++) {
-            byte[] bits = BitFunctions.copyBits(i * 8 + skip, i * 9);
-            arr = BitFunctions.concatBits(arr, bits, bitsCopied, currentBitCount); 
-            bitsCopied += currentBitCount;
+    public static byte[] chBitsPerByte(byte[] source, int currentBitCount, int targetBitCount) {
+        int bits = source.length * currentBitCount;
+        int sourceSkip = 8 - currentBitCount;
+        int targetSkip = 8 - targetBitCount;
+        int sourceIdx = sourceSkip;
+        int targetIdx = targetSkip;
+        byte[] arr = BitFunctions.nBitByteArray(bits, targetBitCount);
+        while (sourceIdx < 8 * source.length) {
+            byte b = BitFunctions.getBitByOffset(sourceIdx, source);
+            arr = BitFunctions.insertBit(b, targetIdx, arr);
+            sourceIdx++;
+            targetIdx++;
+            if (sourceIdx % 8 == 0) {
+                sourceIdx += sourceSkip;
+            }
+            if (targetIdx % 8 == 0) {
+                targetIdx += targetSkip;
+            }
+            System.out.println(BitFunctions.bitRepresentation(arr));
         }
-        return null;
+        return arr;
     }
 
 }

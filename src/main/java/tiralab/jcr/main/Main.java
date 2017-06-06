@@ -6,7 +6,6 @@
 package tiralab.jcr.main;
 
 import tiralab.jcr.logic.BitFunctions;
-import tiralab.jcr.text_interface.TextInterface;
 
 /**
  *
@@ -19,14 +18,11 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        System.out.println(BitFunctions.bitRepresentation(new byte[]{
-            (byte) 00011011,
-            (byte) 00000010,
-            (byte) 11101111,
-            (byte) 11111100,
-            (byte) 01110000,
-            (byte) 01110010
-        }));
-        System.out.println( "00011011 00000010 11101111 11111100 01110000 01110010 ");
+        byte[] test = new byte[]{
+            (byte) 0b00001010,
+            (byte) 0b11101101,
+            (byte) 0b00100001
+        };
+        BitFunctions.bitRepresentation(BitFunctions.chBitsPerByte(test, 4, 6));
     }
 }

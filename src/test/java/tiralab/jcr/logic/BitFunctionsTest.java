@@ -237,8 +237,8 @@ public class BitFunctionsTest {
     @Test
     public void bitRepresentationReturnCorrect1() {
         byte[] test = new byte[]{
-            (byte)0b10101010,
-            (byte)0b11110111
+            (byte) 0b10101010,
+            (byte) 0b11110111
         };
         assertEquals("10101010 11110111", BitFunctions.bitRepresentation(test));
     }
@@ -246,10 +246,114 @@ public class BitFunctionsTest {
     @Test
     public void bitRepresentationReturnCorrect2() {
         byte[] test = new byte[]{
-            (byte)0b10000010,
-            (byte)0b01010111,
-            (byte)0b11010100
+            (byte) 0b10000010,
+            (byte) 0b01010111,
+            (byte) 0b11010100
         };
         assertEquals("10000010 01010111 11010100", BitFunctions.bitRepresentation(test));
+    }
+
+    @Test
+    public void nBitByteArrayReturnCorrectLengthArray1() {
+        assertEquals(2, BitFunctions.nBitByteArray(12, 6).length);
+    }
+
+    @Test
+    public void nBitByteArrayReturnCorrectLengthArray2() {
+        assertEquals(3, BitFunctions.nBitByteArray(12, 4).length);
+    }
+
+    @Test
+    public void nBitByteArrayReturnCorrectLengthArray3() {
+        assertEquals(56, BitFunctions.nBitByteArray(112, 2).length);
+    }
+
+    @Test
+    public void insertBitReturnCorrect1() {
+        testBytes = new byte[]{
+            (byte) 0b10101011
+        };
+        byte[] expected = new byte[]{
+            (byte) 0b10101010
+        };
+        assertArrayEquals(expected, BitFunctions.insertBit((byte) 0, 7, testBytes));
+    }
+
+    @Test
+    public void insertBitReturnCorrect2() {
+        testBytes = new byte[]{
+            (byte) 0b00001111,
+            (byte) 0b11110000
+        };
+        byte[] expected = new byte[]{
+            (byte) 0b00001111,
+            (byte) 0b11110100
+        };
+        assertArrayEquals(expected, BitFunctions.insertBit((byte) 1, 13, testBytes));
+    }
+
+    @Test
+    public void insertBitReturnCorrect3() {
+        testBytes = new byte[]{
+            (byte) 0b10101010,
+            (byte) 0b11111111,
+            (byte) 0b00100101
+        };
+        byte[] expected = new byte[]{
+            (byte) 0b10101010,
+            (byte) 0b11111111,
+            (byte) 0b10100101
+        };
+        assertArrayEquals(expected, BitFunctions.insertBit((byte) 1, 16, testBytes));
+    }
+
+    @Test
+    public void chBitsPerByteReturnCorrect1() {
+        testBytes = new byte[]{
+            (byte) 0b00001010,
+            (byte) 0b11101101,
+            (byte) 0b00100001
+        };
+        byte[] expected = new byte[]{
+            (byte) 0b00101011,
+            (byte) 0b00010001
+        };
+        assertArrayEquals(expected, BitFunctions.chBitsPerByte(testBytes, 4, 6));
+    }
+
+    @Test
+    public void chBitsPerByteReturnCorrect2() {
+        testBytes = new byte[]{
+            (byte) 0b11111111,
+            (byte) 0b10101111,
+            (byte) 0b00001001,
+            (byte) 0b10101010
+        };
+        byte[] expected = new byte[]{
+            (byte) 0b11111110,
+            (byte) 0b10111100,
+            (byte) 0b01001010,
+            (byte) 0b10100000
+        };
+        assertArrayEquals(expected, BitFunctions.chBitsPerByte(testBytes, 7, 8));
+    }
+
+    @Test
+    public void chBitsPerByteReturnCorrect3() {
+        testBytes = new byte[]{
+            (byte) 0b11111111,
+            (byte) 0b10101111,
+            (byte) 0b00001001,};
+        byte[] expected = new byte[]{
+            (byte) 0b00000011,
+            (byte) 0b00000011,
+            (byte) 0b00000010,
+            (byte) 0b00000011,
+            (byte) 0b00000011,
+            (byte) 0b00000001,
+            (byte) 0b00000000,
+            (byte) 0b00000010
+        };
+        assertArrayEquals(expected, BitFunctions.chBitsPerByte(testBytes, 5, 2));
     }
 }

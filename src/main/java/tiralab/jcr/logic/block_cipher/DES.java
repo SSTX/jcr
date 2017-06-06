@@ -15,10 +15,11 @@ import tiralab.jcr.logic.block_cipher.key_schedule.DESKeySchedule;
  * @author ttiira
  */
 public class DES implements BlockCipher {
+
     private int round;
     private byte[] key;
     private DESKeySchedule keySched;
-    
+
     public DES(byte[] key) {
         this.key = key;
         this.round = 0;
@@ -86,9 +87,8 @@ public class DES implements BlockCipher {
         return BitFunctions.permuteBits(data, permTable);
     }
 
-
     /**
-     * Feistel function for DES. 
+     * Feistel function for DES.
      *
      * @param data Right half-block (32 bits) of the block being processed.
      * @param subkey 48-bit subkey from the key schedule.
@@ -102,33 +102,24 @@ public class DES implements BlockCipher {
         block = BitFunctions.bitwiseXOR(block, subkey);
 
         //substitution
+        byte[] stretched = BitFunctions.chBitsPerByte(block, 8, 6);
         byte[] subs = new byte[8];
-        for (int i = 0; i < block.length * 6; i += 6) {
-            //process the block in six bit parts
-            byte substitutionInput = 0;
-            for (int j = 0; j < 6; j++) {
-                //collect six bits for the s-box
-                byte b = BitFunctions.getBitByOffset(i + j, block);
-                substitutionInput |= (b << (5 - j));
-            }
-            // i/6 goes through {0,1,2,3,4,5,6,7}
-            subs[i / 6] = this.substitute(i / 6, substitutionInput);
+        for (int i = 0; i < subs.length; i++) {
+            subs[i] = this.substitute(i, stretched[i]);
         }
-
+        
         //permutation
-        byte[] pInput = new byte[4];
-        for (int i = 0; i < subs.length; i += 2) {
-            //combine the 4-bit values from the s-boxes into bytes
-            pInput[i / 2] = BitFunctions.combineHalfBytes(subs[i], subs[i + 1]);
-        }
-        byte[] out = this.permutationP(pInput);
+        subs = BitFunctions.chBitsPerByte(subs, 4, 8);
+        byte[] out = this.permutationP(subs);
         return out;
     }
 
     /**
      * Substitution function for DES.
+     *
      * @param n Number of the s-box used (0-based).
-     * @param data Six bits of data to be fed into the s-box. Two high-order bits are unused.
+     * @param data Six bits of data to be fed into the s-box. Two high-order
+     * bits are unused.
      * @return 4-bit value from the s-box. Four high-order bits are unused.
      */
     public byte substitute(int n, byte data) {
@@ -207,6 +198,7 @@ public class DES implements BlockCipher {
 
     /**
      * Permutation part of the feistel function. Performed after substitution.
+     *
      * @param data 32-bit half-block.
      * @return permuted half-block.
      */
@@ -221,7 +213,7 @@ public class DES implements BlockCipher {
     }
 
     private void round() {
-        
+
     }
 
     /**

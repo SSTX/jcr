@@ -162,10 +162,11 @@ public class BitFunctions {
         if (arr2.length < len) {
             len = arr2.length;
         }
+        byte[] ret = BitFunctions.copyBits(0, len * 8, arr1);
         for (int i = 0; i < len; i++) {
-            arr1[i] ^= arr2[i];
+            ret[i] ^= arr2[i];
         }
-        return arr1;
+        return ret;
     }
 
     /**

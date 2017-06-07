@@ -15,14 +15,10 @@ import tiralab.jcr.logic.block_cipher.key_schedule.DESKeySchedule;
  */
 public class DES implements BlockCipher {
 
-    private int round;
-    private byte[] key;
-    private DESKeySchedule keySched;
+    public DESKeySchedule keySched;
 
     public DES(byte[] key) {
-        this.key = key;
-        this.round = 0;
-        this.keySched = new DESKeySchedule(this.key);
+        this.keySched = new DESKeySchedule(key);
     }
 
     /**
@@ -217,20 +213,20 @@ public class DES implements BlockCipher {
         byte[] right = BitFunctions.copyBits(32, 64, permutedInput);
         for (int i = 0; i < 16; i++) {
             byte[] roundKey = keys[i];
-            byte[] newRight = this.feistelFunction(right, roundKey);
-            newRight = BitFunctions.bitwiseXOR(left, newRight);
-            left = right;
-            right = newRight;
+            byte[] block = this.round(roundKey, left, right);
+            left = BitFunctions.copyBits(0, 32, block);
+            right = BitFunctions.copyBits(32, 64, block);
         }
-        byte[] out = BitFunctions.concatBits(left, right, 32, 32);
+        //reverse the order of the final half-blocks
+        byte[] out = BitFunctions.concatBits(right, left, 32, 32);
         return this.finalPermutation(out);
     }
-    
+
     public byte[] round(byte[] roundKey, byte[] left, byte[] right) {
         byte[] newRight = BitFunctions.bitwiseXOR(left, this.feistelFunction(right, roundKey));
         left = right;
-        right = newRight
-        return BitFunctions.bitwiseConcat(left, right, 32, 32);
+        right = newRight;
+        return BitFunctions.concatBits(left, right, 32, 32);
     }
 
     /**

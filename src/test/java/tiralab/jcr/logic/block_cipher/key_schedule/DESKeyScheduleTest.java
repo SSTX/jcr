@@ -107,16 +107,30 @@ public class DESKeyScheduleTest {
         };
         assertArrayEquals(expected, sched.encryptionSubKeys()[1]);
     }
-    
+
     @Test
     public void decryptionSubKeysReturnCorrectKeys1() {
-        byte[] expected = sched.encryptionSubKeys()[15];
-        assertArrayEquals(expected, sched.decryptionSubKeys()[0]);
+        byte[] expected = new byte[]{
+            (byte) 0b10010111,
+            (byte) 0b11000101,
+            (byte) 0b11010001,
+            (byte) 0b11111010,
+            (byte) 0b10111010,
+            (byte) 0b01000001
+        };
+        assertArrayEquals(expected, sched.decryptionSubKeys()[3]);
     }
-    
+
     @Test
     public void decryptionSubKeysReturnCorrectKeys2() {
-        byte[] expected = sched.encryptionSubKeys()[10];
-        assertArrayEquals(expected, sched.decryptionSubKeys()[5]);
+        byte[] expected = new byte[]{
+            (byte) 0b11100000,
+            (byte) 0b11011011,
+            (byte) 0b11101011,
+            (byte) 0b11101101,
+            (byte) 0b11100111,
+            (byte) 0b10000001
+        };
+        assertArrayEquals(expected, sched.decryptionSubKeys()[7]);
     }
 }

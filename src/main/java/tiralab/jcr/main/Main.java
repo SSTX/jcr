@@ -21,15 +21,10 @@ public class Main {
      */
     public static void main(String[] args) {
         byte[] test = new byte[]{
-            (byte) 0b00001010,
-            (byte) 0b11101101,
-            (byte) 0b00100001
+            (byte) -127
         };
-        Cryptographer g = new Cryptographer();
-        try {
-            System.out.println(BitFunctions.bitRepresentation(g.encrypt("/home/ttiira/testfile.txt", "/home/ttiira/testkey.txt", "asd")));
-        } catch (IOException e) {
-            System.out.println("io error");
-        }
+        byte[] test2 = new byte[]{(byte) -123};
+        System.out.println(BitFunctions.bitRepresentation(test));
+        System.out.println(BitFunctions.bitRepresentation(test2));
     }
 }

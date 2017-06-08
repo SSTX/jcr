@@ -2,6 +2,10 @@ package tiralab.jcr.logic.block_cipher.key_schedule;
 
 import tiralab.jcr.logic.BitFunctions;
 
+/**
+ *
+ * @author ttiira
+ */
 public class DESKeySchedule {
 
     private byte[] encryptionKey;
@@ -9,17 +13,29 @@ public class DESKeySchedule {
     private byte[] right;
     private int iteration;
 
+    /**
+     *
+     * @param key
+     */
     public DESKeySchedule(byte[] key) {
         this.encryptionKey = this.permutedChoice1(key);
         this.init();
     }
 
+    /**
+     *
+     */
     public void init() {
         this.left = BitFunctions.copyBits(0, 28, this.encryptionKey);
         this.right = BitFunctions.copyBits(28, 56, this.encryptionKey);
         this.iteration = 0;
     }
 
+    /**
+     *
+     * @param block
+     * @return
+     */
     public byte[] permutedChoice1(byte[] block) {
         int[] permTable = new int[]{
             //left 28 bits
@@ -36,6 +52,11 @@ public class DESKeySchedule {
         return BitFunctions.permuteBits(block, permTable);
     }
 
+    /**
+     *
+     * @param state
+     * @return
+     */
     public byte[] permutedChoice2(byte[] state) {
         int[] permTable = new int[]{
             13, 16, 10, 23, 0, 4,
@@ -62,6 +83,10 @@ public class DESKeySchedule {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public byte[][] encryptionSubKeys() {
         byte[][] keys = new byte[16][];
         for (int i = 0; i < 16; i++) {
@@ -75,6 +100,10 @@ public class DESKeySchedule {
         return keys;
     }
 
+    /**
+     *
+     * @return
+     */
     public byte[][] decryptionSubKeys() {
         byte[][] keys = this.encryptionSubKeys();
         byte[][] ret = new byte[16][6];

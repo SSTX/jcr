@@ -30,33 +30,40 @@ public class ECBTest {
     Cipher testCipher;
     byte[] testBytes;
     byte[] testBytes2;
-
+    byte[] evenBlocks;
+    byte[] evenBlocks2;
+    /**
+     *
+     */
     public ECBTest() {
     }
 
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
+    /**
+     *
+     */
     @Before
     public void setUp() {
         DES des = new DES("aaaaaaaa".getBytes());
-        ecb = new ECB(new DES(new byte[8]), 8);
+        ecb = new ECB(des, 8);
         testBytes = new byte[70];
         for (int i = 0; i < 70; i++) {
             testBytes[i] += i; //{0,1,2,...,69}
         }
         testBytes2 = Arrays.copyOfRange(testBytes, 30, 33); //{30, 31, 32}
+        evenBlocks = Arrays.copyOfRange(testBytes, 0, 8);
+        evenBlocks2 = Arrays.copyOfRange(testBytes, 8, 32);
     }
 
+    /**
+     *
+     */
     @After
     public void tearDown() {
     }
 
+    /**
+     *
+     */
     @Test
     public void blockSizeNotZero() {
         try {
@@ -67,6 +74,9 @@ public class ECBTest {
         }
     }
 
+    /**
+     *
+     */
     @Test
     public void blockSizeNotNegative() {
         try {
@@ -77,6 +87,9 @@ public class ECBTest {
         }
     }
 
+    /**
+     *
+     */
     @Test
     public void byteArrayPaddedCorrectlyWhenLengthNotMultipleOfBlockSize1() {
         byte[] test = new byte[34];
@@ -84,6 +97,9 @@ public class ECBTest {
         assertEquals(40, test.length);
     }
 
+    /**
+     *
+     */
     @Test
     public void byteArrayPaddedCorrectlyWhenLengthNotMultipleOfBlockSize2() {
         byte[] test = new byte[9];
@@ -91,6 +107,9 @@ public class ECBTest {
         assertEquals(16, test.length);
     }
 
+    /**
+     *
+     */
     @Test
     public void byteArrayPaddedCorrectlyWhenLengthIsMultipleOfBlockSize() {
         byte[] test = new byte[8];
@@ -99,18 +118,38 @@ public class ECBTest {
     }
 
     @Test
-    public void makeBlocksSplitsCorrectly1() {
-        byte[][] blocks = ecb.makeBlocks(testBytes);
-        assertEquals(9, blocks.length);
-        assertArrayEquals(Arrays.copyOfRange(testBytes, 0, 8), blocks[0]);
-        assertArrayEquals(Arrays.copyOfRange(testBytes, 8, 16), blocks[1]);
+    public void padUnpadReturnOriginalBytes1() {
+        byte[] padded = ecb.padBytes(testBytes);
+        assertArrayEquals(testBytes, ecb.unpadBytes(padded));
     }
 
     @Test
-    public void makeBlocksSplitsCorrectly2() {
-        byte[][] blocks = ecb.makeBlocks(testBytes2);
-        assertEquals(1, blocks.length);
-        byte[] expected = new byte[]{(byte) 30, (byte) 31, (byte) 32, (byte) 5, (byte) 5, (byte) 5, (byte) 5, (byte) 5};
-        assertArrayEquals(expected, blocks[0]);
+    public void padUnpadReturnOriginalBytes2() {
+        byte[] padded = ecb.padBytes(testBytes2);
+        assertArrayEquals(testBytes2, ecb.unpadBytes(padded));
+    }
+
+    @Test
+    public void padUnpadReturnOriginalBytes3() {
+        byte[] padded = ecb.padBytes(new byte[1]);
+        assertArrayEquals(new byte[1], ecb.unpadBytes(padded));
+    }
+
+    @Test
+    public void makeUnmakeBlocksReturnOriginalBytes1() {
+        byte[][] blocks = ecb.makeBlocks(evenBlocks);
+        assertArrayEquals(evenBlocks, ecb.unmakeBlocks(blocks));
+    }
+
+    @Test
+    public void makeUnmakeBlocksReturnOriginalBytes2() {
+        byte[][] blocks = ecb.makeBlocks(evenBlocks2);
+        assertArrayEquals(evenBlocks2, ecb.unmakeBlocks(blocks));
+    }
+
+
+    @Test
+    public void encryptDecryptReturnOriginalBytes1() {
+        assertArrayEquals(testBytes, ecb.decrypt(ecb.encrypt(testBytes)));
     }
 }

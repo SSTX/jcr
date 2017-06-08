@@ -6,6 +6,10 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ *
+ * @author ttiira
+ */
 public class DESTest {
 
     DES des;
@@ -13,6 +17,9 @@ public class DESTest {
     byte[] keyBytes;
     javax.crypto.Cipher testCipher;
 
+    /**
+     *
+     */
     @Before
     public void setUp() {
         testBytes = new byte[8];
@@ -30,21 +37,33 @@ public class DESTest {
         des = new DES(keyBytes);
     }
 
+    /**
+     *
+     */
     @Test
     public void substituteOutputCorrect1() {
         assertEquals(13, des.substitute(0, (byte) 0b00111111));
     }
 
+    /**
+     *
+     */
     @Test
     public void substituteOutputCorrect2() {
         assertEquals(1, des.substitute(2, (byte) 0b00110010));
     }
 
+    /**
+     *
+     */
     @Test
     public void substituteOutputCorrect3() {
         assertEquals(9, des.substitute(1, (byte) 0b11111111));
     }
 
+    /**
+     *
+     */
     @Test
     public void initialPermutationReturnCorrect() {
         byte[] bytes = new byte[]{
@@ -70,6 +89,9 @@ public class DESTest {
         assertArrayEquals(expected, des.initialPermutation(bytes));
     }
 
+    /**
+     *
+     */
     @Test
     public void expandReturnCorrect() {
         byte[] input = new byte[]{
@@ -89,6 +111,9 @@ public class DESTest {
         assertArrayEquals(expected, des.expand(input));
     }
 
+    /**
+     *
+     */
     @Test
     public void feistelFunctionReturnCorrect() {
         byte[] expected = new byte[]{
@@ -114,6 +139,9 @@ public class DESTest {
         assertArrayEquals(expected, des.feistelFunction(input, key));
     }
 
+    /**
+     *
+     */
     @Test
     public void permutationPReturnCorrect() {
         byte[] expected = new byte[]{
@@ -131,6 +159,9 @@ public class DESTest {
         assertArrayEquals(expected, des.permutationP(input));
     }
 
+    /**
+     *
+     */
     @Test
     public void finalPermutationReturnCorrect() {
         byte[] input = new byte[]{
@@ -156,6 +187,9 @@ public class DESTest {
         assertArrayEquals(expected, des.finalPermutation(input));
     }
 
+    /**
+     *
+     */
     @Test
     public void singleRoundReturnCorrect() {
         byte[] expected = new byte[]{
@@ -180,10 +214,13 @@ public class DESTest {
             (byte) 0b11110000,
             (byte) 0b10101010
         };
-        byte[] roundKey = des.keySched.encryptionSubKeys()[0];
+        byte[] roundKey = des.getKeySchedule().encryptionSubKeys()[0];
         assertArrayEquals(expected, des.round(roundKey, left, right));
     }
 
+    /**
+     *
+     */
     @Test
     public void desEncryptionCorrect() {
         byte[] expected = new byte[]{
@@ -209,6 +246,9 @@ public class DESTest {
         assertArrayEquals(expected, des.encrypt(input));
     }
     
+    /**
+     *
+     */
     @Test
     public void desEncryptDecryptGivesOriginalPlaintext() {
         byte[] input = new byte[]{

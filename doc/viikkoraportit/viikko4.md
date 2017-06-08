@@ -4,6 +4,7 @@
 * Maanantai: 1
 * Tiistai: 4
 * Keskiviikko: 2
+* Torstai: 3
 
 Maanantaina aloitin kirjoittamaan metodia, joka pidentää tai lyhentää byte[] -tyyppistä
 taulukkoa käyttämällä (vain) tietyn määrän bittejä joka tavusta. Tarvitsin sitä 
@@ -17,3 +18,4 @@ Olin unohtanut, että taulukot ovat viiteparametreja ja käytin parametria
 arr1 tuloksen laskemiseen. Tämä aiheutti epätoivotun sivuvaikutuksen kutsuvassa 
 metodissa. DES alkoi toimimaan oikein korjauksen jälkeen.
 
+Torstaina työskentelin ECB:n toteutuksen kanssa.

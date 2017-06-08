@@ -16,20 +16,32 @@ import static org.junit.Assert.*;
  */
 public class BitFunctionsTest {
 
+    /**
+     *
+     */
     public BitFunctionsTest() {
     }
 
     byte[] testBytes;
 
+    /**
+     *
+     */
     @Before
     public void setUp() {
         testBytes = new byte[4];
     }
 
+    /**
+     *
+     */
     @After
     public void tearDown() {
     }
 
+    /**
+     *
+     */
     @Test
     public void permuteBitsWorksCorrectly1() {
         testBytes[0] = (byte) 0;
@@ -44,6 +56,9 @@ public class BitFunctionsTest {
         assertEquals((byte) 0, permuted[1]);
     }
 
+    /**
+     *
+     */
     @Test
     public void permuteBitsWorksCorrectly2() {
         testBytes[0] = (byte) 0b10101010;
@@ -60,6 +75,9 @@ public class BitFunctionsTest {
         assertEquals(85, permuted[2]); //85 == 0b01010101
     }
 
+    /**
+     *
+     */
     @Test
     public void getBitByOffsetReturnsCorrectBit1() {
         testBytes[0] = (byte) 0b10101010;
@@ -67,6 +85,9 @@ public class BitFunctionsTest {
         assertEquals(0, BitFunctions.getBitByOffset(1, testBytes));
     }
 
+    /**
+     *
+     */
     @Test
     public void getBitByOffsetReturnsCorrectBit2() {
         testBytes[1] = (byte) 0b11110000;
@@ -74,6 +95,9 @@ public class BitFunctionsTest {
         assertEquals(1, BitFunctions.getBitByOffset(8, testBytes));
     }
 
+    /**
+     *
+     */
     @Test
     public void getBitByOffsetReturnsCorrectBit3() {
         testBytes[0] = (byte) 0b11111111;
@@ -82,6 +106,9 @@ public class BitFunctionsTest {
         assertEquals(0, BitFunctions.getBitByOffset(9, testBytes));
     }
 
+    /**
+     *
+     */
     @Test
     public void rotateLeftReturnsCorrect1() {
         testBytes[0] = (byte) 0b00001111;
@@ -91,6 +118,9 @@ public class BitFunctionsTest {
         assertArrayEquals(expected, BitFunctions.rotateLeft(1, 8, testBytes));
     }
 
+    /**
+     *
+     */
     @Test
     public void rotateLeftReturnsCorrect2() {
         testBytes[0] = (byte) 0b11111111;
@@ -101,6 +131,9 @@ public class BitFunctionsTest {
         assertArrayEquals(expected, BitFunctions.rotateLeft(8, 16, testBytes));
     }
 
+    /**
+     *
+     */
     @Test
     public void rotateLeftReturnsCorrect3() {
         testBytes[0] = (byte) 0b10100000;
@@ -114,6 +147,9 @@ public class BitFunctionsTest {
         assertArrayEquals(expected, BitFunctions.rotateLeft(3, 20, testBytes));
     }
 
+    /**
+     *
+     */
     @Test
     public void rotateLeftIgnoresLengthLessThanOne() {
         testBytes[0] = (byte) 0b00011100;
@@ -122,12 +158,18 @@ public class BitFunctionsTest {
         assertArrayEquals(testBytes, BitFunctions.rotateLeft(119, 0, testBytes));
     }
 
+    /**
+     *
+     */
     @Test
     public void copyBitsReturnCorrect1() {
         testBytes[0] = (byte) 0b00110011;
         assertArrayEquals(testBytes, BitFunctions.copyBits(0, 32, testBytes));
     }
 
+    /**
+     *
+     */
     @Test
     public void copyBitsReturnCorrect2() {
         testBytes[0] = (byte) 0b11001010;
@@ -136,6 +178,9 @@ public class BitFunctionsTest {
         assertArrayEquals(expected, BitFunctions.copyBits(2, 8, testBytes));
     }
 
+    /**
+     *
+     */
     @Test
     public void copyBitsReturnCorrect3() {
         testBytes[0] = (byte) 0b10101010;
@@ -146,6 +191,9 @@ public class BitFunctionsTest {
         assertArrayEquals(expected, BitFunctions.copyBits(6, 9, testBytes));
     }
 
+    /**
+     *
+     */
     @Test
     public void concatBitsReturnCorrect1() {
         testBytes[0] = (byte) 0b11111111;
@@ -154,6 +202,9 @@ public class BitFunctionsTest {
         assertArrayEquals(expected, BitFunctions.concatBits(testBytes, test, 3, 2));
     }
 
+    /**
+     *
+     */
     @Test
     public void concatBitsReturnCorrect2() {
         testBytes[0] = (byte) 0b11011111;
@@ -165,6 +216,9 @@ public class BitFunctionsTest {
         assertArrayEquals(expected, BitFunctions.concatBits(test, testBytes, 3, 6));
     }
 
+    /**
+     *
+     */
     @Test
     public void concatBitsReturnCorrect3() {
         testBytes[0] = (byte) 0b00000001;
@@ -184,6 +238,9 @@ public class BitFunctionsTest {
         assertArrayEquals(expected, BitFunctions.concatBits(testBytes, test, 14, 22));
     }
 
+    /**
+     *
+     */
     @Test
     public void bitwiseXORReturnCorrect() {
         byte[] in1 = new byte[]{
@@ -213,6 +270,9 @@ public class BitFunctionsTest {
         assertArrayEquals(expected, BitFunctions.bitwiseXOR(in1, in2));
     }
 
+    /**
+     *
+     */
     @Test
     public void bitRepresentationReturnCorrect1() {
         byte[] test = new byte[]{
@@ -222,6 +282,9 @@ public class BitFunctionsTest {
         assertEquals("10101010 11110111", BitFunctions.bitRepresentation(test));
     }
 
+    /**
+     *
+     */
     @Test
     public void bitRepresentationReturnCorrect2() {
         byte[] test = new byte[]{
@@ -232,21 +295,33 @@ public class BitFunctionsTest {
         assertEquals("10000010 01010111 11010100", BitFunctions.bitRepresentation(test));
     }
 
+    /**
+     *
+     */
     @Test
     public void nBitByteArrayReturnCorrectLengthArray1() {
         assertEquals(2, BitFunctions.nBitByteArray(12, 6).length);
     }
 
+    /**
+     *
+     */
     @Test
     public void nBitByteArrayReturnCorrectLengthArray2() {
         assertEquals(3, BitFunctions.nBitByteArray(12, 4).length);
     }
 
+    /**
+     *
+     */
     @Test
     public void nBitByteArrayReturnCorrectLengthArray3() {
         assertEquals(56, BitFunctions.nBitByteArray(112, 2).length);
     }
 
+    /**
+     *
+     */
     @Test
     public void insertBitReturnCorrect1() {
         testBytes = new byte[]{
@@ -258,6 +333,9 @@ public class BitFunctionsTest {
         assertArrayEquals(expected, BitFunctions.insertBit((byte) 0, 7, testBytes));
     }
 
+    /**
+     *
+     */
     @Test
     public void insertBitReturnCorrect2() {
         testBytes = new byte[]{
@@ -271,6 +349,9 @@ public class BitFunctionsTest {
         assertArrayEquals(expected, BitFunctions.insertBit((byte) 1, 13, testBytes));
     }
 
+    /**
+     *
+     */
     @Test
     public void insertBitReturnCorrect3() {
         testBytes = new byte[]{
@@ -286,6 +367,9 @@ public class BitFunctionsTest {
         assertArrayEquals(expected, BitFunctions.insertBit((byte) 1, 16, testBytes));
     }
 
+    /**
+     *
+     */
     @Test
     public void chBitsPerByteReturnCorrect1() {
         testBytes = new byte[]{
@@ -300,6 +384,9 @@ public class BitFunctionsTest {
         assertArrayEquals(expected, BitFunctions.chBitsPerByte(testBytes, 4, 6));
     }
 
+    /**
+     *
+     */
     @Test
     public void chBitsPerByteReturnCorrect2() {
         testBytes = new byte[]{
@@ -317,6 +404,9 @@ public class BitFunctionsTest {
         assertArrayEquals(expected, BitFunctions.chBitsPerByte(testBytes, 7, 8));
     }
 
+    /**
+     *
+     */
     @Test
     public void chBitsPerByteReturnCorrect3() {
         testBytes = new byte[]{

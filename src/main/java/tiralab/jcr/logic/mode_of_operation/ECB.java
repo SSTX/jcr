@@ -35,17 +35,11 @@ public class ECB extends ModeOfOperation {
      */
     @Override
     public byte[] encrypt(byte[] data) {
-        byte[][] blocks = this.makeBlocks(data);
+        byte[][] blocks = this.makeBlocks(this.padBytes(data));
         for (int i = 0; i < blocks.length; i++) {
             blocks[i] = this.cipher.encrypt(blocks[i]);
         }
-        byte[] ret = new byte[this.blockSize * blocks.length];
-        for (int i = 0; i < blocks.length; i++) {
-            for (int j = 0; j < this.blockSize; j++) {
-                ret[this.blockSize * i + j] = blocks[i][j];
-            }
-        }
-        return ret;
+        return this.unmakeBlocks(blocks);
     }
 
     /**
@@ -53,11 +47,14 @@ public class ECB extends ModeOfOperation {
      * instantiation. Each block is decrypted separately.
      *
      * @param data Byte array to be decrypted.
-     * @param key Decryption key.
      * @return Decrypted byte array.
      */
     @Override
     public byte[] decrypt(byte[] data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        byte[][] blocks = this.makeBlocks(data);
+        for (int i = 0; i < blocks.length; i++) {
+            blocks[i] = this.cipher.decrypt(blocks[i]);
+        }
+        return this.unpadBytes(this.unmakeBlocks(blocks));
     }
 }

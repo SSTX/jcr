@@ -18,9 +18,15 @@ public class DESKeyScheduleTest {
     byte[] key;
     DESKeySchedule sched;
 
+    /**
+     *
+     */
     public DESKeyScheduleTest() {
     }
 
+    /**
+     *
+     */
     @Before
     public void setUp() {
         key = new byte[]{
@@ -36,6 +42,9 @@ public class DESKeyScheduleTest {
         sched = new DESKeySchedule(key);
     }
 
+    /**
+     *
+     */
     @Test
     public void permutedChoice1ReturnCorrect() {
         byte[] bytes = new byte[]{
@@ -60,6 +69,9 @@ public class DESKeyScheduleTest {
         assertArrayEquals(expected, sched.permutedChoice1(bytes));
     }
 
+    /**
+     *
+     */
     @Test
     public void permutedChoice2ReturnCorrect() {
         byte[] bytes = new byte[]{
@@ -82,6 +94,9 @@ public class DESKeyScheduleTest {
         assertArrayEquals(expected, sched.permutedChoice2(bytes));
     }
 
+    /**
+     *
+     */
     @Test
     public void encryptionSubKeysReturnCorrectKeys1() {
         byte[] expected = new byte[]{
@@ -95,6 +110,9 @@ public class DESKeyScheduleTest {
         assertArrayEquals(expected, sched.encryptionSubKeys()[0]);
     }
 
+    /**
+     *
+     */
     @Test
     public void encryptionSubKeysReturnCorrectKeys2() {
         byte[] expected = new byte[]{
@@ -108,6 +126,9 @@ public class DESKeyScheduleTest {
         assertArrayEquals(expected, sched.encryptionSubKeys()[1]);
     }
 
+    /**
+     *
+     */
     @Test
     public void decryptionSubKeysReturnCorrectKeys1() {
         byte[] expected = new byte[]{
@@ -121,6 +142,9 @@ public class DESKeyScheduleTest {
         assertArrayEquals(expected, sched.decryptionSubKeys()[3]);
     }
 
+    /**
+     *
+     */
     @Test
     public void decryptionSubKeysReturnCorrectKeys2() {
         byte[] expected = new byte[]{

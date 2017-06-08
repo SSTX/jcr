@@ -15,10 +15,14 @@ import tiralab.jcr.logic.block_cipher.key_schedule.DESKeySchedule;
  */
 public class DES implements BlockCipher {
 
-    public DESKeySchedule keySched;
+    private DESKeySchedule keySchedule;
 
+    /**
+     *
+     * @param key
+     */
     public DES(byte[] key) {
-        this.keySched = new DESKeySchedule(key);
+        this.keySchedule = new DESKeySchedule(key);
     }
 
     /**
@@ -222,6 +226,13 @@ public class DES implements BlockCipher {
         return this.finalPermutation(out);
     }
 
+    /**
+     *
+     * @param roundKey
+     * @param left
+     * @param right
+     * @return
+     */
     public byte[] round(byte[] roundKey, byte[] left, byte[] right) {
         byte[] newRight = BitFunctions.bitwiseXOR(left, this.feistelFunction(right, roundKey));
         left = right;
@@ -237,7 +248,7 @@ public class DES implements BlockCipher {
      */
     @Override
     public byte[] encrypt(byte[] data) {
-        byte[][] keys = this.keySched.encryptionSubKeys();
+        byte[][] keys = this.getKeySchedule().encryptionSubKeys();
         return this.process(data, keys);
     }
 
@@ -249,8 +260,15 @@ public class DES implements BlockCipher {
      */
     @Override
     public byte[] decrypt(byte[] data) {
-        byte[][] keys = this.keySched.decryptionSubKeys();
+        byte[][] keys = this.getKeySchedule().decryptionSubKeys();
         return this.process(data, keys);
+    }
+
+    /**
+     * @return the keySchedule
+     */
+    public DESKeySchedule getKeySchedule() {
+        return keySchedule;
     }
 
 }

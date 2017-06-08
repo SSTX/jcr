@@ -32,6 +32,7 @@ public class TextInterface {
      *
      */
     public void run() {
+        this.printHelpText();
         while (true) {
             System.out.print("> ");
             String input = this.scan.nextLine();
@@ -53,10 +54,12 @@ public class TextInterface {
             String s = this.scan.nextLine();
             System.out.println("Cipher:");
             String c = this.scan.nextLine();
+            System.out.println("Mode of operation");
+            String m = this.scan.nextLine();
             System.out.println("Keyfile:");
             String k = this.scan.nextLine();
             try {
-                System.out.println(BitFunctions.bitRepresentation(this.crypt.encrypt(s, k, c)));
+                System.out.println(BitFunctions.bitRepresentation(this.crypt.encrypt(s, k, c, m)));
             } catch (IOException e) {
                 System.out.println("Error reading file");
             }

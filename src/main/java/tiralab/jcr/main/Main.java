@@ -5,9 +5,7 @@
  */
 package tiralab.jcr.main;
 
-import java.io.IOException;
-import tiralab.jcr.logic.BitFunctions;
-import tiralab.jcr.logic.Cryptographer;
+import tiralab.jcr.text_interface.TextInterface;
 
 /**
  *
@@ -20,11 +18,7 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        byte[] test = new byte[]{
-            (byte) -127
-        };
-        byte[] test2 = new byte[]{(byte) -123};
-        System.out.println(BitFunctions.bitRepresentation(test));
-        System.out.println(BitFunctions.bitRepresentation(test2));
+        TextInterface t = new TextInterface();
+        t.run();
     }
 }

@@ -5,6 +5,7 @@
  */
 package tiralab.jcr.logic.mode_of_operation;
 
+import java.util.Arrays;
 import tiralab.jcr.logic.block_cipher.BlockCipher;
 
 /**
@@ -56,6 +57,16 @@ public abstract class ModeOfOperation {
         }
         return paddedBytes;
     }
+    
+    /**
+     * Remove PKCS#7 padding from a byte array. Inverse to padBytes.
+     * @param bytes Byte array to be processed.
+     * @return Byte array with PKCS#7 padding removed.
+     */
+    public byte[] unpadBytes(byte[] bytes) {
+        byte pads = bytes[bytes.length - 1];
+        return Arrays.copyOf(bytes, bytes.length - pads);
+    }
 
     /**
      * Splits an array of bytes into blocks.
@@ -64,7 +75,6 @@ public abstract class ModeOfOperation {
      * @return 2-dimensional array of bytes with each row representing a block.
      */
     public byte[][] makeBlocks(byte[] bytes) {
-        bytes = this.padBytes(bytes);
         int blockNum = bytes.length / this.blockSize;//bytes.length is a multiple of blockSize
         byte[][] blocks = new byte[blockNum][this.blockSize];
         int b = 0;
@@ -77,6 +87,21 @@ public abstract class ModeOfOperation {
             }
         }
         return blocks;
+    }
+    /**
+     * Reverse the things done in makeBlocks.
+     * @param blocks Array to process.
+     * @return 1-dimensional array containing all the bytes that were in the 
+     * blocks-array.
+     */
+    public byte[] unmakeBlocks(byte[][] blocks) {
+        byte[] arr = new byte[blocks.length * this.blockSize];
+        for (int i = 0; i < blocks.length; i++) {
+            for (int j = 0; j < this.blockSize; j++) {
+                arr[this.blockSize * i + j] = blocks[i][j];
+            }
+        }
+        return arr;
     }
 
     /**

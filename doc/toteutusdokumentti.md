@@ -7,6 +7,13 @@ dataan täytettä niin, että se on käytettävän algoritmin lohkokoon monikert
 lohko kerrallaan salausalgoritmille ja lopuksi se palautetaan Cryptographer:lle joka kirjoittaa
 sen tiedostoon.
 
+# Aika- ja tilavaativuudet
+ECB-DES toimii aikavaativuudella O(n), missä n on salattavan/purettavan datan koko (ks. [testausdokumentti](testausdokumentti.md).
+Tilavaativuus on O(n), koska purettava/salattava data luetaan muistiin kokonaisuudessaan kerralla.
+
+# Ongelmia ja mahdollisia ratkaisuja
+Tilavaativuuden voisi mahdollisesti laskea vakioksi lukemalla ja käsittelemällä dataa vain tietty määrä kerrallaan.
+
 # Lähteet
 ## Data Encryption Standard (DES)
 * https://en.wikipedia.org/wiki/Data_Encryption_Standard

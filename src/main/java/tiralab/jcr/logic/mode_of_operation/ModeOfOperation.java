@@ -5,7 +5,6 @@
  */
 package tiralab.jcr.logic.mode_of_operation;
 
-import java.util.Arrays;
 import tiralab.jcr.logic.block_cipher.BlockCipher;
 
 /**
@@ -62,10 +61,18 @@ public abstract class ModeOfOperation {
      * Remove PKCS#7 padding from a byte array. Inverse to padBytes.
      * @param bytes Byte array to be processed.
      * @return Byte array with PKCS#7 padding removed.
+     * @throws IllegalArgumentException
      */
-    public byte[] unpadBytes(byte[] bytes) {
+    public byte[] unpadBytes(byte[] bytes) throws IllegalArgumentException {
         byte pads = bytes[bytes.length - 1];
-        return Arrays.copyOf(bytes, bytes.length - pads);
+        if (pads <= 0 || pads >= bytes.length) {
+            throw new IllegalArgumentException("Malformed padding in data to decrypt");
+        }
+        byte[] unpad = new byte[bytes.length - pads];
+        for (int i = 0; i < unpad.length; i++) {
+            unpad[i] = bytes[i];
+        }
+        return unpad;
     }
 
     /**

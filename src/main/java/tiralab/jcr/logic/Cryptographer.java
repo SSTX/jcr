@@ -22,6 +22,13 @@ public class Cryptographer {
         this.io = new FileIO();
     }
 
+    /**
+     *
+     * @param cipherName
+     * @param modeOfOperation
+     * @param key
+     * @return
+     */
     public ModeOfOperation selectMode(String cipherName, String modeOfOperation,
             byte[] key) {
         BlockCipher cipher;
@@ -44,37 +51,37 @@ public class Cryptographer {
     /**
      * Encrypts a file.
      *
-     * @param filePath Path to the file in the filesystem.
+     * @param inputFilePath Path to the input file.
+     * @param outputFilePath Path to the output file.
      * @param keyPath Path to the key file.
      * @param cipherName Name of the cipher to use.
      * @param modeOfOperation Mode of operation to use the block cipher with.
-     * @return Encrypted byte array.
      * @throws java.io.IOException
      */
-    public byte[] encrypt(String filePath, String keyPath,
+    public void encrypt(String inputFilePath, String outputFilePath, String keyPath,
             String cipherName, String modeOfOperation) throws IOException {
-        byte[] data = this.getIo().readData(filePath);
+        byte[] data = this.getIo().readData(inputFilePath);
         byte[] key = this.getIo().readData(keyPath);
         ModeOfOperation mode = this.selectMode(cipherName, modeOfOperation, key);
-        return mode.encrypt(data);
+        this.getIo().writeData(outputFilePath, mode.encrypt(data));
     }
 
     /**
      * Decrypts a file.
      *
-     * @param filePath Path to the file in the filesystem.
+     * @param inputFilePath Path to the input file.
+     * @param outputFilePath Path to the output file.
      * @param keyPath Path to the key file.
      * @param cipherName Name of the cipher to use.
      * @param modeOfOperation Mode of operation to use the cipher with.
-     * @return Decrypted byte array.
      * @throws java.io.IOException
      */
-    public byte[] decrypt(String filePath, String keyPath,
+    public void decrypt(String inputFilePath, String outputFilePath, String keyPath,
             String cipherName, String modeOfOperation) throws IOException {
-        byte[] data = this.getIo().readData(filePath);
+        byte[] data = this.getIo().readData(inputFilePath);
         byte[] key = this.getIo().readData(keyPath);
         ModeOfOperation mode = this.selectMode(cipherName, modeOfOperation, key);
-        return mode.decrypt(data);
+        this.getIo().writeData(outputFilePath, mode.decrypt(data));
     }
 
     /**

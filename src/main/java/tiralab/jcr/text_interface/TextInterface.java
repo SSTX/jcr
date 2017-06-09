@@ -7,7 +7,6 @@ package tiralab.jcr.text_interface;
 
 import tiralab.jcr.logic.Cryptographer;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Scanner;
 import tiralab.jcr.logic.BitFunctions;
 
@@ -49,27 +48,52 @@ public class TextInterface {
      * @param command
      */
     public void handleCommand(String command) {
-        if (command.equals("e")) {
-            System.out.println("File to encrypt:");
-            String s = this.scan.nextLine();
-            System.out.println("Cipher:");
-            String c = this.scan.nextLine();
-            System.out.println("Mode of operation");
-            String m = this.scan.nextLine();
-            System.out.println("Keyfile:");
-            String k = this.scan.nextLine();
-            try {
-                System.out.println(BitFunctions.bitRepresentation(this.crypt.encrypt(s, k, c, m)));
-            } catch (IOException e) {
-                System.out.println("Error reading file");
-            }
-        } else if (command.equals("d")) {
-
-        } else if (command.equals("h")) {
-            this.printHelpText();
-        } else {
-            System.out.println("Unknown command");
+        switch (command) {
+            case "e":
+                this.processData("e");
+                break;
+            case "d":
+                this.processData("d");
+                break;
+            case "h":
+                this.printHelpText();
+                break;
+            default:
+                System.out.println("Unknown command.");
+                break;
         }
+    }
+
+    /**
+     *
+     * @param mode
+     */
+    public void processData(String mode) {
+        System.out.println("Input file:");
+        String i = this.scan.nextLine();
+        System.out.println("Output file");
+        String o = this.scan.nextLine();
+        System.out.println("Cipher:");
+        String c = this.scan.nextLine();
+        System.out.println("Mode of operation");
+        String m = this.scan.nextLine();
+        System.out.println("Keyfile:");
+        String k = this.scan.nextLine();
+        try {
+            switch (mode.toLowerCase()) {
+                case "d":
+                    this.crypt.decrypt(i, o, k, c, m);
+                    break;
+                case "e":
+                    this.crypt.encrypt(i, o, k, c, m);
+                    break;
+            }
+        } catch (IOException e) {
+            System.out.println("IOError: " + e.getMessage());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Bad data: " + e.getMessage());
+        }
+
     }
 
     /**
@@ -80,5 +104,6 @@ public class TextInterface {
         System.out.println("e\tencrypt");
         System.out.println("d\tdecrypt");
         System.out.println("h\tprint this help text");
+        System.out.println("q\tquit");
     }
 }

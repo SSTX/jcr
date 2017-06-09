@@ -8,7 +8,7 @@ lohko kerrallaan salausalgoritmille ja lopuksi se palautetaan Cryptographer:lle 
 sen tiedostoon.
 
 # Aika- ja tilavaativuudet
-ECB-DES toimii aikavaativuudella O(n), missä n on salattavan/purettavan datan koko (ks. [testausdokumentti](testausdokumentti.md).
+ECB-DES toimii aikavaativuudella O(n), missä n on salattavan/purettavan datan koko (ks. [testausdokumentti](testausdokumentti.md)).
 Tilavaativuus on O(n), koska purettava/salattava data luetaan muistiin kokonaisuudessaan kerralla.
 
 # Ongelmia ja mahdollisia ratkaisuja

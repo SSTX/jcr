@@ -1,7 +1,9 @@
+# Yksikkötestaus
 Yksikkötestaukseen käytän jUnitia. DES:n testidata on lähtöisin 
 [tästä](http://page.math.tu-berlin.de/~kant/teaching/hess/krypto-ws2006/des.htm)
  materiaalista.
 
+# Suorituskykytestaus
 Suorituskykytestaukseen on main-paketissa oma luokka, Benchmarking. Se sisältää 
 main-metodin, joka ajaa ECB:n salausmetodia eri kokoisilla syötteillä (tavuina):
 1, 10, 100, 1000, ..., 1000000000 ja tulostaa lopuksi niihin kuluneet ajat. Testaaja

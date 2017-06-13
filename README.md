@@ -10,3 +10,4 @@ Salaus- ja purkuohjelma javalla. Tiralabra 2017 alkukesä.
 * [Viikko 2](doc/viikkoraportit/viikko2.md)
 * [Viikko 3](doc/viikkoraportit/viikko3.md)
 * [Viikko 4](doc/viikkoraportit/viikko4.md)
+* [Viikko 5](doc/viikkoraportit/viikko5.md)

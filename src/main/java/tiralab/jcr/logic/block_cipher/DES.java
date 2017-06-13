@@ -26,7 +26,7 @@ public class DES implements BlockCipher {
     }
 
     /**
-     * Expand function (E) from the DES cipher. Used in the Feistel function to
+     * Expand function (E) of the DES cipher. Used in the Feistel function to
      * expand the right half-block to 48 bits.
      *
      * @param data 32-bit half-block to be expanded.
@@ -91,7 +91,7 @@ public class DES implements BlockCipher {
      *
      * @param data Right half-block (32 bits) of the block being processed.
      * @param subkey 48-bit subkey from the key schedule.
-     * @return 32-bit half-block to be XORed with the left half-block.
+     * @return 32-bit half-block.
      */
     public byte[] feistelFunction(byte[] data, byte[] subkey) {
         //expansion
@@ -116,87 +116,85 @@ public class DES implements BlockCipher {
     /**
      * Substitution function for DES.
      *
-     * @param n Number of the s-box used (0-based).
+     * @param boxNumber Number of the s-box used (0-based).
      * @param data Six bits of data to be fed into the s-box. Two high-order
      * bits are unused.
      * @return 4-bit value from the s-box. Four high-order bits are unused.
      */
-    public byte substitute(int n, byte data) {
-        int[][] substitutionBox = this.getSubstitutionBox(n);
-        //6th and 1st bit from the right represent the row in the s-box
+    public byte substitute(int boxNumber, byte data) {
+        byte[][] substitutionBox = this.getSubstitutionBox(boxNumber);
+        //6th and 1st bit from the right define the row in the s-box
+        //put the 6th bit in the 2nd position from the right and add the 1st bit
         int row = (((data >> 5) & 1) << 1) | (data & 1);
-        //bits 5..2 from the right represent the column
-        int col = 0;
-        for (int i = 4; i > 0; i--) {
-            col |= ((data >> i) & 1) << (i - 1);
-        }
-        return (byte) substitutionBox[row][col];
+        //bits 5..2 from the right define the column
+        int col = (data >> 1) & 0b00001111;
+        return substitutionBox[row][col];
     }
 
-    private int[][] getSubstitutionBox(int n) {
-        switch (n) {
+    private byte[][] getSubstitutionBox(int boxNumber) {
+        switch (boxNumber) {
             case 0:
-                return new int[][]{
+                return new byte[][]{
                     {14, 4, 13, 1, 2, 15, 11, 8, 3, 10, 6, 12, 5, 9, 0, 7},
                     {0, 15, 7, 4, 14, 2, 13, 1, 10, 6, 12, 11, 9, 5, 3, 8},
                     {4, 1, 14, 8, 13, 6, 2, 11, 15, 12, 9, 7, 3, 10, 5, 0},
                     {15, 12, 8, 2, 4, 9, 1, 7, 5, 11, 3, 14, 10, 0, 6, 13}
                 };
             case 1:
-                return new int[][]{
+                return new byte[][]{
                     {15, 1, 8, 14, 6, 11, 3, 4, 9, 7, 2, 13, 12, 0, 5, 10},
                     {3, 13, 4, 7, 15, 2, 8, 14, 12, 0, 1, 10, 6, 9, 11, 5},
                     {0, 14, 7, 11, 10, 4, 13, 1, 5, 8, 12, 6, 9, 3, 2, 15},
                     {13, 8, 10, 1, 3, 15, 4, 2, 11, 6, 7, 12, 0, 5, 14, 9}
                 };
             case 2:
-                return new int[][]{
+                return new byte[][]{
                     {10, 0, 9, 14, 6, 3, 15, 5, 1, 13, 12, 7, 11, 4, 2, 8},
                     {13, 7, 0, 9, 3, 4, 6, 10, 2, 8, 5, 14, 12, 11, 15, 1},
                     {13, 6, 4, 9, 8, 15, 3, 0, 11, 1, 2, 12, 5, 10, 14, 7},
                     {1, 10, 13, 0, 6, 9, 8, 7, 4, 15, 14, 3, 11, 5, 2, 12}
                 };
             case 3:
-                return new int[][]{
+                return new byte[][]{
                     {7, 13, 14, 3, 0, 6, 9, 10, 1, 2, 8, 5, 11, 12, 4, 15},
                     {13, 8, 11, 5, 6, 15, 0, 3, 4, 7, 2, 12, 1, 10, 14, 9},
                     {10, 6, 9, 0, 12, 11, 7, 13, 15, 1, 3, 14, 5, 2, 8, 4},
                     {3, 15, 0, 6, 10, 1, 13, 8, 9, 4, 5, 11, 12, 7, 2, 14}
                 };
             case 4:
-                return new int[][]{
+                return new byte[][]{
                     {2, 12, 4, 1, 7, 10, 11, 6, 8, 5, 3, 15, 13, 0, 14, 9},
                     {14, 11, 2, 12, 4, 7, 13, 1, 5, 0, 15, 10, 3, 9, 8, 6},
                     {4, 2, 1, 11, 10, 13, 7, 8, 15, 9, 12, 5, 6, 3, 0, 14},
                     {11, 8, 12, 7, 1, 14, 2, 13, 6, 15, 0, 9, 10, 4, 5, 3}
                 };
             case 5:
-                return new int[][]{
+                return new byte[][]{
                     {12, 1, 10, 15, 9, 2, 6, 8, 0, 13, 3, 4, 14, 7, 5, 11},
                     {10, 15, 4, 2, 7, 12, 9, 5, 6, 1, 13, 14, 0, 11, 3, 8},
                     {9, 14, 15, 5, 2, 8, 12, 3, 7, 0, 4, 10, 1, 13, 11, 6},
                     {4, 3, 2, 12, 9, 5, 15, 10, 11, 14, 1, 7, 6, 0, 8, 13},};
             case 6:
-                return new int[][]{
+                return new byte[][]{
                     {4, 11, 2, 14, 15, 0, 8, 13, 3, 12, 9, 7, 5, 10, 6, 1},
                     {13, 0, 11, 7, 4, 9, 1, 10, 14, 3, 5, 12, 2, 15, 8, 6},
                     {1, 4, 11, 13, 12, 3, 7, 14, 10, 15, 6, 8, 0, 5, 9, 2},
                     {6, 11, 13, 8, 1, 4, 10, 7, 9, 5, 0, 15, 14, 2, 3, 12}
                 };
             case 7:
-                return new int[][]{
+                return new byte[][]{
                     {13, 2, 8, 4, 6, 15, 11, 1, 10, 9, 3, 14, 5, 0, 12, 7},
                     {1, 15, 13, 8, 10, 3, 7, 4, 12, 5, 6, 11, 0, 14, 9, 2},
                     {7, 11, 4, 1, 9, 12, 14, 2, 0, 6, 10, 13, 15, 3, 5, 8},
                     {2, 1, 14, 7, 4, 10, 8, 13, 15, 12, 9, 0, 3, 5, 6, 11}
                 };
             default:
-                return null;
+                throw new IllegalArgumentException("Invalid s-box index for DES.");
         }
     }
 
     /**
-     * Permutation part of the feistel function. Performed after substitution.
+     * Permutation part of the feistel function.
      *
      * @param data 32-bit half-block.
      * @return permuted half-block.
@@ -211,6 +209,14 @@ public class DES implements BlockCipher {
         return BitFunctions.permuteBits(data, permTable);
     }
 
+    /**
+     * The actual encryption process. First we apply IP, then we do 16 rounds of
+     * encryption and finally perform FP.
+     *
+     * @param data 64-bit block to encrypt/decrypt.
+     * @param keys 16 round keys from the key schedule, 48 bits each.
+     * @return 64-bit block with DES applied.
+     */
     private byte[] process(byte[] data, byte[][] keys) {
         byte[] permutedInput = this.initialPermutation(data);
         byte[] left = BitFunctions.copyBits(0, 32, permutedInput);
@@ -227,11 +233,16 @@ public class DES implements BlockCipher {
     }
 
     /**
+     * Single round of the encryption process. Apply Feistel function to the
+     * right half-block, XOR it with the left half-block. The result becomes the
+     * right half-block of the next round, while the current right becomes the
+     * next left.
      *
-     * @param roundKey
-     * @param left
-     * @param right
-     * @return
+     * @param roundKey 48-bit round key from the key schedule.
+     * @param left Current left half-block.
+     * @param right Current right half-block.
+     * @return 64-bit block with the new left as bits 0..31 and the new right as
+     * bits 32..63.
      */
     public byte[] round(byte[] roundKey, byte[] left, byte[] right) {
         byte[] newRight = BitFunctions.bitwiseXOR(left, this.feistelFunction(right, roundKey));

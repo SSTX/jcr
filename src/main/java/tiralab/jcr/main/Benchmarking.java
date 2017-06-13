@@ -19,8 +19,10 @@ public class Benchmarking {
 
     public static void main(String[] args) {
         List<byte[]> inputs = new ArrayList<>();
-        for (int i = 1; i < 100000000; i *= 10) {
+        int limit = Integer.parseInt(args[0]);
+        for (int i = 1; i <= limit; i *= 10) {
             inputs.add(mkArray(i));
+            inputs.add(mkArray(5*i));
         }
         long[] times = new long[inputs.size()];
         byte[] key = mkArray(8);
@@ -33,7 +35,7 @@ public class Benchmarking {
             times[i] = timeAfter - timeBefore;
         }
         for (int i = 0; i < times.length; i++) {
-            System.out.println("10E" + i + " " + (1.0 * times[i] / 1000000000));
+            System.out.println(inputs.get(i).length + "\t" + (1.0 * times[i] / 1000000000));
         }
     }
     

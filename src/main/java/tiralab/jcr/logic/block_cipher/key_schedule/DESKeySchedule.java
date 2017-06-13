@@ -18,6 +18,9 @@ public class DESKeySchedule {
      * @param key
      */
     public DESKeySchedule(byte[] key) {
+        if (key.length != 8) {
+            throw new IllegalArgumentException("Invalid length key for DES");
+        }
         this.encryptionKey = this.permutedChoice1(key);
         this.init();
     }

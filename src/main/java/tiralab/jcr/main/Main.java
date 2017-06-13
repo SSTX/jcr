@@ -18,7 +18,6 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        System.out.println(System.getProperty("user.dir"));
         TextInterface t = new TextInterface();
         t.run();
     }

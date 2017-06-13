@@ -192,7 +192,7 @@ public class BitFunctions {
      * Insert a single bit into a specified 0-based index from the left.
      *
      * @param bit Byte representing the bit to insert. 1 or 0.
-     * @param bitIndex How many bits from the left should be bit be inserted.
+     * @param bitIndex How many bits from the left should be bit be inserted (0-based).
      * @param array Array to insert the bit in.
      * @return Array with the bit inserted.
      */
@@ -200,9 +200,8 @@ public class BitFunctions {
         int nByte = bitIndex / 8;
         int nBit = bitIndex % 8;
         if (bit == 0) {
-            bit = (byte) 1;
-            bit <<= (7 - nBit);
-            bit = (byte) (~bit & 0x000000ff);
+            bit = (byte) ~(1 << (7 - nBit));
+            //bit is now all ones, except a zero in the position defined by bitIndex
             array[nByte] &= bit;
         } else {
             bit <<= (7 - nBit);
@@ -226,11 +225,11 @@ public class BitFunctions {
         //how many high-order bits to ignore in each byte
         int sourceSkip = 8 - currentBitCount;
         int targetSkip = 8 - targetBitCount;
-        //start from the first bit position to read and write
+        //start reading and writing from the first valid index
         int sourceIdx = sourceSkip;
         int targetIdx = targetSkip;
         byte[] arr = BitFunctions.nBitByteArray(bits, targetBitCount);
-        //loop through each bit in the source array
+        //loop over each bit in the source array
         while (sourceIdx < 8 * source.length) {
             byte b = BitFunctions.getBitByOffset(sourceIdx, source);
             arr = BitFunctions.insertBit(b, targetIdx, arr);

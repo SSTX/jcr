@@ -5,6 +5,8 @@
 * Tiistai: 4
 * Keskiviikko: 2
 * Torstai: 3
+* Perjantai: 5
+* Yhteensä: 15
 
 Maanantaina aloitin kirjoittamaan metodia, joka pidentää tai lyhentää byte[] -tyyppistä
 taulukkoa käyttämällä (vain) tietyn määrän bittejä joka tavusta. Tarvitsin sitä 
@@ -19,3 +21,6 @@ arr1 tuloksen laskemiseen. Tämä aiheutti epätoivotun sivuvaikutuksen kutsuvas
 metodissa. DES alkoi toimimaan oikein korjauksen jälkeen.
 
 Torstaina työskentelin ECB:n toteutuksen kanssa.
+
+Perjantaina kirjoitin vielä muutaman testin Cryptographer-luokalle. Aloitin testaus-
+ja toteutusdokumentaation kirjoittamisen. Kirjoitin vertaisarvion.

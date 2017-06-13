@@ -67,7 +67,7 @@ sitä kutsuva metodi (DES:n) encrypt toimivat ajassa O(1).
 
 Palataan ECB:n encrypt-metodiin. Viimeisellä rivillä kutsutaan unmakeBlocks. Nähdään, että
 sen aikavaativuus on O(h * j), missä h on syötteenä annetun 2-ulotteisen taulukon 
-rivimäärä, ja h sarakemäärä. Kuitenkin tiedetään, että h * j = n, missä n on
+rivimäärä, ja j sarakemäärä. Kuitenkin tiedetään, että h * j = n, missä n on
 encrypt-metodin parametrin data pituus. Siis tämänkin osan aikavaativuus on O(n).
 
 ### Yhteenveto

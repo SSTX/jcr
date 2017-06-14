@@ -27,7 +27,7 @@ public abstract class ModeOfOperation {
      * Mode of operation for block ciphers.
      *
      * @param cipher Block cipher to be used in this mode of operation.
-     * @param blockSize Block size in bytes for the block cipher used.
+     * @param blockSize Block size in bytes for the block cipher.
      */
     public ModeOfOperation(BlockCipher cipher, int blockSize) {
         this.cipher = cipher;

@@ -4,10 +4,14 @@ Yksikkötestaukseen käytän jUnitia. DES:n testidata on lähtöisin
  materiaalista.
 
 # Suorituskykytestaus
-Suorituskykytestaukseen on main-paketissa oma luokka, Benchmarking. Se sisältää 
-main-metodin, joka ajaa ECB:n salausmetodia eri kokoisilla syötteillä (tavuina):
-1, 10, 100, 1000, ..., 1000000000 ja tulostaa lopuksi niihin kuluneet ajat. Testaaja
-sai seuraavat tulokset:
+Suorituskykytestaukseen on main-paketissa oma luokka, Benchmarking. Sen sisältämä
+main-metodi mittaa ECB-DES:n suorittamiseen kuluvaa aikaa eri pituisilla syötteillä.
+Argumentteja on kolme, pienin testattavan syötteen koko, suurimman testattavan syötteen
+koko ja koon lisäys. Testisyötteen koko kasvaa lineaarisesti pienimmästä suurimpaan
+annetuin askelin. Esim "100 1000 100" tuottaa syötteiden pituuksiksi 100, 200, 300,
+400, 500, 600, 700, 800, 900, 1000.
+
+Testaustulokset tulostuvat stdout:n. Testaaja sai seuraavat tulokset:
 
 | Syötteen koko tavuina | Kulunut aika sekunteina|
 | ---- | ----------- |

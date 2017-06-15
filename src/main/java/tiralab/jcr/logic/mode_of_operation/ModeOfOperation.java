@@ -102,9 +102,10 @@ public abstract class ModeOfOperation {
      * blocks-array.
      */
     public byte[] unmakeBlocks(byte[][] blocks) {
-        byte[] arr = new byte[blocks.length * this.blockSize];
+        int bytesInBlock = blocks[0].length;
+        byte[] arr = new byte[blocks.length * bytesInBlock];
         for (int i = 0; i < blocks.length; i++) {
-            for (int j = 0; j < this.blockSize; j++) {
+            for (int j = 0; j < bytesInBlock; j++) {
                 arr[this.blockSize * i + j] = blocks[i][j];
             }
         }

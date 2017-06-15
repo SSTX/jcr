@@ -12,71 +12,6 @@ package tiralab.jcr.logic;
 public class BitFunctions {
 
     /**
-     * Function for modifying blocks at bit level.
-     *
-     * @param data Block to be modified. Length in bits must be greater than the
-     * largest number in permTable.
-     * @param permTable Array of integers that specifies which bits go where in
-     * the new block. Each bit-index i in the new block will have permTable[i]
-     * as its value.
-     * @return New block with enough bytes to hold permTable.length bits, with
-     * n-th bit from the left being the m-th bit in the original block, where m
-     * = permTable[n].
-     */
-    public static byte[] permuteBits(byte[] data, int[] permTable) {
-        byte[] permuted = BitFunctions.nBitByteArray(permTable.length);
-        for (int i = 0; i < permTable.length; i++) {
-            int nbyteData = permTable[i] / 8;
-            int nbitData = permTable[i] % 8;
-            int nbytePerm = i / 8;
-            int nbitPerm = i % 8;
-            byte b = data[nbyteData];
-            b >>>= (7 - nbitData); //push the desired bit all the way to the right
-            b &= 0b00000001;
-            b <<= (7 - nbitPerm); //push the bit to its correct position in the byte
-            permuted[nbytePerm] |= b;
-        }
-        return permuted;
-    }
-
-    /**
-     * Get the nth bit from a byte array starting from the left.
-     *
-     * @param offset Index of the desired bit (0-based).
-     * @param data The byte array containing the bit.
-     * @return Byte with the rightmost bit being the desired bit and the rest
-     * being zero bits.
-     */
-    public static byte getBitByOffset(int offset, byte[] data) {
-        int nbyte = offset / 8;
-        int nbit = offset % 8;
-        byte b = data[nbyte];
-        b >>>= (7 - nbit);
-        b &= 0b00000001;
-        return b;
-    }
-
-    /**
-     * Rotate a byte array bitwise to the left.
-     *
-     * @param rotN How many positions to rotate.
-     * @param lengthInBits How many bits from the left to be considered as part
-     * of the array.
-     * @param data Byte array to rotate.
-     * @return Bitwise-rotated byte array.
-     */
-    public static byte[] rotateLeft(int rotN, int lengthInBits, byte[] data) {
-        if (lengthInBits <= 0) {
-            return data;
-        }
-        int[] permTable = new int[lengthInBits];
-        for (int i = 0; i < lengthInBits; i++) {
-            permTable[i] = (i + rotN) % lengthInBits;
-        }
-        return BitFunctions.permuteBits(data, permTable);
-    }
-
-    /**
      * Make a byte array just large enough to hold a specified number of bits.
      *
      * @param bits Amount of bits needed.
@@ -106,6 +41,94 @@ public class BitFunctions {
         } else {
             return new byte[bits / bitsPerByte + 1];
         }
+    }
+
+    /**
+     * Get the nth bit from a byte array starting from the left.
+     *
+     * @param offset Index of the desired bit (0-based).
+     * @param data The byte array containing the bit.
+     * @return Byte with the rightmost bit being the desired bit and the rest
+     * being zero bits.
+     */
+    public static byte getBitByOffset(int offset, byte[] data) {
+        int nbyte = offset / 8;
+        int nbit = offset % 8;
+        byte b = data[nbyte];
+        b >>>= (7 - nbit);
+        b &= 0b00000001;
+        return b;
+    }
+
+    /**
+     * Insert a single bit into a specified 0-based index from the left.
+     *
+     * @param bit Byte representing the bit to insert. 1 or 0.
+     * @param bitIndex How many bits from the left should be bit be inserted
+     * (0-based).
+     * @param array Array to insert the bit in.
+     * @return Array with the bit inserted.
+     */
+    public static byte[] insertBit(byte bit, int bitIndex, byte[] array) {
+        int nByte = bitIndex / 8;
+        int nBit = bitIndex % 8;
+        if (bit == 0) {
+            bit = (byte) ~(1 << (7 - nBit));
+            //bit is now all ones, except a zero in the position defined by bitIndex
+            array[nByte] &= bit;
+        } else {
+            bit <<= (7 - nBit);
+            array[nByte] |= bit;
+        }
+        return array;
+    }
+
+    /**
+     * Function for modifying blocks at bit level.
+     *
+     * @param data Block to be modified. Length in bits must be greater than the
+     * largest number in permTable.
+     * @param permTable Array of integers that specifies which bits go where in
+     * the new block. Each bit-index i in the new block will have permTable[i]
+     * as its value.
+     * @return New block with enough bytes to hold permTable.length bits, with
+     * n-th bit from the left being the m-th bit in the original block, where m
+     * = permTable[n].
+     */
+    public static byte[] permuteBits(byte[] data, int[] permTable) {
+        byte[] permuted = BitFunctions.nBitByteArray(permTable.length);
+        for (int i = 0; i < permTable.length; i++) {
+            int nbyteData = permTable[i] / 8;
+            int nbitData = permTable[i] % 8;
+            int nbytePerm = i / 8;
+            int nbitPerm = i % 8;
+            byte b = data[nbyteData];
+            b >>>= (7 - nbitData); //push the desired bit all the way to the right
+            b &= 0b00000001;
+            b <<= (7 - nbitPerm); //push the bit to its correct position in the byte
+            permuted[nbytePerm] |= b;
+        }
+        return permuted;
+    }
+
+    /**
+     * Rotate a byte array bitwise to the left.
+     *
+     * @param rotN How many positions to rotate.
+     * @param lengthInBits How many bits from the left to be considered as part
+     * of the array.
+     * @param data Byte array to rotate.
+     * @return Bitwise-rotated byte array.
+     */
+    public static byte[] rotateLeft(int rotN, int lengthInBits, byte[] data) {
+        if (lengthInBits <= 0) {
+            return data;
+        }
+        int[] permTable = new int[lengthInBits];
+        for (int i = 0; i < lengthInBits; i++) {
+            permTable[i] = (i + rotN) % lengthInBits;
+        }
+        return BitFunctions.permuteBits(data, permTable);
     }
 
     /**
@@ -189,28 +212,6 @@ public class BitFunctions {
     }
 
     /**
-     * Insert a single bit into a specified 0-based index from the left.
-     *
-     * @param bit Byte representing the bit to insert. 1 or 0.
-     * @param bitIndex How many bits from the left should be bit be inserted (0-based).
-     * @param array Array to insert the bit in.
-     * @return Array with the bit inserted.
-     */
-    public static byte[] insertBit(byte bit, int bitIndex, byte[] array) {
-        int nByte = bitIndex / 8;
-        int nBit = bitIndex % 8;
-        if (bit == 0) {
-            bit = (byte) ~(1 << (7 - nBit));
-            //bit is now all ones, except a zero in the position defined by bitIndex
-            array[nByte] &= bit;
-        } else {
-            bit <<= (7 - nBit);
-            array[nByte] |= bit;
-        }
-        return array;
-    }
-
-    /**
      * Stretch or compress a byte array by using a specified amount of bits in
      * each byte. Bit count n means n low-order bits.
      *
@@ -221,6 +222,13 @@ public class BitFunctions {
      * @return Stretched/compressed byte array.
      */
     public static byte[] chBitsPerByte(byte[] source, int currentBitCount, int targetBitCount) {
+        if (targetBitCount <= 0
+                || targetBitCount > 8
+                || currentBitCount <= 0
+                || currentBitCount > 8) {
+            throw new IllegalArgumentException(
+                    "Amount of bits used in chBitsPerByte must be in 1..8");
+        }
         int bits = source.length * currentBitCount;
         //how many high-order bits to ignore in each byte
         int sourceSkip = 8 - currentBitCount;

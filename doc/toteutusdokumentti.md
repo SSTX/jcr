@@ -11,34 +11,100 @@ sen tiedostoon.
 
 ## Kokeelliset tulokset
 
-ECB-DES toimii aikavaativuudella O(n), missä n on salattavan/purettavan datan koko
+ECB-DES näyttää toimivan aikavaativuudella O(n), missä n on salattavan/purettavan datan koko
 (ks. [testausdokumentti](testausdokumentti.md)).
 
 ## Analyysi
-Tarkastellaan lähemmin aikavaativuutta. Aloitetaan pisteestä, jossa kutsutaan ECB:n metodia
-encrypt. Metodin ensimmäisellä rivillä kutsutaan kahta apumetodia: padBytes ja makeBlocks.
+Tarkastellaan lähemmin algoritmin aikavaativuutta.
 
-### Syötteen esikäsittely
+### BitFunctions-luokan metodit
+1. __nBitByteArray: O(1).__ Metodissa on vain vakioiakaisia operaatioita.
+2. __getBitByOffset: O(1).__ Metodissa on vain vakioaikaisia operaatioita.
+3. __insertBit: O(1).__ Metodissa on vain vakioaikaisia operaatioita.
+4. __permuteBits: O(n), missä n on permTable-taulukon pituus.__ Metodissa on yksi
+silmukka, joka ajetaan kerran jokaista permTable:n alkiota kohti. Silmukassa on vain
+vakioaikaisia operaatioita.
+5. __rotateLeft: O(n), missä n on kokonaisluvun lengthInBits suuruus.__ Metodissa
+käydään alkio alkiolta läpi taulukko, jonka pituus on lengthInBits. Tähän kuluu
+aikaa O(n). Luotu taulukko annetaan parametrina __permuteBits__:lle, jonka aikavaativuus
+on yllä esitetyn nojalla lineaarinen taulukon koon suhteen.
+6. __concatBits: O(n + m), missä n, m ovat kokonaislukujen nBitsLeft, nBitsRight
+suuruudet.__ Metodissa on kaksi silmukkaa, toinen ajetaan n kertaa, toinen m kertaa.
+Silmukoiden sisällä kutsutaan __getBitByOffset__:a ja __insertBit__:a, joiden
+aikavaativuudet ovat O(1). Siis aikavaativuus on n * 2 * O(1) + m * 2 * O(1) = O(n + m).
+7. __copyBits: O(m - n), missä n on kokonaisluvun startInclusive suuruus, ja m on
+kokonaisluvun endExclusive suuruus.__ Metodissa on yksi silmukka, joka ajetaan 
+m - n kertaa, jos m - n > 0. Silmukan sisällä on kutsu __getBitByOffset__:n, jonka
+aikavaativuus on O(1), ja kaksi selvästi vakioaikaista operaatiota. Siis metodin
+aikavaativuus on O(n - m) * O(1) = O(n - m).
+8. __bitwiseXOR: O(n), missä n on taulukoiden arr1, arr2 pituuksista lyhyempi.__
+Metodissa on vakioaikaisten operaatioiden lisäksi kutsu __copyBits__:n ja silmukka,
+joka ajetaan n kertaa. CopyBits:lle annetaan parametreina 0, 8*n ja taulukko arr1, 
+joten sen aikavaativuus on tässä O(8n - 0) = O(n). Silmukan sisällä on yksi vakioaikainen
+operaatio, joten sen aikavaativuus on O(n). Siis metodin aikavaativuus on O(n).
+9. __bitRepresentation: O(n), missä n on taulukon data pituus.__ Analyysi ohitetaan,
+koska metodia ei käytetä salausalgoritmissa.
+10. __chBitsPerByte: O(n), missä n on taulukon source pituus.__ Ennen silmukkaa 
+suoritettavat operaatiot ovat vakioaikaisia. Havaitaan, että silmukassa kasvatetaan
+sourceIdx:a ja targetIdx:a joka kierroksella vähintään yhdellä. Lisäksi havaitaan,
+että sourceIdx on alussa vähintään 0. Siten silmukka ajetaan korkeintaan 8n - 0 = O(n)
+kertaa. Silmukan sisällä on vakioaikaisia operaatioita, mukaanlukien kutsut __getBitByOffset__:n
+ja __insertBit__:n. Siis silmukan ja koko metodin aikavaativuus on O(n).
 
-__padBytes:__ olkoon n syötteen bytes[] pituus. Metodissa on kaksi silmukkaa ja taulukon
-luonti, muuten operaatiot ovat vakioaikaisia. Huomataan, että muuttuja padNeed on vakio. 
-Siten kumpikin silmukka toimii ajassa O(n), ja koko metodin aikavaativuus on O(n).
-Uuden taulukon luomisen takia tilavaativuus on O(n).
 
-__makeBlocks:__ Olkoon n syötteen bytes[] pituus. Nähdään, että blockNum * blockSize = n.
-Siten uuden taulukon blocks[][] koko tavuina on O(n), ja kahden sisäkkäisen silmukan aikavaativuus
-on O(n). Tässäkin siis metodin aika- ja tilavaativuus on O(n).
+### ModeOfOperation-luokan metodit
 
-### Varsinainen salausalgoritmi
+1. __padBytes: O(n), missä n on taulukon bytes pituus.__ Huomataan, että muuttuja padNeed on vakio. 
+Ensimmäinen silmukka toimii selvästi ajassa O(n). Toinen silmukka ajetaan korkeintaan
+n + padNeed kertaa. Koska padNeed on vakio, on tämänkin silmukan aikavaativuus O(n).
+Metodin aikavaativuus on 2 * O(n) = O(n).
+2. __unpadBytes: O(n), missä n on taulukon bytes pituus.__ Huomataan, että muuttuja
+pads on vakio (korkeintaan 255 = O(255) = O(1)). Silmukka ajetaan siis O(n) - O(1) = O(n)
+kertaa, ja sen sisällä on yksi vakioaikainen operaatio. Siten silmukan ja koko metodin
+aikavaativuus on O(n) * O(1) = O(n).
+3. __makeBlocks: O(n), missä n on taulukon bytes pituus.__ Huomataan, että 
+blockNum * blockSize = n. Metodissa on kaksi sisäkkäistä silmukkaa, ulompi ajetaan
+blockNum kertaa, sisempi blockSize kertaa. Silmukoiden sisällä on vain vakioaikaisia
+operaatioita. Silmukoiden ja koko metodin aikavaativuus on siis 
+O(blockNum * blockSize) * O(1) = O(n).
+4. __unmakeBlocks: O(n*m), missä n on blocks-taulukon rivimäärä ja m sarakemäärä.__
+Metodissa on kaksi sisäkkäistä silmukkaa. Ulompi ajetaan n kertaa, sisempi m kertaa.
+Silmukoiden ja koko metodin aikavaativuus on siten O(n*m).
+5. __konstruktori: O(1).__ Vain vakioaikaisia operaatioita.
 
-Seuraavaksi siirrytään silmukkaan, jossa kutsutaan joka kierroksella DES:n metodia
-encrypt. Silmukka ajetaan O(n) kertaa, koska blocks[][] -taulukon pituus on
-parametrin data pituus jaettuna vakiolla blockSize.
+### DESKeySchedule-luokan metodit
+1. __init: O(1).__ Metodissa on kaksi kutsua __copyBits__:n. Sen aikavaativuus on
+tässä O(1), koska merkitsevät parametrit ovat vakioita.
+2. __permutedChoice1: O(1).__ Metodissa luodaan vakiokokoinen taulukko, joka annetaan
+parametrina __permuteBits__:lle. Siis aikavaativuus on O(1).
+3. __permutedChoice2: O(1).__ Kuten edellinen.
+4. __nLeftShift: O(1).__ Selvästi vakioaikainen.
+5. __encryptionSubKeys: O(1).__ Metodissa luodaan vakiokokoinen taulukko keys.
+Seuraavaksi ajetaan silmukkaa 16 kertaa. Silmukan sisällä on kutsuja __rotateLeft__:n
+ja __concatBits__:n. Huomataan, että aikavaativuuden kannalta merkitsevät parametrit
+ovat vakioita, siis näiden aikavaativuus on O(1). Lisäksi joitain vakioaikaisia
+operaatioita. Aikavaativuus on siis O(1).
+6. __decryptionSubKeys: O(1).__ Metodissa kutsutaan __encryptionSubKeys__:a, jonka
+aikavaativuus on O(1). Saadun taulukon alkiot järjestetään vastakkaiseen järjestykseen
+aikavaativuudella O(1). Siis metodin aikavaativuus on O(1)
+7. __konstruktori: O(1).__ 
 
-Tutkitaan seuraavaksi DES:n encrypt-metodia. Ensimmäisellä rivillä kutsutaan keySchedulen
-metodia encryptionSubkeys. Se kutsuu apumetodeja rotateLeft, concatBits ja permutedChoice2. 
-Helposti nähdään, että niiden aikavaativuudet ovat O(n), missä n on syötteinä annettujen
-taulukoiden yhteispituus.Apumetodeja kutsutaan vakiomäärä kertoja vakiopituisilla syötteillä,
+### DES-luokan metodit
+
+
+### ECB-luokan metodit
+
+Aloitetaan pisteestä, jossa kutsutaan ECB-luokan metodia encrypt. Olkoon n taulukon
+data pituus. Yllä esitetyn perusteella nähdään, että blocks-taulukon laskemisen
+aikavaativuus on O(n). Seuraavaksi metodissa on silmukka, joka ajetaan O(n) kertaa.
+Tämä johtuu siitä, että makeBlocks-metodi jakaa data-taulukon vakiokokoisiin osiin
+(riveihin). O(n / d) = O(n), missä d on vakio. Silmukan sisällä kutsutaan DES:n
+metodia encrypt.
+
+Ensimmäisellä rivillä kutsutaan keySchedulen metodia encryptionSubkeys. 
+Se kutsuu apumetodeja rotateLeft, concatBits ja permutedChoice2. Helposti nähdään, 
+että niiden aikavaativuudet ovat O(n), missä n on syötteinä annettujentaulukoiden 
+yhteispituus.Apumetodeja kutsutaan vakiomäärä kertoja vakiopituisilla syötteillä,
 joten encryptionSubkeys toimiii ajassa O(1).
 
 Seuraavaksi suoritus siirtyy metodiin process. Koska metodi initialPermutation palauttaa

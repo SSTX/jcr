@@ -87,63 +87,60 @@ operaatioita. Aikavaativuus on siis O(1).
 6. __decryptionSubKeys: O(1).__ Metodissa kutsutaan __encryptionSubKeys__:a, jonka
 aikavaativuus on O(1). Saadun taulukon alkiot järjestetään vastakkaiseen järjestykseen
 aikavaativuudella O(1). Siis metodin aikavaativuus on O(1)
-7. __konstruktori: O(1).__ 
+7. __konstruktori: O(1).__ Kaksi vakioaikaista metodikutsua. Selvästi O(1).
 
 ### DES-luokan metodit
-
+1. __expand: O(1).__ Metodissa luodaan vakiokokoinen taulukko, joka annetaan
+aikavaativuuden kannalta merkitsevänä parametrian __permuteBits__:lle. Siis metodin
+aikavaativuus on O(1).
+2. __initialPermutation: O(1).__ Kuten edellinen.
+3. __finalPermutation: O(1).__ Kuten edellinen.
+4. __permutationP: O(1).__ Kuten edellinen.
+5. __getSubstitutionBox: O(1).__ Selvästi vakioaikainen.
+6. __substitute: O(1).__ Vain vakioaikaisia operatioita.
+7. __feistelFunction: O(n), missä n on pienin taulukoiden data, subkey pituuksista.__
+Taulukon block laskemisen aikavaativuus tunnetaan, se on O(n). Tämä taulukko on 
+pituudeltaan n. Se annetaan parametrina __chBitsPerByte__:lle, joten tämän operaation
+aikavaativuus on O(n). Taulukko subs on vakiopituinen, joten muut operaatiot ovat
+aikavaativuudeltaan O(1). Koko metodin aikavaativuus on siis O(n) + O(n) + O(1) = O(n).
+8. __round: O(n), missä n on taulukoista right, roundKey lyhyemmän pituus.__ 
+Edellä osoitetun perusteella tässä __feistelFunction__:n aikavaativuus on O(n).
+Havaitaan, että sen palauttama taulukko on vakiopituinen. Siten __bitwiseXOR__:n
+aikavaativuus on tässä O(1). Lopussa kutsutaan vielä __concatBits__:a, aikavaativuus
+on tässä O(1). O(n) + O(1) + O(1) = O(n).
+9. __process: O(1).__ Havaitaan, että taulukot permutedInput, left, right ovat 
+vakiopituisia. Silmukkaa ajetaan 16 kertaa. Silmukan sisällä on kutsut __round__:n ja
+__copyBits__:n. Nähdään, että ainoa mahdollisesti ei-vakiokokoinen parametri on 
+roundKey. Kuitenkin yllä olevan perusteella __round__:n aikavaativuus on lineaarinen
+**pienimmän** taulukon pituuden suhteen, siis tässä vakio. Silmukan ulkopuolella
+olevat metodikutsut ovat myös vakioaikaisia.
+10. __encrypt: O(1).__ Kumpikin kutsutuista metodeista on aikavaativuudeltaan O(1).
+11. __decrypt: O(1).__ Kuten edellinen.
+12. __getKeySchedule: O(1).__ Selvästi vakioaikainen.
+13. __konstruktori: O(1).__ Selvästi vakioaikainen.
 
 ### ECB-luokan metodit
+1. __encrypt: O(n), missä n on taulukon data pituus.__ Edellä esitetyn perusteella
+__padBytes__:n aikavaativuus on tässä O(n). Sen paluuarvo on taulukko, jonka pituus
+on vakiomäärän suurempi kuin syötteenä annetun taulukon. Tämä paluuarvo syötetään
+__makeBlocks__:lle, jonka aikavaativuus on siis myös O(n). Saatu paluuarvo on pituudeltaan
+O(n), koska __makeBlocks__ jakaa parametrinaan saamansa taulukon vakiokokoisiin osiin,
+O(n / d) = O(n), jos d on vakio. Silmukkaa ajetaan siis O(n) kertaa ja sen sisällä
+kutsutaan DES:n __encrypt__-metodia, jonka aikavaativuudeksi tiedetään O(1). Lopuksi
+kutsutaan metodia __unmakeBlocks__. Sen aikavaativuus on O(n), koska blocks-taulukon
+(rivien määrä) * (sarakkeiden määrä) = n. Siis koko metodin aikavaativuus on O(n).
+2. __decrypt: O(n), missä n on taulukon data pituus.__ Kuten edellä, tässäkin
+__makeBlocks__:lle annetaan O(n) kokoinen taulukko. DES:n __decrypt__-metodin 
+aikavaativuus on O(1). Tiedetään, että __unmakeBlocks__ palautaa taulukon, jonka
+pituus on O(n). Siten __unpadBytes__:n aikavaativuus on tässä O(n). Koko metodin 
+aikavaativuus on siis O(n).
 
-Aloitetaan pisteestä, jossa kutsutaan ECB-luokan metodia encrypt. Olkoon n taulukon
-data pituus. Yllä esitetyn perusteella nähdään, että blocks-taulukon laskemisen
-aikavaativuus on O(n). Seuraavaksi metodissa on silmukka, joka ajetaan O(n) kertaa.
-Tämä johtuu siitä, että makeBlocks-metodi jakaa data-taulukon vakiokokoisiin osiin
-(riveihin). O(n / d) = O(n), missä d on vakio. Silmukan sisällä kutsutaan DES:n
-metodia encrypt.
-
-Ensimmäisellä rivillä kutsutaan keySchedulen metodia encryptionSubkeys. 
-Se kutsuu apumetodeja rotateLeft, concatBits ja permutedChoice2. Helposti nähdään, 
-että niiden aikavaativuudet ovat O(n), missä n on syötteinä annettujentaulukoiden 
-yhteispituus.Apumetodeja kutsutaan vakiomäärä kertoja vakiopituisilla syötteillä,
-joten encryptionSubkeys toimiii ajassa O(1).
-
-Seuraavaksi suoritus siirtyy metodiin process. Koska metodi initialPermutation palauttaa
-korkeintaan 8 tavua pitkän taulukon, ovat kaikki muuttujat tässä metodissa vakiokokoisia.
-Apumetodi copyBits toimii ajassa O(n), missä n on kahden ensimmäisen parametrin
-pituusero, joka on tässä vakio. Enää täytyy tarkastella metodia round, muut toimivat
-vakioajassa.
-
-Round:n ensimmäisellä rivillä kutsutaan ensin metodia feistelFunction. Sille annetut
-parametrit ovat vakiopituisia. FeistelFunction:n sisällä kaksi ensimmäistä riviä toimivat selvästi
-vakioajassa. Tarkastellaan lähemmin substitution ja permutation -osia.
-
-__substitution:__ Ensin kutsutaan metodia chBitsPerByte. Se toimii ajassa O(n),
-missä n on syötteenä annetun taulukon pituus. Tässä se on vakio. Metodikutsua
-seuraava silmukka ajetaan vakiomäärä kertoja, ja substitute-metodi toimii selvästi
-vakioajassa. Tämän osan aikavaativuus on siis O(1).
-
-__permutation:__ Taas kutsutaan chBitsPerByte:a vakiopituisella syötteellä. Lisäksi 
-nähdään, että permutationP toimii ajassa O(n), missä n on syötteen pituus. Tässä
-n on vakio. Tämänkin osan aikavaativuus on siis O(1).
-
-Saatiin feistelFunction:lle aikavaativuudeksi O(1). Seuraavaksi round:ssa tehdään
-vakiopituisten taulukoiden XOR, joka toimii ajassa O(1). ConcatBits toimii tässäkin
-vakioajassa. Round toimii siis ajassa O(1), ja siten myös kutsuva metodi process ja
-sitä kutsuva metodi (DES:n) encrypt toimivat ajassa O(1).
-
-Palataan ECB:n encrypt-metodiin. Viimeisellä rivillä kutsutaan unmakeBlocks. Nähdään, että
-sen aikavaativuus on O(h * j), missä h on syötteenä annetun 2-ulotteisen taulukon 
-rivimäärä, ja j sarakemäärä. Kuitenkin tiedetään, että h * j = n, missä n on
-encrypt-metodin parametrin data pituus. Siis tämänkin osan aikavaativuus on O(n).
 
 ### Yhteenveto
-ECB:n metodissa encrypt ensin esikäsitellään syötteenä saatu data. Aikavaativuus on O(n),
-missä n on data:n pituus tavuina. Seuraavaksi ajetaan silmukkaa O(n) kertaa, ja joka
-kierroksella kutsutaan metodia, jonka aikavaativuus on O(1). Silmukan aikavaativuus on
-siis O(n). Lopuksi loppukäsitellään salattu data, aikavaativuus O(n).
-
-ECB:n encrypt-metodin aikavaativuus on siten O(n), missä n on metodiparametrin data
-koko tavuina.
+Nähtiin, että ECB:n metodien __encrypt__ ja __decrypt__ aikavaativuudet ovat O(n),
+missä n parametrina annetun taulukon pituus. Tämä taulukko on salattava/purettava data,
+joten salausalgoritmin aikavaativuus on O(m), missä m on salattavien/purettavien 
+tavujen määrä.
 
 # Ongelmia ja mahdollisia ratkaisuja
 Tilavaativuuden voisi mahdollisesti laskea vakioksi lukemalla ja käsittelemällä dataa vain tietty määrä kerrallaan.

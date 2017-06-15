@@ -87,48 +87,19 @@ public class DES implements BlockCipher {
     }
 
     /**
-     * Feistel function for DES.
+     * Permutation part of the feistel function.
      *
-     * @param data Right half-block (32 bits) of the block being processed.
-     * @param subkey 48-bit subkey from the key schedule.
-     * @return 32-bit half-block.
+     * @param data 32-bit half-block.
+     * @return permuted half-block.
      */
-    public byte[] feistelFunction(byte[] data, byte[] subkey) {
-        //expansion
-        byte[] block = this.expand(data);
-
-        //key mixing
-        block = BitFunctions.bitwiseXOR(block, subkey);
-
-        //substitution
-        byte[] stretched = BitFunctions.chBitsPerByte(block, 8, 6);
-        byte[] subs = new byte[8];
-        for (int i = 0; i < subs.length; i++) {
-            subs[i] = this.substitute(i, stretched[i]);
-        }
-
-        //permutation
-        subs = BitFunctions.chBitsPerByte(subs, 4, 8);
-        byte[] out = this.permutationP(subs);
-        return out;
-    }
-
-    /**
-     * Substitution function for DES.
-     *
-     * @param boxNumber Number of the s-box used (0-based).
-     * @param data Six bits of data to be fed into the s-box. Two high-order
-     * bits are unused.
-     * @return 4-bit value from the s-box. Four high-order bits are unused.
-     */
-    public byte substitute(int boxNumber, byte data) {
-        byte[][] substitutionBox = this.getSubstitutionBox(boxNumber);
-        //6th and 1st bit from the right define the row in the s-box
-        //put the 6th bit in the 2nd position from the right and add the 1st bit
-        int row = (((data >> 5) & 1) << 1) | (data & 1);
-        //bits 5..2 from the right define the column
-        int col = (data >> 1) & 0b00001111;
-        return substitutionBox[row][col];
+    public byte[] permutationP(byte[] data) {
+        int[] permTable = new int[]{
+            15, 6, 19, 20, 28, 11, 27, 16,
+            0, 14, 22, 25, 4, 17, 30, 9,
+            1, 7, 23, 13, 31, 26, 2, 8,
+            18, 12, 29, 5, 21, 10, 3, 24
+        };
+        return BitFunctions.permuteBits(data, permTable);
     }
 
     private byte[][] getSubstitutionBox(int boxNumber) {
@@ -194,19 +165,67 @@ public class DES implements BlockCipher {
     }
 
     /**
-     * Permutation part of the feistel function.
+     * Substitution function for DES.
      *
-     * @param data 32-bit half-block.
-     * @return permuted half-block.
+     * @param boxNumber Number of the s-box used (0-based).
+     * @param data Six bits of data to be fed into the s-box. Two high-order
+     * bits are unused.
+     * @return 4-bit value from the s-box. Four high-order bits are unused.
      */
-    public byte[] permutationP(byte[] data) {
-        int[] permTable = new int[]{
-            15, 6, 19, 20, 28, 11, 27, 16,
-            0, 14, 22, 25, 4, 17, 30, 9,
-            1, 7, 23, 13, 31, 26, 2, 8,
-            18, 12, 29, 5, 21, 10, 3, 24
-        };
-        return BitFunctions.permuteBits(data, permTable);
+    public byte substitute(int boxNumber, byte data) {
+        byte[][] substitutionBox = this.getSubstitutionBox(boxNumber);
+        //6th and 1st bit from the right define the row in the s-box
+        //put the 6th bit in the 2nd position from the right and add the 1st bit
+        int row = (((data >> 5) & 1) << 1) | (data & 1);
+        //bits 5..2 from the right define the column
+        int col = (data >> 1) & 0b00001111;
+        return substitutionBox[row][col];
+    }
+
+    /**
+     * Feistel function for DES.
+     *
+     * @param data Right half-block (32 bits) of the block being processed.
+     * @param subkey 48-bit subkey from the key schedule.
+     * @return 32-bit half-block.
+     */
+    public byte[] feistelFunction(byte[] data, byte[] subkey) {
+        //expansion
+        byte[] block = this.expand(data);
+
+        //key mixing
+        block = BitFunctions.bitwiseXOR(block, subkey);
+
+        //substitution
+        byte[] stretched = BitFunctions.chBitsPerByte(block, 8, 6);
+        byte[] subs = new byte[8];
+        for (int i = 0; i < subs.length; i++) {
+            subs[i] = this.substitute(i, stretched[i]);
+        }
+
+        //permutation
+        subs = BitFunctions.chBitsPerByte(subs, 4, 8);
+        byte[] out = this.permutationP(subs);
+        return out;
+    }
+
+    /**
+     * Single round of the encryption process. Apply Feistel function to the
+     * right half-block, XOR it with the left half-block. The result becomes the
+     * right half-block of the next round, while the current right becomes the
+     * next left.
+     *
+     * @param roundKey 48-bit round key from the key schedule.
+     * @param left Current left half-block.
+     * @param right Current right half-block.
+     * @return 64-bit block with the new left as bits 0..31 and the new right as
+     * bits 32..63.
+     */
+    public byte[] round(byte[] roundKey, byte[] left, byte[] right) {
+        byte[] newRight = BitFunctions.bitwiseXOR(left, this.feistelFunction(right, roundKey));
+        left = right;
+        right = newRight;
+        return BitFunctions.concatBits(left, right, 32, 32);
     }
 
     /**
@@ -230,25 +249,6 @@ public class DES implements BlockCipher {
         //reverse the order of the final half-blocks
         byte[] out = BitFunctions.concatBits(right, left, 32, 32);
         return this.finalPermutation(out);
-    }
-
-    /**
-     * Single round of the encryption process. Apply Feistel function to the
-     * right half-block, XOR it with the left half-block. The result becomes the
-     * right half-block of the next round, while the current right becomes the
-     * next left.
-     *
-     * @param roundKey 48-bit round key from the key schedule.
-     * @param left Current left half-block.
-     * @param right Current right half-block.
-     * @return 64-bit block with the new left as bits 0..31 and the new right as
-     * bits 32..63.
-     */
-    public byte[] round(byte[] roundKey, byte[] left, byte[] right) {
-        byte[] newRight = BitFunctions.bitwiseXOR(left, this.feistelFunction(right, roundKey));
-        left = right;
-        right = newRight;
-        return BitFunctions.concatBits(left, right, 32, 32);
     }
 
     /**

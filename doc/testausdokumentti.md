@@ -15,9 +15,11 @@ Testaustulokset tulostuvat stdout:n. Testaaja sai seuraavat tulokset argumentein
 2000 100000 2000:
 
 Self-implemented
+
+
 |size  | nanoseconds|
 |-------|-----------|
-|2000  |  11685219|
+|2000  |  11685219| 
 |4000  |  19984944|
 |6000  |  29810086|
 |8000  |  39406739|
@@ -40,6 +42,7 @@ Self-implemented
 |42000  |  200092090|
 |44000  |  209262123|
 |46000  |  218812374|
+
 |48000  |  228367334|
 |50000  |  238288353|
 |52000  |  247184268|
@@ -67,6 +70,7 @@ Self-implemented
 |96000  |  455628464|
 |98000  |  465546670|
 |100000  |  474936831|
+
  
 Java default provider
 

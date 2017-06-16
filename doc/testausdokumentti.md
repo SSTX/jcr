@@ -1,7 +1,7 @@
 # Yksikkötestaus
 Yksikkötestaukseen käytän jUnitia. DES:n testidata on lähtöisin 
 [tästä](http://page.math.tu-berlin.de/~kant/teaching/hess/krypto-ws2006/des.htm)
- materiaalista.
+ materiaalista. [Yksikkötestauksen kattavuusraportti](https://htmlpreview.github.io/?https://github.com/SSTX/jcr/blob/master/doc/pit-reports/201706160946/index.html).
 
 # Suorituskykytestaus
 Suorituskykytestaukseen on main-paketissa oma luokka, Benchmarking. Sen sisältämä
@@ -42,7 +42,6 @@ Self-implemented
 |42000  |  200092090|
 |44000  |  209262123|
 |46000  |  218812374|
-
 |48000  |  228367334|
 |50000  |  238288353|
 |52000  |  247184268|

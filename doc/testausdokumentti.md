@@ -25,7 +25,9 @@ Jokaiselle syötteelle tehdään 10 kertaa seuraava:
 4. Tallennetaan aikaleimojen välinen erotus listaan
 
 Näin voidaan ottaa keskiarvo ajoajoista. Testaustulokset tulostuvat stdout:n.
-Testaaja sai seuraavat tulokset argumentein 2000 100000 2000:
+Niitä voi tarkastella helposti esim. R-projektin avulla tallentamalla ne tekstitiedostoon
+ja lukemalla komennolla read.table("tiedostonimi").
+Graafinen esitys testituloksista argumentein 2000 100000 2000:
 
 __Tämä toteutus__
 

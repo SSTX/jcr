@@ -64,7 +64,7 @@ public class BitFunctions {
      * Insert a single bit into a specified 0-based index from the left.
      *
      * @param bit Byte representing the bit to insert. 1 or 0.
-     * @param bitIndex How many bits from the left should be bit be inserted
+     * @param bitIndex How many bits from the left should the bit be inserted
      * (0-based).
      * @param array Array to insert the bit in.
      * @return Array with the bit inserted.

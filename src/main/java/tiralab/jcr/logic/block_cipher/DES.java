@@ -242,9 +242,9 @@ public class DES implements BlockCipher {
         byte[] right = BitFunctions.copyBits(32, 64, permutedInput);
         for (int i = 0; i < 16; i++) {
             byte[] roundKey = keys[i];
-            byte[] block = this.round(roundKey, left, right);
-            left = BitFunctions.copyBits(0, 32, block);
-            right = BitFunctions.copyBits(32, 64, block);
+            byte[] newRight = BitFunctions.bitwiseXOR(left, this.feistelFunction(right, roundKey));
+            left = right;
+            right = newRight;
         }
         //reverse the order of the final half-blocks
         byte[] out = BitFunctions.concatBits(right, left, 32, 32);

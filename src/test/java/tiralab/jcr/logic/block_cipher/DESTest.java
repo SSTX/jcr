@@ -191,37 +191,6 @@ public class DESTest {
      *
      */
     @Test
-    public void singleRoundReturnCorrect() {
-        byte[] expected = new byte[]{
-            (byte) 0b11110000,
-            (byte) 0b10101010,
-            (byte) 0b11110000,
-            (byte) 0b10101010,
-            (byte) 0b11101111,
-            (byte) 0b01001010,
-            (byte) 0b01100101,
-            (byte) 0b01000100
-        };
-        byte[] left = new byte[]{
-            (byte) 0b11001100,
-            (byte) 0b00000000,
-            (byte) 0b11001100,
-            (byte) 0b11111111
-        };
-        byte[] right = new byte[]{
-            (byte) 0b11110000,
-            (byte) 0b10101010,
-            (byte) 0b11110000,
-            (byte) 0b10101010
-        };
-        byte[] roundKey = des.getKeySchedule().encryptionSubKeys()[0];
-        assertArrayEquals(expected, des.round(roundKey, left, right));
-    }
-
-    /**
-     *
-     */
-    @Test
     public void desEncryptionCorrect() {
         byte[] expected = new byte[]{
             (byte) 0b10000101,

@@ -210,25 +210,6 @@ public class DES implements BlockCipher {
     }
 
     /**
-     * Single round of the encryption process. Apply Feistel function to the
-     * right half-block, XOR it with the left half-block. The result becomes the
-     * right half-block of the next round, while the current right becomes the
-     * next left.
-     *
-     * @param roundKey 48-bit round key from the key schedule.
-     * @param left Current left half-block.
-     * @param right Current right half-block.
-     * @return 64-bit block with the new left as bits 0..31 and the new right as
-     * bits 32..63.
-     */
-    public byte[] round(byte[] roundKey, byte[] left, byte[] right) {
-        byte[] newRight = BitFunctions.bitwiseXOR(left, this.feistelFunction(right, roundKey));
-        left = right;
-        right = newRight;
-        return BitFunctions.concatBits(left, right, 32, 32);
-    }
-
-    /**
      * The actual encryption process. First we apply IP, then we do 16 rounds of
      * encryption and finally perform FP.
      *

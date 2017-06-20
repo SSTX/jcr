@@ -103,21 +103,16 @@ Taulukon block laskemisen aikavaativuus tunnetaan, se on O(n). Tämä taulukko o
 pituudeltaan n. Se annetaan parametrina __chBitsPerByte__:lle, joten tämän operaation
 aikavaativuus on O(n). Taulukko subs on vakiopituinen, joten muut operaatiot ovat
 aikavaativuudeltaan O(1). Koko metodin aikavaativuus on siis O(n) + O(n) + O(1) = O(n).
-8. __round: O(n), missä n on taulukoista right, roundKey lyhyemmän pituus.__ 
-Edellä osoitetun perusteella tässä __feistelFunction__:n aikavaativuus on O(n).
-Havaitaan, että sen palauttama taulukko on vakiopituinen. Siten __bitwiseXOR__:n
-aikavaativuus on tässä O(1). Lopussa kutsutaan vielä __concatBits__:a, aikavaativuus
-on tässä O(1). O(n) + O(1) + O(1) = O(n).
-9. __process: O(1).__ Havaitaan, että taulukot permutedInput, left, right ovat 
-vakiopituisia. Silmukkaa ajetaan 16 kertaa. Silmukan sisällä on kutsut __round__:n ja
-__copyBits__:n. Nähdään, että ainoa mahdollisesti ei-vakiokokoinen parametri on 
-roundKey. Kuitenkin yllä olevan perusteella __round__:n aikavaativuus on lineaarinen
-**pienimmän** taulukon pituuden suhteen, siis tässä vakio. Silmukan ulkopuolella
-olevat metodikutsut ovat myös vakioaikaisia.
-10. __encrypt: O(1).__ Kumpikin kutsutuista metodeista on aikavaativuudeltaan O(1).
-11. __decrypt: O(1).__ Kuten edellinen.
-12. __getKeySchedule: O(1).__ Selvästi vakioaikainen.
-13. __konstruktori: O(1).__ Selvästi vakioaikainen.
+8. __process: O(1).__ Havaitaan, että taulukot permutedInput, left, right ovat 
+vakiopituisia. Silmukkaa ajetaan 16 kertaa, sen sisällä on kutsu __feistelFunction__:n
+ja __bitwiseXOR__:n. Koska taulukko right on vakiokokoinen, __feistelFunction__:n 
+aikavaativuus on tässä O(1). Tiedetään, että sen palauttama taulukko on vakiopituinen.
+Siten myös __bitwiseXOR__:n aikavaativuus on tässä O(1). Näin ollen metodin aikavaativuus
+on O(1).
+9. __encrypt: O(1).__ Kumpikin kutsutuista metodeista on aikavaativuudeltaan O(1).
+10. __decrypt: O(1).__ Kuten edellinen.
+11. __getKeySchedule: O(1).__ Selvästi vakioaikainen.
+12. __konstruktori: O(1).__ Selvästi vakioaikainen.
 
 ### ECB-luokan metodit
 1. __encrypt: O(n), missä n on taulukon data pituus.__ Edellä esitetyn perusteella

@@ -144,6 +144,9 @@ tavujen määrä.
 
 # Ongelmia ja mahdollisia ratkaisuja
 Tilavaativuuden voisi mahdollisesti laskea vakioksi lukemalla ja käsittelemällä dataa vain tietty määrä kerrallaan.
+ECB-DES toimii todella hitaasti verrattuna javan valmiisiin kirjastoihin (ks. [testausdokumentti](testausdokumentti.md)).
+Suorituskykyä voisi ehkä parantaa muuttamalla taulukonkäsittelymetodeita siten, että mahdollisimman paljon operaatioita
+tehdään jo olemassaolevaan, parametrina annettuun taulukkoon. Tällä hetkellä kaikki metodit luovat ja palauttavat uuden taulukon.
 
 # Lähteet
 ## Data Encryption Standard (DES)

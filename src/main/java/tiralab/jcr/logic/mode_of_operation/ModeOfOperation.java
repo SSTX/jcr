@@ -32,7 +32,7 @@ public abstract class ModeOfOperation {
     public ModeOfOperation(BlockCipher cipher, int blockSize) {
         this.cipher = cipher;
         if (blockSize <= 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Invalid block size.");
         }
         this.blockSize = blockSize;
     }
@@ -82,7 +82,11 @@ public abstract class ModeOfOperation {
      * @return 2-dimensional array of bytes with each row representing a block.
      */
     public byte[][] makeBlocks(byte[] bytes) {
-        int blockNum = bytes.length / this.blockSize;//bytes.length is a multiple of blockSize
+        if (bytes.length % this.blockSize != 0) {
+            throw new IllegalArgumentException("Byte array fed to makeBlocks has"
+                    + " length that is not a multiple of blockSize");
+        }
+        int blockNum = bytes.length / this.blockSize;
         byte[][] blocks = new byte[blockNum][this.blockSize];
         int b = 0;
         for (int i = 0; i < blockNum; i++) {

@@ -19,78 +19,155 @@ Tarkastellaan lähemmin algoritmin aikavaativuutta.
 
 ### BitFunctions-luokan metodit
 1. __nBitByteArray__
-    * Aikavaativuus O(1). Metodissa on vain vakioiakaisia operaatioita.
-    * Tilavaativuus O(n), missä n on parametrin bits suuruus. Metodista palautetaan
-    uusi taulukko, jonka pituus on n.
-2. __getBitByOffset: O(1).__ Metodissa on vain vakioaikaisia operaatioita.
-3. __insertBit: O(1).__ Metodissa on vain vakioaikaisia operaatioita.
-4. __permuteBits: O(n), missä n on permTable-taulukon pituus.__ Metodissa on yksi
+* Aikavaativuus O(1). Metodissa on vain vakioiakaisia operaatioita.
+* Tilavaativuus O(n), missä n on parametrin bits suuruus. Metodista palautetaan
+uusi taulukko, jonka pituus on O(n).
+
+2. __getBitByOffset__ 
+* Aikavaativuus O(1). Metodissa on vain vakioaikaisia operaatioita.
+* Tilavaativuus O(1). Metodissa on vain vakiotilaisia operaatioita.
+
+3. __insertBit__
+* Aikavaativuus O(1). Metodissa on vain vakioaikaisia operaatioita.
+* Tilavaativuus O(1). Metodissa on vain vakiotilaisia operaatioita.
+
+4. __permuteBits__ 
+* Aikavaativuus O(n), missä n on permTable-taulukon pituus. Metodissa on yksi
 silmukka, joka ajetaan kerran jokaista permTable:n alkiota kohti. Silmukassa on vain
 vakioaikaisia operaatioita.
-5. __rotateLeft: O(n), missä n on kokonaisluvun lengthInBits suuruus.__ Metodissa
+* Tilavaativuus O(n), missä n on permTable-taulukon pituus. Metodissa kutsutaan
+__nBitByteArray__:a, joka palauttaa n-pituisen taulukon. Muut operaatiot ovat 
+vakiotilaisia.
+
+5. __rotateLeft__ 
+* Aikavaativuus O(n), missä n on kokonaisluvun lengthInBits suuruus. Metodissa
 käydään alkio alkiolta läpi taulukko, jonka pituus on lengthInBits. Tähän kuluu
 aikaa O(n). Luotu taulukko annetaan parametrina __permuteBits__:lle, jonka aikavaativuus
 on yllä esitetyn nojalla lineaarinen taulukon koon suhteen.
-6. __concatBits: O(n + m), missä n, m ovat kokonaislukujen nBitsLeft, nBitsRight
-suuruudet.__ Metodissa on kaksi silmukkaa, toinen ajetaan n kertaa, toinen m kertaa.
+* Tilavaativuus O(n), missä n on kokonaisluvun lengthInBits suuruus. Metodissa luodaan
+taulukko, jonka pituus on n.
+
+6. __concatBits__
+* Aikavaativuus O(n + m), missä n, m ovat kokonaisluvut nBitsLeft, nBitsRight.
+ Metodissa on kaksi silmukkaa, toinen ajetaan n kertaa, toinen m kertaa.
 Silmukoiden sisällä kutsutaan __getBitByOffset__:a ja __insertBit__:a, joiden
 aikavaativuudet ovat O(1). Siis aikavaativuus on n * 2 * O(1) + m * 2 * O(1) = O(n + m).
-7. __copyBits: O(m - n), missä n on kokonaisluvun startInclusive suuruus, ja m on
-kokonaisluvun endExclusive suuruus.__ Metodissa on yksi silmukka, joka ajetaan 
+* Tilavaativuus O(n + m), missä n, m kuten edellä.
+Kutsutaan __nBitByteArray__:a parametrilla n+m, mikä palauttaa (n+m) -pituisen taulukon.
+
+7. __copyBits__
+* Aikavaativuus O(m - n), missä n on kokonaisluvun startInclusive suuruus, ja m on
+kokonaisluvun endExclusive suuruus. Metodissa on yksi silmukka, joka ajetaan 
 m - n kertaa, jos m - n > 0. Silmukan sisällä on kutsu __getBitByOffset__:n, jonka
 aikavaativuus on O(1), ja kaksi selvästi vakioaikaista operaatiota. Siis metodin
 aikavaativuus on O(n - m) * O(1) = O(n - m).
-8. __bitwiseXOR: O(n), missä n on taulukoiden arr1, arr2 pituuksista lyhyempi.__
+* Tilavaativuus O(m - n), missä n ja m kuten edellä. Kutsutaan __nBitByteArray__:a
+parametrilla m - n, mikä palauttaa (m-n) -pituisen taulukon.
+
+8. __bitwiseXOR__
+* Aikavaativuus O(n), missä n on taulukoiden arr1, arr2 pituuksista lyhyempi.
 Metodissa on vakioaikaisten operaatioiden lisäksi kutsu __copyBits__:n ja silmukka,
 joka ajetaan n kertaa. CopyBits:lle annetaan parametreina 0, 8*n ja taulukko arr1, 
 joten sen aikavaativuus on tässä O(8n - 0) = O(n). Silmukan sisällä on yksi vakioaikainen
 operaatio, joten sen aikavaativuus on O(n). Siis metodin aikavaativuus on O(n).
-9. __bitRepresentation: O(n), missä n on taulukon data pituus.__ Analyysi ohitetaan,
-koska metodia ei käytetä salausalgoritmissa.
-10. __chBitsPerByte: O(n), missä n on taulukon source pituus.__ Ennen silmukkaa 
+* Tilavaativuus O(n), missä n kuten edellä. Kutsutaan __copyBits__:a parametrein
+0, 8n ja arr1, mikä palauttaa (8n - 0) -pituisen taulukon. O(8n - 0) = 0(n).
+
+9. __inPlaceBitwiseXOR__
+* Aikavaativuus O(n), missä n on taulukoiden arr1, arr2 pituuksista lyhyempi. Metodissa
+olevaa silmukkaa ajetaan n kertaa, ja sen sisällä olevat operaatiot ovat vakioaikaisia.
+* Tilavaativuus O(1). Metodissa on vain vakiotilaisia operaatioita.
+
+10. __chBitsPerByte__ 
+* Aikavaativuus O(n), missä n on taulukon source pituus. Ennen silmukkaa 
 suoritettavat operaatiot ovat vakioaikaisia. Havaitaan, että silmukassa kasvatetaan
 sourceIdx:a ja targetIdx:a joka kierroksella vähintään yhdellä. Lisäksi havaitaan,
 että sourceIdx on alussa vähintään 0. Siten silmukka ajetaan korkeintaan 8n - 0 = O(n)
 kertaa. Silmukan sisällä on vakioaikaisia operaatioita, mukaanlukien kutsut __getBitByOffset__:n
 ja __insertBit__:n. Siis silmukan ja koko metodin aikavaativuus on O(n).
+* Tilavaativuus O(n), missä n on taulukon source pituus. Huomataan, että currentBitCount
+ja targetBitCount ovat vakioita. Siten metodissa luotu taulukko arr on pituudeltaan
+O(n). Muut operaatiot ovat vakiotilaisia.
 
 
 ### ModeOfOperation-luokan metodit
 
-1. __padBytes: O(n), missä n on taulukon bytes pituus.__ Huomataan, että muuttuja padNeed on vakio. 
+1. __padBytes__ 
+* Aikavaativuus O(n), missä n on taulukon bytes pituus. Huomataan, että muuttuja padNeed on vakio. 
 Ensimmäinen silmukka toimii selvästi ajassa O(n). Toinen silmukka ajetaan korkeintaan
 n + padNeed kertaa. Koska padNeed on vakio, on tämänkin silmukan aikavaativuus O(n).
 Metodin aikavaativuus on 2 * O(n) = O(n).
-2. __unpadBytes: O(n), missä n on taulukon bytes pituus.__ Huomataan, että muuttuja
+* Tilavaativuus O(n), missä n kuten edellä. Koska muuttuja padNeed on vakio, metodissa luotu
+taulukko paddedBytes on pituudeltaan O(n).
+
+2. __unpadBytes__ 
+* Aikavaativuus O(n), missä n on taulukon bytes pituus. Huomataan, että muuttuja
 pads on vakio (korkeintaan 255 = O(255) = O(1)). Silmukka ajetaan siis O(n) - O(1) = O(n)
 kertaa, ja sen sisällä on yksi vakioaikainen operaatio. Siten silmukan ja koko metodin
 aikavaativuus on O(n) * O(1) = O(n).
-3. __makeBlocks: O(n), missä n on taulukon bytes pituus.__ Huomataan, että 
+* Tilavaativuus O(n), missä n kuten edellä. Koska muuttuja pads on vakio, metodissa
+luotu taulukko unpad on pituudeltaan O(n).
+
+3. __makeBlocks__ 
+* Aikavaativuus O(n), missä n on taulukon bytes pituus. Huomataan, että 
 blockNum * blockSize = n. Metodissa on kaksi sisäkkäistä silmukkaa, ulompi ajetaan
 blockNum kertaa, sisempi blockSize kertaa. Silmukoiden sisällä on vain vakioaikaisia
 operaatioita. Silmukoiden ja koko metodin aikavaativuus on siis 
 O(blockNum * blockSize) * O(1) = O(n).
-4. __unmakeBlocks: O(n*m), missä n on blocks-taulukon rivimäärä ja m sarakemäärä.__
+* Tilavaativuus O(n), missä n kuten edellä. Nähdään, että 2-ulotteisen taulukon
+blocks koko on n.
+
+4. __unmakeBlocks__
+* Aikavaativuus O(n*m), missä n on blocks-taulukon rivimäärä ja m sarakemäärä.
 Metodissa on kaksi sisäkkäistä silmukkaa. Ulompi ajetaan n kertaa, sisempi m kertaa.
 Silmukoiden ja koko metodin aikavaativuus on siten O(n*m).
-5. __konstruktori: O(1).__ Vain vakioaikaisia operaatioita.
+* Tilavaativuus O(n*m), missä n ja m kuten edellä. Metodissa luodaan taulukko, jossa
+rivejä n ja sarakkeita m.
+
+5. __konstruktori__ 
+* Aikavaativuus O(1). Vain vakioaikaisia operaatioita.
+* Tilavaativuus O(1). Vain vakiotilaisia operaatioita.
 
 ### DESKeySchedule-luokan metodit
-1. __init: O(1).__ Metodissa on kaksi kutsua __copyBits__:n. Sen aikavaativuus on
+1. __init__ 
+* Aikavaativuus O(1). Metodissa on kaksi kutsua __copyBits__:n. Sen aikavaativuus on
 tässä O(1), koska merkitsevät parametrit ovat vakioita.
-2. __permutedChoice1: O(1).__ Metodissa luodaan vakiokokoinen taulukko, joka annetaan
+* Tilavaativuus O(1). Kutsu __copyBits__:n palauttaa tässä vakiopituisen taulukon.
+
+2. __permutedChoice1__ 
+* Aikavaativuus O(1). Metodissa luodaan vakiokokoinen taulukko, joka annetaan
 parametrina __permuteBits__:lle. Siis aikavaativuus on O(1).
-3. __permutedChoice2: O(1).__ Kuten edellinen.
-4. __nLeftShift: O(1).__ Selvästi vakioaikainen.
-5. __encryptionSubKeys: O(1).__ Metodissa luodaan vakiokokoinen taulukko keys.
+* Tilavaativuus O(1). Kutsu __permuteBits__:n palauttaa tässä vakiokokoisen taulukon.
+
+3. __permutedChoice2__
+* Aikavaativuus O(1). Kuten __permutedChoice1__.
+* Tilavaativuus O(1). Kuten __permutedChoice1__.
+
+4. __nLeftShift__ 
+* Aikavaativuus O(1). Selvästi vakioaikainen.
+* Tilavaativuus O(1). Selvästi vakiotilainen.
+
+5. __encryptionSubKeys__ 
+* Aikavaativuus O(1). Metodissa luodaan vakiokokoinen taulukko keys.
 Seuraavaksi ajetaan silmukkaa 16 kertaa. Silmukan sisällä on kutsuja __rotateLeft__:n
 ja __concatBits__:n. Huomataan, että aikavaativuuden kannalta merkitsevät parametrit
 ovat vakioita, siis näiden aikavaativuus on O(1). Lisäksi joitain vakioaikaisia
 operaatioita. Aikavaativuus on siis O(1).
-6. __decryptionSubKeys: O(1).__ Metodissa kutsutaan __encryptionSubKeys__:a, jonka
+* Tilavaativuus O(1). Luodaan 2-ulotteinen taulukko keys, jossa vakiomäärä rivejä. 
+Tässä __rotateLeft__ palauttaa vakiopituisen taulukon, koska sen toinen parametri 
+(lengthInBits) on vakio. Siis keys:n sarakemäärä on vakio ja metodin tilavaativuus
+O(1).
+
+6. __decryptionSubKeys__ 
+* Aikavaativuus O(1). Metodissa kutsutaan __encryptionSubKeys__:a, jonka
 aikavaativuus on O(1). Saadun taulukon alkiot järjestetään vastakkaiseen järjestykseen
-aikavaativuudella O(1). Siis metodin aikavaativuus on O(1)
-7. __konstruktori: O(1).__ Kaksi vakioaikaista metodikutsua. Selvästi O(1).
+aikavaativuudella O(1). Siis metodin aikavaativuus on O(1).
+* Tilavaativuus O(1). Metodissa luodaan kaksi vakiokokoista taulukkoa, toinen suoraan
+ja toinen __encryptionSubKeys__:n kautta. Tilavaativuus on vakio.
+
+7. __konstruktori__ 
+* Aikavaativuus O(1). Kaksi vakioaikaista metodikutsua. Selvästi O(1).
+* Tilavaativuus O(1). Kaksi vakiotilaista metodikutsua. Selvästi O(1).
 
 ### DES-luokan metodit
 1. __expand: O(1).__ Metodissa luodaan vakiokokoinen taulukko, joka annetaan

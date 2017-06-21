@@ -274,31 +274,6 @@ public class BitFunctionsTest {
      *
      */
     @Test
-    public void bitRepresentationReturnCorrect1() {
-        byte[] test = new byte[]{
-            (byte) 0b10101010,
-            (byte) 0b11110111
-        };
-        assertEquals("10101010 11110111", BitFunctions.bitRepresentation(test));
-    }
-
-    /**
-     *
-     */
-    @Test
-    public void bitRepresentationReturnCorrect2() {
-        byte[] test = new byte[]{
-            (byte) 0b10000010,
-            (byte) 0b01010111,
-            (byte) 0b11010100
-        };
-        assertEquals("10000010 01010111 11010100", BitFunctions.bitRepresentation(test));
-    }
-
-    /**
-     *
-     */
-    @Test
     public void nBitByteArrayReturnCorrectLengthArray1() {
         assertEquals(2, BitFunctions.nBitByteArray(12, 6).length);
     }

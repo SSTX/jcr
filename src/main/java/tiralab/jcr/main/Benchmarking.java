@@ -43,9 +43,9 @@ public class Benchmarking {
         Cipher cipherComp = initCipher(key);
 
         //ensure the program is compiled before testing
-        BitFunctions.bitRepresentation(ecb.encrypt(inputs.get(0)));
+        ecb.encrypt(inputs.get(0));
         try {
-            BitFunctions.bitRepresentation(cipherComp.doFinal(inputs.get(0)));
+            cipherComp.doFinal(inputs.get(0));
         } catch (Exception ignore) {
         }
 

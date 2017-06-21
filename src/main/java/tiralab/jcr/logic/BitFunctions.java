@@ -206,27 +206,6 @@ public class BitFunctions {
             arr1[i] ^= arr2[i];
         }
     }
-    
-    
-
-    /**
-     * Make a string representation of the bits in a byte array.
-     *
-     * @param data Bits to convert.
-     * @return String with bits represented as '0' and '1' and spaces between
-     * bytes.
-     */
-    public static String bitRepresentation(byte[] data) {
-        StringBuilder b = new StringBuilder();
-        for (int i = 0; i < data.length; i++) {
-            for (int j = 0; j < 8; j++) {
-                b.append(BitFunctions.getBitByOffset(8 * i + j, data));
-            }
-            b.append(" ");
-        }
-        b.deleteCharAt(b.length() - 1);
-        return b.toString();
-    }
 
     /**
      * Stretch or compress a byte array by using a specified amount of bits in

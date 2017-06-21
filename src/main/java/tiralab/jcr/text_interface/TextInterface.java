@@ -89,7 +89,7 @@ public class TextInterface {
                     break;
             }
         } catch (IOException e) {
-            System.out.println("IOError: " + e.getMessage());
+            System.out.println("IOError: " + e.getCause());
         } catch (IllegalArgumentException e) {
             System.out.println("Bad data: " + e.getMessage());
         }

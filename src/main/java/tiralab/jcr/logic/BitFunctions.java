@@ -67,9 +67,8 @@ public class BitFunctions {
      * @param bitIndex How many bits from the left should the bit be inserted
      * (0-based).
      * @param array Array to insert the bit in.
-     * @return Array with the bit inserted.
      */
-    public static byte[] insertBit(byte bit, int bitIndex, byte[] array) {
+    public static void insertBit(byte bit, int bitIndex, byte[] array) {
         int nByte = bitIndex / 8;
         int nBit = bitIndex % 8;
         if (bit == 0) {
@@ -80,7 +79,6 @@ public class BitFunctions {
             bit <<= (7 - nBit);
             array[nByte] |= bit;
         }
-        return array;
     }
 
     /**
@@ -191,6 +189,25 @@ public class BitFunctions {
         }
         return ret;
     }
+    
+      /**
+     * In-place bitwise exclusive-or operation for two byte arrays. The result
+     * is stored in arr1.
+     *
+     * @param arr1 First operand. Will be overwritten.
+     * @param arr2 Second operand.
+     */
+    public static void inPlaceBitwiseXOR(byte[] arr1, byte[] arr2) {
+        int len = arr1.length;
+        if (arr2.length < len) {
+            len = arr2.length;
+        }
+        for (int i = 0; i < len; i++) {
+            arr1[i] ^= arr2[i];
+        }
+    }
+    
+    
 
     /**
      * Make a string representation of the bits in a byte array.
@@ -240,7 +257,7 @@ public class BitFunctions {
         //loop over each bit in the source array
         while (sourceIdx < 8 * source.length) {
             byte b = BitFunctions.getBitByOffset(sourceIdx, source);
-            arr = BitFunctions.insertBit(b, targetIdx, arr);
+            BitFunctions.insertBit(b, targetIdx, arr);
             sourceIdx++;
             targetIdx++;
             //if we have read currentBitCount bits, skip to the start of the next

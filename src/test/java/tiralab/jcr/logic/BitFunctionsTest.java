@@ -330,7 +330,8 @@ public class BitFunctionsTest {
         byte[] expected = new byte[]{
             (byte) 0b10101010
         };
-        assertArrayEquals(expected, BitFunctions.insertBit((byte) 0, 7, testBytes));
+        BitFunctions.insertBit((byte) 0, 7, testBytes);
+        assertArrayEquals(expected, testBytes);
     }
 
     /**
@@ -346,7 +347,8 @@ public class BitFunctionsTest {
             (byte) 0b00001111,
             (byte) 0b11110100
         };
-        assertArrayEquals(expected, BitFunctions.insertBit((byte) 1, 13, testBytes));
+        BitFunctions.insertBit((byte) 1, 13, testBytes);
+        assertArrayEquals(expected, testBytes);
     }
 
     /**
@@ -364,7 +366,8 @@ public class BitFunctionsTest {
             (byte) 0b11111111,
             (byte) 0b10100101
         };
-        assertArrayEquals(expected, BitFunctions.insertBit((byte) 1, 16, testBytes));
+        BitFunctions.insertBit((byte) 1, 16, testBytes);
+        assertArrayEquals(expected, testBytes);
     }
 
     /**

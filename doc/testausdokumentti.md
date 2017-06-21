@@ -50,3 +50,10 @@ johtuu suureksi osaksi taulukoiden luomisen ja kopioimisen suuresta määrästä
 ### Siirretty round-metodin koodi process-metodin sisälle
 Tällä muutoksella oli suuri vaikutus: toteutuksen aikavaativuus javax:n oletustoteutukseen
 nähden putosi 250-kertaisesta 200-kertaiseen. 
+### Substitution boxit byte[][][] -tyyppiseen oliomuuttujaan
+Ennen DES-luokassa oli metodi, joka palautti uuden s-boxin syötteenä saamansa
+numeron perusteella. Nyt ne luodaan vain yhden kerran samalla kun DES-olio luodaan.
+Suhteellinen ajoaika pieneni 200-kertaisesta 180-kertaiseen.
+### BitFunctions-luokkaan uusi metodi inPlaceBitwiseXOR
+DES:n metodissa feistelFunction saatiin vähennettyä yksi taulukon luominen tällä tavoin.
+Suhteellinen ajoaika pieneni 180 -> 170.

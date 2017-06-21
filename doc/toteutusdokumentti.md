@@ -18,7 +18,10 @@ ECB-DES näyttää toimivan aikavaativuudella O(n), missä n on salattavan/puret
 Tarkastellaan lähemmin algoritmin aikavaativuutta.
 
 ### BitFunctions-luokan metodit
-1. __nBitByteArray: O(1).__ Metodissa on vain vakioiakaisia operaatioita.
+1. __nBitByteArray__
+    * Aikavaativuus O(1). Metodissa on vain vakioiakaisia operaatioita.
+    * Tilavaativuus O(n), missä n on parametrin bits suuruus. Metodista palautetaan
+    uusi taulukko, jonka pituus on n.
 2. __getBitByOffset: O(1).__ Metodissa on vain vakioaikaisia operaatioita.
 3. __insertBit: O(1).__ Metodissa on vain vakioaikaisia operaatioita.
 4. __permuteBits: O(n), missä n on permTable-taulukon pituus.__ Metodissa on yksi
@@ -96,23 +99,22 @@ aikavaativuus on O(1).
 2. __initialPermutation: O(1).__ Kuten edellinen.
 3. __finalPermutation: O(1).__ Kuten edellinen.
 4. __permutationP: O(1).__ Kuten edellinen.
-5. __getSubstitutionBox: O(1).__ Selvästi vakioaikainen.
-6. __substitute: O(1).__ Vain vakioaikaisia operatioita.
-7. __feistelFunction: O(n), missä n on pienin taulukoiden data, subkey pituuksista.__
+5. __substitute: O(1).__ Vain vakioaikaisia operatioita.
+6. __feistelFunction: O(n), missä n on pienin taulukoiden data, subkey pituuksista.__
 Taulukon block laskemisen aikavaativuus tunnetaan, se on O(n). Tämä taulukko on 
 pituudeltaan n. Se annetaan parametrina __chBitsPerByte__:lle, joten tämän operaation
 aikavaativuus on O(n). Taulukko subs on vakiopituinen, joten muut operaatiot ovat
 aikavaativuudeltaan O(1). Koko metodin aikavaativuus on siis O(n) + O(n) + O(1) = O(n).
-8. __process: O(1).__ Havaitaan, että taulukot permutedInput, left, right ovat 
+7. __process: O(1).__ Havaitaan, että taulukot permutedInput, left, right ovat 
 vakiopituisia. Silmukkaa ajetaan 16 kertaa, sen sisällä on kutsu __feistelFunction__:n
 ja __bitwiseXOR__:n. Koska taulukko right on vakiokokoinen, __feistelFunction__:n 
 aikavaativuus on tässä O(1). Tiedetään, että sen palauttama taulukko on vakiopituinen.
 Siten myös __bitwiseXOR__:n aikavaativuus on tässä O(1). Näin ollen metodin aikavaativuus
 on O(1).
-9. __encrypt: O(1).__ Kumpikin kutsutuista metodeista on aikavaativuudeltaan O(1).
-10. __decrypt: O(1).__ Kuten edellinen.
-11. __getKeySchedule: O(1).__ Selvästi vakioaikainen.
-12. __konstruktori: O(1).__ Selvästi vakioaikainen.
+8. __encrypt: O(1).__ Kumpikin kutsutuista metodeista on aikavaativuudeltaan O(1).
+9. __decrypt: O(1).__ Kuten edellinen.
+10. __getKeySchedule: O(1).__ Selvästi vakioaikainen.
+11. __konstruktori: O(1).__ Selvästi vakioaikainen.
 
 ### ECB-luokan metodit
 1. __encrypt: O(n), missä n on taulukon data pituus.__ Edellä esitetyn perusteella

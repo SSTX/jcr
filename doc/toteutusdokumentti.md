@@ -181,10 +181,10 @@ __permuteBits__:lle, jonka tilavaativuus on tässä O(1).
     * Aikavaativuus O(1). Kuten edellinen.
     * Tilavaativuus O(1). Kuten edellinen.
 
-3. __finalPermutation_
+3. __finalPermutation__
     * Aikavaativuus O(1). Kuten edellinen.
     * Tilavaativuus O(1). Kuten edellinen.
-_ 
+
 4. __permutationP__
     * Aikavaativuus O(1). Kuten edellinen.
     * Tilavaativuus O(1). Kuten edellinen.

@@ -1,6 +1,6 @@
 Install java. Get the .jar file from github. Then run in the shell:
 
-java -jar *jcr.jar* -d|-e *inputFile* *outputFile* *keyFile*
+`java -jar jcr.jar -d|-e inputFile outputFile keyFile`
 
 where
 * *jcr.jar* is the name of the .jar file on your filesystem 

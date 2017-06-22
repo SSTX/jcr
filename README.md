@@ -2,6 +2,8 @@
 Encryption program implementing the Data Encryption Standard (DES) in Electronic Code Book (ECB) mode.
 Programmed in Java using Maven.
 
+* [Instructions for use](doc/instructions_for_use.md)
+
 ## Dokumentaatio
 * [Määrittelydokumentti](doc/määrittelydokumentti.md)
 * [Toteutusdokumentti](doc/toteutusdokumentti.md)

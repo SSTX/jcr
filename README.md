@@ -1,5 +1,7 @@
 # jcr
-Salaus- ja purkuohjelma javalla. Tiralabra 2017 alkukesä.
+Encryption program implementing the Data Encryption Standard (DES) in Electronic Code Book (ECB) mode.
+Programmed in Java using Maven.
+
 ## Dokumentaatio
 * [Määrittelydokumentti](doc/määrittelydokumentti.md)
 * [Toteutusdokumentti](doc/toteutusdokumentti.md)

@@ -83,8 +83,7 @@ public abstract class ModeOfOperation {
      */
     public byte[][] makeBlocks(byte[] bytes) {
         if (bytes.length % this.blockSize != 0) {
-            throw new IllegalArgumentException("Byte array fed to makeBlocks has"
-                    + " length that is not a multiple of blockSize");
+            throw new IllegalArgumentException("Malformed padding (data length is not a multiple of block size)");
         }
         int blockNum = bytes.length / this.blockSize;
         byte[][] blocks = new byte[blockNum][this.blockSize];

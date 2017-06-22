@@ -62,7 +62,7 @@ public class Main {
                     break;
             }
         } catch (Exception e) {
-            System.out.println(e.getCause());
+            e.printStackTrace();
         }
     }
 

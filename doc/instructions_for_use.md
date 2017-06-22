@@ -1,4 +1,4 @@
-Install java. Get the .jar file from github. Then run in the shell:
+Install java. Get the .jar file from github. Then run in shell:
 
 `java -jar jcr.jar -d|-e inputFile outputFile keyFile`
 

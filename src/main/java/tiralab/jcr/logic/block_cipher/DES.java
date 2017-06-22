@@ -194,7 +194,6 @@ public class DES implements BlockCipher {
         //permutation
         data = BitFunctions.chBitsPerByte(data, 4, 8);
         return this.permutationP(data);
-        
     }
 
     /**
@@ -210,7 +209,8 @@ public class DES implements BlockCipher {
         byte[] left = BitFunctions.copyBits(0, 32, permutedInput);
         byte[] right = BitFunctions.copyBits(32, 64, permutedInput);
         for (int i = 0; i < 16; i++) {
-            byte[] newRight = BitFunctions.bitwiseXOR(left,
+            byte[] newRight = BitFunctions.bitwiseXOR(
+                    left,
                     this.feistelFunction(right, keys[i]));
             left = right;
             right = newRight;

@@ -82,15 +82,15 @@ public class BitFunctions {
     }
 
     /**
-     * Function for modifying blocks at bit level.
+     * Function for modifying byte arrays at bit level.
      *
-     * @param data Block to be modified. Length in bits must be greater than the
+     * @param data Byte array to be modified. Length in bits must be greater than the
      * largest number in permTable.
      * @param permTable Array of integers that specifies which bits go where in
-     * the new block. Each bit-index i in the new block will have permTable[i]
+     * the new byte array. Each bit-index i in the new byte array will have permTable[i]
      * as its value.
-     * @return New block with enough bytes to hold permTable.length bits, with
-     * n-th bit from the left being the m-th bit in the original block, where m
+     * @return New byte array with enough bytes to hold permTable.length bits, with
+     * n-th bit from the left being the m-th bit in the original byte array, where m
      * = permTable[n].
      */
     public static byte[] permuteBits(byte[] data, int[] permTable) {

@@ -6,6 +6,8 @@ Programmed in Java using Maven.
 * [Määrittelydokumentti](doc/määrittelydokumentti.md)
 * [Toteutusdokumentti](doc/toteutusdokumentti.md)
 * [Testausdokumentti](doc/testausdokumentti.md)
+* [Javadoc](https://htmlpreview.github.io/?https://github.com/SSTX/jcr/blob/master/doc/apidocs/index.html)
+* [PIT-raportti](https://htmlpreview.github.io/?https://github.com/SSTX/jcr/blob/master/doc/pit-reports/201706220955/index.html)
 
 ## Viikkoraportit
 * [Viikko 1](doc/viikkoraportit/viikko1.md)

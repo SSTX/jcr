@@ -1,16 +1,11 @@
 # Yleiskuvaus
-Toteutan ohjelman, joka pystyy salaamaan ja purkamaan dataa käyttäen eri salausalgoritmeja.
-Algoritmeista toteutan ensiksi DES:n ja tämän jälkeen, jos aikaa jää, jonkin seuraavista:
-AES, Twofish, Speck. Valitsin ensimmäiseksi DES:n, koska se on suhteellisen yksinkertainen toteuttaa.
-Todelliseen salaukseen se ei ole enää käyttökelpoinen pienen avainpituutensa (56 bittiä) takia.
-
+Toteutus Data Encryption Standardille (DES), ja algoritmin käyttämiseen tarvittavat komponentit
+ja työkalut: Electronic Code Book (ECB), tiedostojen lukeminen/kirjoittaminen, komentorivikäyttöliittymä.
 Käytän toteutuksessa Javaa ja Mavenia.
 
 # Ohjelman toiminta
-Ohjelmaa käytetään tekstikäyttöliittymän kautta. Se lukee käsiteltävän datan
-joko näppäimistöltä tai tiedostosta, salaa tai purkaa sen riippuen käyttäjän ohjeista 
-ja lopuksi tallentaa tuloksen tiedostoon tai tulostaa sen näytölle. Syötteenä annettu 
-data voi olla mikä tahansa jono bittejä. 
+Ohjelmaa käytetään komentoriviltä. Syötteenä annetaan luettavien ja kirjoitettavien tiedostojen sijainnit
+ja valitsin salaamiselle/purkamiselle.
 
 # Aika- ja tilavaativuus
 ## Tavoitteellinen vaativuus
@@ -18,7 +13,4 @@ DES ja useat muut salausalgoritmit toimivat aika- ja tilavaativuudella O(n), mis
 on käsiteltävän datan suuruus. O(n) on tavoitteena myös tässä toteutuksessa. 
 
 ## Vaativuuksien testaus ja analysointi
-Tarkoituksena on testata omien toteutuksieni suorituskykyä verrattuna javan valmiiden kirjastojen toteutuksiin.
-Minkälainen ero on pienillä syötteillä? Suurilla syötteillä?
-
-Lisäksi, jos aikaa riittää useamman algoritmin toteuttamiseen, aion verrata niiden aikavaativuuksia toisiinsa.
+Vertaan oman toteutukseni suorituskykyä javan valmiiden kirjastojen toteutuksiin.

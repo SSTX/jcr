@@ -2,6 +2,7 @@
 Yksikkötestaukseen käytän jUnitia. DES:n testidata on lähtöisin 
 [tästä](http://page.math.tu-berlin.de/~kant/teaching/hess/krypto-ws2006/des.htm)
  materiaalista.
+ * [Yksikkötestauksen kattavuusraportti](pit-reports/201706220955/index.html)
 
 # Suorituskykytestaus
 ## Käyttöohje

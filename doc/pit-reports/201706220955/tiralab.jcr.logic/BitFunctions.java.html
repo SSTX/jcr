@@ -1,0 +1,4517 @@
+<html>
+<head>
+<style type='text/css'>
+html, body, div, span, p, blockquote, pre {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+
+body{
+	line-height: 1;
+	color: black;
+	background: white;
+	margin-left: 20px;
+}
+
+.src { 
+	border: 1px solid #dddddd;
+	padding-top: 10px;
+	padding-right: 5px;
+	padding-left: 5px;
+	font-family: Consolas, Courier, monospace;
+}
+
+
+.covered {background-color: #ddffdd}
+.uncovered {background-color: #ffdddd}
+.killed {background-color: #aaffaa}
+.survived {background-color: #ffaaaa}
+.uncertain {background-color: #dde7ef}
+.run_error {background-color: #dde7ef}
+.na {background-color: #eeeeee}
+.timed_out {background-color: #dde7ef}
+.non_viable {background-color: #aaffaa}
+.memory_error {background-color: #dde7ef}
+.not_started {background-color: #dde7ef; color : red}
+.no_coverage {background-color: #ffaaaa}
+
+
+.pop {outline:none; }
+.pop strong {line-height:30px;}
+.pop {text-decoration:none;}
+.pop span { z-index:10;display:none; padding:14px 20px; margin-top:-30px; margin-left:28px; width:800px; line-height:16px; word-wrap:break-word; }
+.pop:hover span{ display:inline; position:absolute; color:#111; border:1px solid #DCA; background:#fffAF0;}
+
+.pop span { border-radius:4px; -moz-border-radius: 4px; -webkit-border-radius: 4px; -moz-box-shadow: 5px 5px 8px #CCC; -webkit-box-shadow: 5px 5px 8px #CCC; box-shadow: 5px 5px 8px #CCC; }
+</style>
+
+</head>
+<body>
+
+
+<h1>BitFunctions.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_1'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>/*</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_2'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * To change this license header, choose License Headers in Project Properties.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_3'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * To change this template file, choose Tools | Templates</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_4'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * and open the template in the editor.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_5'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''> */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_6'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package tiralab.jcr.logic;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_7'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_8'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>/**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_9'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_10'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * @author ttiira</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_11'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''> */</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_12'></a>
+<span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>public class BitFunctions {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_13'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_14'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_15'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Make a byte array just large enough to hold a specified number of bits.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_16'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_17'/>
+17
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_17'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param bits Amount of bits needed.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_18'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @return New byte array initialized to all zeroes, big enough to hold the</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_19'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * needed bits.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_20'/>
+20
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_20'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_21'/>
+21
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_21'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public static byte[] nBitByteArray(int bits) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_22'/>
+22
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_22'>2</a>
+<span>
+1. nBitByteArray : Replaced integer modulus with multiplication &rarr; KILLED<br/>
+2. nBitByteArray : negated conditional &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (bits % 8 == 0) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_23'/>
+23
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_23'>2</a>
+<span>
+1. nBitByteArray : Replaced integer division with multiplication &rarr; KILLED<br/>
+2. nBitByteArray : mutated return of Object value for tiralab/jcr/logic/BitFunctions::nBitByteArray to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            return new byte[bits / 8];</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_24'/>
+24
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_24'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        } else {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_25'/>
+25
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_25'>3</a>
+<span>
+1. nBitByteArray : Replaced integer division with multiplication &rarr; KILLED<br/>
+2. nBitByteArray : Replaced integer addition with subtraction &rarr; KILLED<br/>
+3. nBitByteArray : mutated return of Object value for tiralab/jcr/logic/BitFunctions::nBitByteArray to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            return new byte[bits / 8 + 1];</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_26'/>
+26
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_26'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_27'/>
+27
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_27'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_28'/>
+28
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_28'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_29'/>
+29
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_29'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_30'/>
+30
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_30'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Make a byte array just large enough to hold a specified number of bits,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_31'/>
+31
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_31'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * only using some of the bits in each byte.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_32'/>
+32
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_32'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_33'/>
+33
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_33'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param bits How many bits to store.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_34'/>
+34
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_34'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param bitsPerByte How many bits to put in each byte.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_35'/>
+35
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_35'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @return New byte array initialized to all zeroes, big enough to hold the</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_36'/>
+36
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_36'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * needed bits.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_37'/>
+37
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_37'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_38'/>
+38
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_38'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public static byte[] nBitByteArray(int bits, int bitsPerByte) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_39'/>
+39
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_39'>2</a>
+<span>
+1. nBitByteArray : Replaced integer modulus with multiplication &rarr; KILLED<br/>
+2. nBitByteArray : negated conditional &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (bits % bitsPerByte == 0) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_40'/>
+40
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_40'>2</a>
+<span>
+1. nBitByteArray : Replaced integer division with multiplication &rarr; KILLED<br/>
+2. nBitByteArray : mutated return of Object value for tiralab/jcr/logic/BitFunctions::nBitByteArray to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            return new byte[bits / bitsPerByte];</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_41'/>
+41
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_41'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        } else {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_42'/>
+42
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_42'>3</a>
+<span>
+1. nBitByteArray : Replaced integer division with multiplication &rarr; KILLED<br/>
+2. nBitByteArray : Replaced integer addition with subtraction &rarr; KILLED<br/>
+3. nBitByteArray : mutated return of Object value for tiralab/jcr/logic/BitFunctions::nBitByteArray to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            return new byte[bits / bitsPerByte + 1];</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_43'/>
+43
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_43'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_44'/>
+44
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_44'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_45'/>
+45
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_45'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_46'/>
+46
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_46'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_47'/>
+47
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_47'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Get the nth bit from a byte array starting from the left.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_48'/>
+48
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_48'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_49'/>
+49
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_49'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param offset Index of the desired bit (0-based).</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_50'/>
+50
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_50'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param data The byte array containing the bit.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_51'/>
+51
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_51'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @return Byte with the rightmost bit being the desired bit and the rest</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_52'/>
+52
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_52'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * being zero bits.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_53'/>
+53
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_53'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_54'/>
+54
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_54'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public static byte getBitByOffset(int offset, byte[] data) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_55'/>
+55
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_55'>1</a>
+<span>
+1. getBitByOffset : Replaced integer division with multiplication &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        int nbyte = offset / 8;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_56'/>
+56
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_56'>1</a>
+<span>
+1. getBitByOffset : Replaced integer modulus with multiplication &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        int nbit = offset % 8;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_57'/>
+57
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_57'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        byte b = data[nbyte];</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_58'/>
+58
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_58'>2</a>
+<span>
+1. getBitByOffset : Replaced integer subtraction with addition &rarr; KILLED<br/>
+2. getBitByOffset : Replaced Unsigned Shift Right with Shift Left &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        b &#62;&#62;&#62;= (7 - nbit);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_59'/>
+59
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_59'>1</a>
+<span>
+1. getBitByOffset : Replaced bitwise AND with OR &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        b &#38;= 0b00000001;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_60'/>
+60
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_60'>1</a>
+<span>
+1. getBitByOffset : replaced return of integer sized value with (x == 0 ? 1 : 0) &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return b;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_61'/>
+61
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_61'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_62'/>
+62
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_62'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_63'/>
+63
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_63'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_64'/>
+64
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_64'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Insert a single bit into a specified 0-based index from the left.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_65'/>
+65
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_65'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_66'/>
+66
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_66'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param bit Byte representing the bit to insert. 1 or 0.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_67'/>
+67
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_67'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param bitIndex How many bits from the left should the bit be inserted</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_68'/>
+68
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_68'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * (0-based).</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_69'/>
+69
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_69'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param array Array to insert the bit in.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_70'/>
+70
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_70'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_71'/>
+71
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_71'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public static void insertBit(byte bit, int bitIndex, byte[] array) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_72'/>
+72
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_72'>1</a>
+<span>
+1. insertBit : Replaced integer division with multiplication &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        int nByte = bitIndex / 8;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_73'/>
+73
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_73'>1</a>
+<span>
+1. insertBit : Replaced integer modulus with multiplication &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        int nBit = bitIndex % 8;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_74'/>
+74
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_74'>1</a>
+<span>
+1. insertBit : negated conditional &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (bit == 0) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_75'/>
+75
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_75'>3</a>
+<span>
+1. insertBit : Replaced Shift Left with Shift Right &rarr; SURVIVED<br/>
+2. insertBit : Replaced integer subtraction with addition &rarr; KILLED<br/>
+3. insertBit : Replaced XOR with AND &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>            bit = (byte) ~(1 &#60;&#60; (7 - nBit));</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_76'/>
+76
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_76'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            //bit is now all ones, except a zero in the position defined by bitIndex</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_77'/>
+77
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_77'>1</a>
+<span>
+1. insertBit : Replaced bitwise AND with OR &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            array[nByte] &#38;= bit;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_78'/>
+78
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_78'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        } else {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_79'/>
+79
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_79'>2</a>
+<span>
+1. insertBit : Replaced integer subtraction with addition &rarr; KILLED<br/>
+2. insertBit : Replaced Shift Left with Shift Right &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            bit &#60;&#60;= (7 - nBit);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_80'/>
+80
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_80'>1</a>
+<span>
+1. insertBit : Replaced bitwise OR with AND &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            array[nByte] |= bit;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_81'/>
+81
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_81'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_82'/>
+82
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_82'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_83'/>
+83
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_83'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_84'/>
+84
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_84'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_85'/>
+85
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_85'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Function for modifying blocks at bit level.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_86'/>
+86
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_86'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_87'/>
+87
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_87'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param data Block to be modified. Length in bits must be greater than the</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_88'/>
+88
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_88'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * largest number in permTable.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_89'/>
+89
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_89'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param permTable Array of integers that specifies which bits go where in</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_90'/>
+90
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_90'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * the new block. Each bit-index i in the new block will have permTable[i]</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_91'/>
+91
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_91'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * as its value.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_92'/>
+92
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_92'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @return New block with enough bytes to hold permTable.length bits, with</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_93'/>
+93
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_93'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * n-th bit from the left being the m-th bit in the original block, where m</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_94'/>
+94
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_94'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * = permTable[n].</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_95'/>
+95
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_95'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_96'/>
+96
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_96'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public static byte[] permuteBits(byte[] data, int[] permTable) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_97'/>
+97
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_97'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        byte[] permuted = BitFunctions.nBitByteArray(permTable.length);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_98'/>
+98
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_98'>3</a>
+<span>
+1. permuteBits : changed conditional boundary &rarr; KILLED<br/>
+2. permuteBits : Changed increment from 1 to -1 &rarr; KILLED<br/>
+3. permuteBits : negated conditional &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        for (int i = 0; i &#60; permTable.length; i++) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_99'/>
+99
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_99'>1</a>
+<span>
+1. permuteBits : Replaced integer division with multiplication &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            int nbyteData = permTable[i] / 8;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_100'/>
+100
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_100'>1</a>
+<span>
+1. permuteBits : Replaced integer modulus with multiplication &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            int nbitData = permTable[i] % 8;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_101'/>
+101
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_101'>1</a>
+<span>
+1. permuteBits : Replaced integer division with multiplication &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            int nbytePerm = i / 8;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_102'/>
+102
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_102'>1</a>
+<span>
+1. permuteBits : Replaced integer modulus with multiplication &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            int nbitPerm = i % 8;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_103'/>
+103
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_103'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            byte b = data[nbyteData];</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_104'/>
+104
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_104'>2</a>
+<span>
+1. permuteBits : Replaced integer subtraction with addition &rarr; KILLED<br/>
+2. permuteBits : Replaced Unsigned Shift Right with Shift Left &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            b &#62;&#62;&#62;= (7 - nbitData); //push the desired bit all the way to the right</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_105'/>
+105
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_105'>1</a>
+<span>
+1. permuteBits : Replaced bitwise AND with OR &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            b &#38;= 0b00000001;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_106'/>
+106
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_106'>2</a>
+<span>
+1. permuteBits : Replaced integer subtraction with addition &rarr; KILLED<br/>
+2. permuteBits : Replaced Shift Left with Shift Right &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            b &#60;&#60;= (7 - nbitPerm); //push the bit to its correct position in the byte</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_107'/>
+107
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_107'>1</a>
+<span>
+1. permuteBits : Replaced bitwise OR with AND &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            permuted[nbytePerm] |= b;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_108'/>
+108
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_108'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_109'/>
+109
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_109'>1</a>
+<span>
+1. permuteBits : mutated return of Object value for tiralab/jcr/logic/BitFunctions::permuteBits to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return permuted;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_110'/>
+110
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_110'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_111'/>
+111
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_111'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_112'/>
+112
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_112'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_113'/>
+113
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_113'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Rotate a byte array bitwise to the left.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_114'/>
+114
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_114'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_115'/>
+115
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_115'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param rotN How many positions to rotate.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_116'/>
+116
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_116'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param lengthInBits How many bits from the left to be considered as part</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_117'/>
+117
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_117'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * of the array.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_118'/>
+118
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_118'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param data Byte array to rotate.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_119'/>
+119
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_119'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @return Bitwise-rotated byte array.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_120'/>
+120
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_120'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_121'/>
+121
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_121'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public static byte[] rotateLeft(int rotN, int lengthInBits, byte[] data) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_122'/>
+122
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_122'>2</a>
+<span>
+1. rotateLeft : changed conditional boundary &rarr; KILLED<br/>
+2. rotateLeft : negated conditional &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (lengthInBits &#60;= 0) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_123'/>
+123
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_123'>1</a>
+<span>
+1. rotateLeft : mutated return of Object value for tiralab/jcr/logic/BitFunctions::rotateLeft to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            return data;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_124'/>
+124
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_124'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_125'/>
+125
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_125'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        int[] permTable = new int[lengthInBits];</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_126'/>
+126
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_126'>3</a>
+<span>
+1. rotateLeft : changed conditional boundary &rarr; KILLED<br/>
+2. rotateLeft : Changed increment from 1 to -1 &rarr; KILLED<br/>
+3. rotateLeft : negated conditional &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        for (int i = 0; i &#60; lengthInBits; i++) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_127'/>
+127
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_127'>2</a>
+<span>
+1. rotateLeft : Replaced integer addition with subtraction &rarr; KILLED<br/>
+2. rotateLeft : Replaced integer modulus with multiplication &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            permTable[i] = (i + rotN) % lengthInBits;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_128'/>
+128
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_128'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_129'/>
+129
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_129'>1</a>
+<span>
+1. rotateLeft : mutated return of Object value for tiralab/jcr/logic/BitFunctions::rotateLeft to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return BitFunctions.permuteBits(data, permTable);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_130'/>
+130
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_130'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_131'/>
+131
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_131'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_132'/>
+132
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_132'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_133'/>
+133
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_133'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Concatenates two byte arrays bitwise.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_134'/>
+134
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_134'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_135'/>
+135
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_135'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param left Array whose bits to put left in the concatenation.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_136'/>
+136
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_136'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param right Array whose bits to put right in the concatenation.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_137'/>
+137
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_137'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param nBitsLeft Number of bits in the left array.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_138'/>
+138
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_138'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param nBitsRight Number of bits in the right array.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_139'/>
+139
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_139'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @return Byte array with nBitsLeft bits from the left array starting from</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_140'/>
+140
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_140'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * the left and nBitsRight bits from the right array after them.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_141'/>
+141
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_141'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_142'/>
+142
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_142'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public static byte[] concatBits(byte[] left, byte[] right, int nBitsLeft, int nBitsRight) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_143'/>
+143
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_143'>1</a>
+<span>
+1. concatBits : Replaced integer addition with subtraction &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        byte[] arr = BitFunctions.nBitByteArray(nBitsLeft + nBitsRight);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_144'/>
+144
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_144'>3</a>
+<span>
+1. concatBits : changed conditional boundary &rarr; KILLED<br/>
+2. concatBits : Changed increment from 1 to -1 &rarr; KILLED<br/>
+3. concatBits : negated conditional &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        for (int i = 0; i &#60; nBitsLeft; i++) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_145'/>
+145
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_145'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            byte b = BitFunctions.getBitByOffset(i, left);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_146'/>
+146
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_146'>1</a>
+<span>
+1. concatBits : removed call to tiralab/jcr/logic/BitFunctions::insertBit &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            BitFunctions.insertBit(b, i, arr);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_147'/>
+147
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_147'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_148'/>
+148
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_148'>3</a>
+<span>
+1. concatBits : changed conditional boundary &rarr; KILLED<br/>
+2. concatBits : Changed increment from 1 to -1 &rarr; KILLED<br/>
+3. concatBits : negated conditional &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        for (int i = 0; i &#60; nBitsRight; i++) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_149'/>
+149
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_149'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            byte b = BitFunctions.getBitByOffset(i, right);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_150'/>
+150
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_150'>2</a>
+<span>
+1. concatBits : Replaced integer addition with subtraction &rarr; KILLED<br/>
+2. concatBits : removed call to tiralab/jcr/logic/BitFunctions::insertBit &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            BitFunctions.insertBit(b, nBitsLeft + i, arr);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_151'/>
+151
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_151'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_152'/>
+152
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_152'>1</a>
+<span>
+1. concatBits : mutated return of Object value for tiralab/jcr/logic/BitFunctions::concatBits to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return arr;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_153'/>
+153
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_153'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_154'/>
+154
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_154'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_155'/>
+155
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_155'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_156'/>
+156
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_156'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Copy a range of bits from a byte array.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_157'/>
+157
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_157'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_158'/>
+158
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_158'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param startInclusive Starting bit index, inclusive.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_159'/>
+159
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_159'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param endExclusive Ending bit index, exclusive.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_160'/>
+160
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_160'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param data Byte array to be copied from.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_161'/>
+161
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_161'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @return New byte array with the copied range starting from the left.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_162'/>
+162
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_162'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_163'/>
+163
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_163'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public static byte[] copyBits(int startInclusive, int endExclusive, byte[] data) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_164'/>
+164
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_164'>1</a>
+<span>
+1. copyBits : Replaced integer subtraction with addition &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        int nBits = endExclusive - startInclusive;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_165'/>
+165
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_165'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        byte[] arr = BitFunctions.nBitByteArray(nBits);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_166'/>
+166
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_166'>3</a>
+<span>
+1. copyBits : changed conditional boundary &rarr; KILLED<br/>
+2. copyBits : Changed increment from 1 to -1 &rarr; KILLED<br/>
+3. copyBits : negated conditional &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        for (int i = 0; i &#60; nBits; i++) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_167'/>
+167
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_167'>1</a>
+<span>
+1. copyBits : Replaced integer addition with subtraction &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            byte b = BitFunctions.getBitByOffset(startInclusive + i, data);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_168'/>
+168
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_168'>3</a>
+<span>
+1. copyBits : Replaced integer modulus with multiplication &rarr; KILLED<br/>
+2. copyBits : Replaced integer subtraction with addition &rarr; KILLED<br/>
+3. copyBits : Replaced Shift Left with Shift Right &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            b &#60;&#60;= (7 - (i % 8)); //push the rightmost bit to its correct position</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_169'/>
+169
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_169'>2</a>
+<span>
+1. copyBits : Replaced integer division with multiplication &rarr; KILLED<br/>
+2. copyBits : Replaced bitwise OR with AND &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            arr[i / 8] |= b;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_170'/>
+170
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_170'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_171'/>
+171
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_171'>1</a>
+<span>
+1. copyBits : mutated return of Object value for tiralab/jcr/logic/BitFunctions::copyBits to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return arr;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_172'/>
+172
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_172'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_173'/>
+173
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_173'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_174'/>
+174
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_174'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_175'/>
+175
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_175'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Bitwise exclusive-or operation for two byte arrays.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_176'/>
+176
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_176'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_177'/>
+177
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_177'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param arr1 First operand.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_178'/>
+178
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_178'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param arr2 Second operand.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_179'/>
+179
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_179'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @return Byte array constructed by XORing the bits of arr1 and arr2.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_180'/>
+180
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_180'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_181'/>
+181
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_181'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public static byte[] bitwiseXOR(byte[] arr1, byte[] arr2) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_182'/>
+182
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_182'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        int len = arr1.length;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_183'/>
+183
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_183'>2</a>
+<span>
+1. bitwiseXOR : changed conditional boundary &rarr; SURVIVED<br/>
+2. bitwiseXOR : negated conditional &rarr; SURVIVED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        if (arr2.length &#60; len) {</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_184'/>
+184
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_184'></a>
+<span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>            len = arr2.length;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_185'/>
+185
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_185'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_186'/>
+186
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_186'>1</a>
+<span>
+1. bitwiseXOR : Replaced integer multiplication with division &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        byte[] ret = BitFunctions.copyBits(0, len * 8, arr1);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_187'/>
+187
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_187'>3</a>
+<span>
+1. bitwiseXOR : changed conditional boundary &rarr; KILLED<br/>
+2. bitwiseXOR : Changed increment from 1 to -1 &rarr; KILLED<br/>
+3. bitwiseXOR : negated conditional &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        for (int i = 0; i &#60; len; i++) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_188'/>
+188
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_188'>1</a>
+<span>
+1. bitwiseXOR : Replaced XOR with AND &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            ret[i] ^= arr2[i];</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_189'/>
+189
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_189'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_190'/>
+190
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_190'>1</a>
+<span>
+1. bitwiseXOR : mutated return of Object value for tiralab/jcr/logic/BitFunctions::bitwiseXOR to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return ret;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_191'/>
+191
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_191'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_192'/>
+192
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_192'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_193'/>
+193
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_193'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>      /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_194'/>
+194
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_194'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * In-place bitwise exclusive-or operation for two byte arrays. The result</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_195'/>
+195
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_195'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * is stored in arr1.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_196'/>
+196
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_196'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_197'/>
+197
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_197'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param arr1 First operand. Will be overwritten.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_198'/>
+198
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_198'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param arr2 Second operand.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_199'/>
+199
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_199'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_200'/>
+200
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_200'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public static void inPlaceBitwiseXOR(byte[] arr1, byte[] arr2) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_201'/>
+201
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_201'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        int len = arr1.length;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_202'/>
+202
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_202'>2</a>
+<span>
+1. inPlaceBitwiseXOR : changed conditional boundary &rarr; SURVIVED<br/>
+2. inPlaceBitwiseXOR : negated conditional &rarr; SURVIVED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        if (arr2.length &#60; len) {</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_203'/>
+203
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_203'></a>
+<span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>            len = arr2.length;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_204'/>
+204
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_204'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_205'/>
+205
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_205'>3</a>
+<span>
+1. inPlaceBitwiseXOR : changed conditional boundary &rarr; KILLED<br/>
+2. inPlaceBitwiseXOR : Changed increment from 1 to -1 &rarr; KILLED<br/>
+3. inPlaceBitwiseXOR : negated conditional &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        for (int i = 0; i &#60; len; i++) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_206'/>
+206
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_206'>1</a>
+<span>
+1. inPlaceBitwiseXOR : Replaced XOR with AND &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            arr1[i] ^= arr2[i];</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_207'/>
+207
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_207'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_208'/>
+208
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_208'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_209'/>
+209
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_209'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_210'/>
+210
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_210'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_211'/>
+211
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_211'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Stretch or compress a byte array by using a specified amount of bits in</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_212'/>
+212
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_212'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * each byte. Bit count n means n low-order bits.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_213'/>
+213
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_213'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_214'/>
+214
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_214'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param source Array to be stretched/compressed.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_215'/>
+215
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_215'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param currentBitCount How many bits are currently used per byte</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_216'/>
+216
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_216'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * (low-order bits).</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_217'/>
+217
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_217'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param targetBitCount How many bits to put in each byte (low-order bits).</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_218'/>
+218
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_218'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @return Stretched/compressed byte array.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_219'/>
+219
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_219'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_220'/>
+220
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_220'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public static byte[] chBitsPerByte(byte[] source, int currentBitCount, int targetBitCount) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_221'/>
+221
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_221'>8</a>
+<span>
+1. chBitsPerByte : changed conditional boundary &rarr; SURVIVED<br/>
+2. chBitsPerByte : changed conditional boundary &rarr; SURVIVED<br/>
+3. chBitsPerByte : changed conditional boundary &rarr; KILLED<br/>
+4. chBitsPerByte : changed conditional boundary &rarr; KILLED<br/>
+5. chBitsPerByte : negated conditional &rarr; KILLED<br/>
+6. chBitsPerByte : negated conditional &rarr; KILLED<br/>
+7. chBitsPerByte : negated conditional &rarr; KILLED<br/>
+8. chBitsPerByte : negated conditional &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        if (targetBitCount &#60;= 0</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_222'/>
+222
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_222'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>                || targetBitCount &#62; 8</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_223'/>
+223
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_223'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>                || currentBitCount &#60;= 0</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_224'/>
+224
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_224'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>                || currentBitCount &#62; 8) {</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_225'/>
+225
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_225'></a>
+<span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>            throw new IllegalArgumentException(</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_226'/>
+226
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_226'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>                    &#34;Amount of bits used in chBitsPerByte must be in 1..8&#34;);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_227'/>
+227
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_227'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_228'/>
+228
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_228'>1</a>
+<span>
+1. chBitsPerByte : Replaced integer multiplication with division &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        int bits = source.length * currentBitCount;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_229'/>
+229
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_229'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        //how many high-order bits to ignore in each byte</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_230'/>
+230
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_230'>1</a>
+<span>
+1. chBitsPerByte : Replaced integer subtraction with addition &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        int sourceSkip = 8 - currentBitCount;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_231'/>
+231
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_231'>1</a>
+<span>
+1. chBitsPerByte : Replaced integer subtraction with addition &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        int targetSkip = 8 - targetBitCount;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_232'/>
+232
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_232'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        //start reading and writing from the first valid index</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_233'/>
+233
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_233'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        int sourceIdx = sourceSkip;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_234'/>
+234
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_234'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        int targetIdx = targetSkip;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_235'/>
+235
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_235'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        byte[] arr = BitFunctions.nBitByteArray(bits, targetBitCount);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_236'/>
+236
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_236'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        //loop over each bit in the source array</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_237'/>
+237
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_237'>3</a>
+<span>
+1. chBitsPerByte : changed conditional boundary &rarr; KILLED<br/>
+2. chBitsPerByte : Replaced integer multiplication with division &rarr; KILLED<br/>
+3. chBitsPerByte : negated conditional &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        while (sourceIdx &#60; 8 * source.length) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_238'/>
+238
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_238'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            byte b = BitFunctions.getBitByOffset(sourceIdx, source);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_239'/>
+239
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_239'>1</a>
+<span>
+1. chBitsPerByte : removed call to tiralab/jcr/logic/BitFunctions::insertBit &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            BitFunctions.insertBit(b, targetIdx, arr);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_240'/>
+240
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_240'>1</a>
+<span>
+1. chBitsPerByte : Changed increment from 1 to -1 &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            sourceIdx++;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_241'/>
+241
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_241'>1</a>
+<span>
+1. chBitsPerByte : Changed increment from 1 to -1 &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            targetIdx++;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_242'/>
+242
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_242'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            //if we have read currentBitCount bits, skip to the start of the next</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_243'/>
+243
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_243'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            //piece of bits to read</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_244'/>
+244
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_244'>2</a>
+<span>
+1. chBitsPerByte : Replaced integer modulus with multiplication &rarr; KILLED<br/>
+2. chBitsPerByte : negated conditional &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            if (sourceIdx % 8 == 0) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_245'/>
+245
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_245'>1</a>
+<span>
+1. chBitsPerByte : Replaced integer addition with subtraction &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                sourceIdx += sourceSkip;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_246'/>
+246
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_246'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_247'/>
+247
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_247'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            //if we have written targetBitCount bits, skip to the start of the next</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_248'/>
+248
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_248'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            //piece of bits to write</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_249'/>
+249
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_249'>2</a>
+<span>
+1. chBitsPerByte : Replaced integer modulus with multiplication &rarr; KILLED<br/>
+2. chBitsPerByte : negated conditional &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            if (targetIdx % 8 == 0) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_250'/>
+250
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_250'>1</a>
+<span>
+1. chBitsPerByte : Replaced integer addition with subtraction &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                targetIdx += targetSkip;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_251'/>
+251
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_251'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_252'/>
+252
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_252'></a>
+<span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_253'/>
+253
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_253'>1</a>
+<span>
+1. chBitsPerByte : mutated return of Object value for tiralab/jcr/logic/BitFunctions::chBitsPerByte to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED<br/>
+
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return arr;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_254'/>
+254
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_254'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_255'/>
+255
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_255'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ce15112_256'/>
+256
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_256'></a>
+<span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_22'>22</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_22'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>nBitByteArray<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.permuteBitsWorksCorrectly2(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer modulus with multiplication &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>nBitByteArray<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.permuteBitsWorksCorrectly2(tiralab.jcr.logic.BitFunctionsTest)</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_23'>23</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_23'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>nBitByteArray<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.permuteBitsWorksCorrectly2(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer division with multiplication &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>nBitByteArray<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.permuteBitsWorksCorrectly2(tiralab.jcr.logic.BitFunctionsTest)</span></span> mutated return of Object value for tiralab/jcr/logic/BitFunctions::nBitByteArray to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_25'>25</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_25'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>nBitByteArray<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.rotateLeftReturnsCorrect3(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer division with multiplication &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>nBitByteArray<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.rotateLeftReturnsCorrect3(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer addition with subtraction &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>nBitByteArray<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.rotateLeftReturnsCorrect3(tiralab.jcr.logic.BitFunctionsTest)</span></span> mutated return of Object value for tiralab/jcr/logic/BitFunctions::nBitByteArray to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_39'>39</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_39'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>nBitByteArray<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.nBitByteArrayReturnCorrectLengthArray2(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer modulus with multiplication &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>nBitByteArray<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.nBitByteArrayReturnCorrectLengthArray2(tiralab.jcr.logic.BitFunctionsTest)</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_40'>40</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_40'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>nBitByteArray<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.nBitByteArrayReturnCorrectLengthArray2(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer division with multiplication &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>nBitByteArray<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.nBitByteArrayReturnCorrectLengthArray2(tiralab.jcr.logic.BitFunctionsTest)</span></span> mutated return of Object value for tiralab/jcr/logic/BitFunctions::nBitByteArray to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_42'>42</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_42'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>nBitByteArray<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.chBitsPerByteReturnCorrect2(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer division with multiplication &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>nBitByteArray<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.chBitsPerByteReturnCorrect2(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer addition with subtraction &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>nBitByteArray<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.chBitsPerByteReturnCorrect2(tiralab.jcr.logic.BitFunctionsTest)</span></span> mutated return of Object value for tiralab/jcr/logic/BitFunctions::nBitByteArray to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_55'>55</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_55'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getBitByOffset<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.getBitByOffsetReturnsCorrectBit1(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer division with multiplication &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_56'>56</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_56'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getBitByOffset<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.getBitByOffsetReturnsCorrectBit1(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer modulus with multiplication &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_58'>58</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_58'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getBitByOffset<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.getBitByOffsetReturnsCorrectBit1(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getBitByOffset<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.getBitByOffsetReturnsCorrectBit1(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced Unsigned Shift Right with Shift Left &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_59'>59</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_59'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getBitByOffset<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.getBitByOffsetReturnsCorrectBit1(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced bitwise AND with OR &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_60'>60</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_60'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getBitByOffset<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.getBitByOffsetReturnsCorrectBit1(tiralab.jcr.logic.BitFunctionsTest)</span></span> replaced return of integer sized value with (x == 0 ? 1 : 0) &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_72'>72</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_72'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>insertBit<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.insertBitReturnCorrect2(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer division with multiplication &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_73'>73</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_73'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>insertBit<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.insertBitReturnCorrect2(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer modulus with multiplication &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_74'>74</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_74'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>insertBit<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.insertBitReturnCorrect2(tiralab.jcr.logic.BitFunctionsTest)</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_75'>75</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_75'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>insertBit<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.insertBitReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer subtraction with addition &rarr; KILLED</p> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>insertBit<br/><b>Killed by : </b>none</span></span> Replaced Shift Left with Shift Right &rarr; SURVIVED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>insertBit<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.insertBitReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced XOR with AND &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_77'>77</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_77'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>insertBit<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.insertBitReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced bitwise AND with OR &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_79'>79</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_79'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>insertBit<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.insertBitReturnCorrect2(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>insertBit<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.insertBitReturnCorrect2(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced Shift Left with Shift Right &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_80'>80</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_80'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>insertBit<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.insertBitReturnCorrect2(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced bitwise OR with AND &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_98'>98</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_98'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>permuteBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.permuteBitsWorksCorrectly2(tiralab.jcr.logic.BitFunctionsTest)</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>permuteBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.permuteBitsWorksCorrectly2(tiralab.jcr.logic.BitFunctionsTest)</span></span> Changed increment from 1 to -1 &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>permuteBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.permuteBitsWorksCorrectly2(tiralab.jcr.logic.BitFunctionsTest)</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_99'>99</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_99'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>permuteBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.permuteBitsWorksCorrectly2(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer division with multiplication &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_100'>100</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_100'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>permuteBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.permuteBitsWorksCorrectly2(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer modulus with multiplication &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_101'>101</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_101'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>permuteBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.permuteBitsWorksCorrectly2(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer division with multiplication &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_102'>102</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_102'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>permuteBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.permuteBitsWorksCorrectly2(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer modulus with multiplication &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_104'>104</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_104'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>permuteBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.permuteBitsWorksCorrectly2(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>permuteBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.permuteBitsWorksCorrectly2(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced Unsigned Shift Right with Shift Left &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_105'>105</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_105'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>permuteBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.permuteBitsWorksCorrectly2(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced bitwise AND with OR &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_106'>106</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_106'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>permuteBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.permuteBitsWorksCorrectly2(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>permuteBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.permuteBitsWorksCorrectly2(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced Shift Left with Shift Right &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_107'>107</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_107'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>permuteBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.permuteBitsWorksCorrectly2(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced bitwise OR with AND &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_109'>109</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_109'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>permuteBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.permuteBitsWorksCorrectly2(tiralab.jcr.logic.BitFunctionsTest)</span></span> mutated return of Object value for tiralab/jcr/logic/BitFunctions::permuteBits to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_122'>122</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_122'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>rotateLeft<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.rotateLeftIgnoresLengthLessThanOne(tiralab.jcr.logic.BitFunctionsTest)</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>rotateLeft<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.rotateLeftIgnoresLengthLessThanOne(tiralab.jcr.logic.BitFunctionsTest)</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_123'>123</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_123'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>rotateLeft<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.rotateLeftIgnoresLengthLessThanOne(tiralab.jcr.logic.BitFunctionsTest)</span></span> mutated return of Object value for tiralab/jcr/logic/BitFunctions::rotateLeft to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_126'>126</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_126'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>rotateLeft<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.rotateLeftReturnsCorrect2(tiralab.jcr.logic.BitFunctionsTest)</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>rotateLeft<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.rotateLeftReturnsCorrect2(tiralab.jcr.logic.BitFunctionsTest)</span></span> Changed increment from 1 to -1 &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>rotateLeft<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.rotateLeftReturnsCorrect2(tiralab.jcr.logic.BitFunctionsTest)</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_127'>127</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_127'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>rotateLeft<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.rotateLeftReturnsCorrect2(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer addition with subtraction &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>rotateLeft<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.rotateLeftReturnsCorrect2(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer modulus with multiplication &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_129'>129</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_129'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>rotateLeft<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.rotateLeftReturnsCorrect2(tiralab.jcr.logic.BitFunctionsTest)</span></span> mutated return of Object value for tiralab/jcr/logic/BitFunctions::rotateLeft to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_143'>143</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_143'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>concatBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.concatBitsReturnCorrect2(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer addition with subtraction &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_144'>144</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_144'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>concatBits<br/><b>Killed by : </b>tiralab.jcr.logic.block_cipher.DESTest.desEncryptionCorrect(tiralab.jcr.logic.block_cipher.DESTest)</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>concatBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.concatBitsReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> Changed increment from 1 to -1 &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>concatBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.concatBitsReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_146'>146</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_146'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>concatBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.concatBitsReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> removed call to tiralab/jcr/logic/BitFunctions::insertBit &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_148'>148</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_148'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>concatBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.concatBitsReturnCorrect2(tiralab.jcr.logic.BitFunctionsTest)</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>concatBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.concatBitsReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> Changed increment from 1 to -1 &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>concatBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.concatBitsReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_150'>150</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_150'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>concatBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.concatBitsReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer addition with subtraction &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>concatBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.concatBitsReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> removed call to tiralab/jcr/logic/BitFunctions::insertBit &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_152'>152</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_152'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>concatBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.concatBitsReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> mutated return of Object value for tiralab/jcr/logic/BitFunctions::concatBits to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_164'>164</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_164'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>copyBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.copyBitsReturnCorrect2(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer subtraction with addition &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_166'>166</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_166'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>copyBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.copyBitsReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>copyBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.copyBitsReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> Changed increment from 1 to -1 &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>copyBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.copyBitsReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_167'>167</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_167'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>copyBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.copyBitsReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer addition with subtraction &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_168'>168</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_168'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>copyBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.copyBitsReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer modulus with multiplication &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>copyBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.copyBitsReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>copyBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.copyBitsReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced Shift Left with Shift Right &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_169'>169</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_169'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>copyBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.copyBitsReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer division with multiplication &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>copyBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.copyBitsReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced bitwise OR with AND &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_171'>171</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_171'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>copyBits<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.copyBitsReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> mutated return of Object value for tiralab/jcr/logic/BitFunctions::copyBits to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_183'>183</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_183'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>bitwiseXOR<br/><b>Killed by : </b>none</span></span> changed conditional boundary &rarr; SURVIVED</p> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>bitwiseXOR<br/><b>Killed by : </b>none</span></span> negated conditional &rarr; SURVIVED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_186'>186</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_186'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>bitwiseXOR<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.bitwiseXORReturnCorrect(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer multiplication with division &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_187'>187</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_187'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>bitwiseXOR<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.bitwiseXORReturnCorrect(tiralab.jcr.logic.BitFunctionsTest)</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>bitwiseXOR<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.bitwiseXORReturnCorrect(tiralab.jcr.logic.BitFunctionsTest)</span></span> Changed increment from 1 to -1 &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>bitwiseXOR<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.bitwiseXORReturnCorrect(tiralab.jcr.logic.BitFunctionsTest)</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_188'>188</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_188'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>bitwiseXOR<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.bitwiseXORReturnCorrect(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced XOR with AND &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_190'>190</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_190'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>bitwiseXOR<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.bitwiseXORReturnCorrect(tiralab.jcr.logic.BitFunctionsTest)</span></span> mutated return of Object value for tiralab/jcr/logic/BitFunctions::bitwiseXOR to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_202'>202</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_202'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>inPlaceBitwiseXOR<br/><b>Killed by : </b>none</span></span> changed conditional boundary &rarr; SURVIVED</p> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>inPlaceBitwiseXOR<br/><b>Killed by : </b>none</span></span> negated conditional &rarr; SURVIVED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_205'>205</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_205'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>inPlaceBitwiseXOR<br/><b>Killed by : </b>tiralab.jcr.logic.block_cipher.DESTest.feistelFunctionReturnCorrect(tiralab.jcr.logic.block_cipher.DESTest)</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>inPlaceBitwiseXOR<br/><b>Killed by : </b>tiralab.jcr.logic.block_cipher.DESTest.feistelFunctionReturnCorrect(tiralab.jcr.logic.block_cipher.DESTest)</span></span> Changed increment from 1 to -1 &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>inPlaceBitwiseXOR<br/><b>Killed by : </b>tiralab.jcr.logic.block_cipher.DESTest.feistelFunctionReturnCorrect(tiralab.jcr.logic.block_cipher.DESTest)</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_206'>206</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_206'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>inPlaceBitwiseXOR<br/><b>Killed by : </b>tiralab.jcr.logic.block_cipher.DESTest.feistelFunctionReturnCorrect(tiralab.jcr.logic.block_cipher.DESTest)</span></span> Replaced XOR with AND &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_221'>221</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_221'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>chBitsPerByte<br/><b>Killed by : </b>none</span></span> changed conditional boundary &rarr; SURVIVED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>chBitsPerByte<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.chBitsPerByteReturnCorrect2(tiralab.jcr.logic.BitFunctionsTest)</span></span> changed conditional boundary &rarr; KILLED</p> <p class='SURVIVED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>chBitsPerByte<br/><b>Killed by : </b>none</span></span> changed conditional boundary &rarr; SURVIVED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>chBitsPerByte<br/><b>Killed by : </b>tiralab.jcr.logic.block_cipher.DESTest.feistelFunctionReturnCorrect(tiralab.jcr.logic.block_cipher.DESTest)</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>chBitsPerByte<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.chBitsPerByteReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>6.<span><b>6</b><br/><b>Location : </b>chBitsPerByte<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.chBitsPerByteReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>7.<span><b>7</b><br/><b>Location : </b>chBitsPerByte<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.chBitsPerByteReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>8.<span><b>8</b><br/><b>Location : </b>chBitsPerByte<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.chBitsPerByteReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_228'>228</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_228'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>chBitsPerByte<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.chBitsPerByteReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer multiplication with division &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_230'>230</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_230'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>chBitsPerByte<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.chBitsPerByteReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer subtraction with addition &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_231'>231</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_231'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>chBitsPerByte<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.chBitsPerByteReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer subtraction with addition &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_237'>237</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_237'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>chBitsPerByte<br/><b>Killed by : </b>tiralab.jcr.logic.block_cipher.DESTest.feistelFunctionReturnCorrect(tiralab.jcr.logic.block_cipher.DESTest)</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>chBitsPerByte<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.chBitsPerByteReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer multiplication with division &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>chBitsPerByte<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.chBitsPerByteReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_239'>239</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_239'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>chBitsPerByte<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.chBitsPerByteReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> removed call to tiralab/jcr/logic/BitFunctions::insertBit &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_240'>240</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_240'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>chBitsPerByte<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.chBitsPerByteReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> Changed increment from 1 to -1 &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_241'>241</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_241'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>chBitsPerByte<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.chBitsPerByteReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> Changed increment from 1 to -1 &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_244'>244</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_244'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>chBitsPerByte<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.chBitsPerByteReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer modulus with multiplication &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>chBitsPerByte<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.chBitsPerByteReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_245'>245</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_245'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>chBitsPerByte<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.chBitsPerByteReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer addition with subtraction &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_249'>249</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_249'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>chBitsPerByte<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.chBitsPerByteReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer modulus with multiplication &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>chBitsPerByte<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.chBitsPerByteReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_250'>250</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_250'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>chBitsPerByte<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.chBitsPerByteReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> Replaced integer addition with subtraction &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ce15112_253'>253</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ce15112_253'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>chBitsPerByte<br/><b>Killed by : </b>tiralab.jcr.logic.BitFunctionsTest.chBitsPerByteReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest)</span></span> mutated return of Object value for tiralab/jcr/logic/BitFunctions::chBitsPerByte to ( if (x != null) null else throw new RuntimeException ) &rarr; KILLED</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+<li class='mutator'>INCREMENTS_MUTATOR</li>
+<li class='mutator'>VOID_METHOD_CALL_MUTATOR</li>
+<li class='mutator'>RETURN_VALS_MUTATOR</li>
+<li class='mutator'>MATH_MUTATOR</li>
+<li class='mutator'>NEGATE_CONDITIONALS_MUTATOR</li>
+<li class='mutator'>INVERT_NEGS_MUTATOR</li>
+<li class='mutator'>CONDITIONALS_BOUNDARY_MUTATOR</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>tiralab.jcr.logic.block_cipher.key_schedule.DESKeyScheduleTest.decryptionSubKeysReturnCorrectKeys2(tiralab.jcr.logic.block_cipher.key_schedule.DESKeyScheduleTest) (0 ms)</li><li>tiralab.jcr.logic.block_cipher.DESTest.substituteOutputCorrect2(tiralab.jcr.logic.block_cipher.DESTest) (1 ms)</li><li>tiralab.jcr.logic.block_cipher.DESTest.permutationPReturnCorrect(tiralab.jcr.logic.block_cipher.DESTest) (1 ms)</li><li>tiralab.jcr.logic.block_cipher.key_schedule.DESKeyScheduleTest.permutedChoice2ReturnCorrect(tiralab.jcr.logic.block_cipher.key_schedule.DESKeyScheduleTest) (0 ms)</li><li>tiralab.jcr.logic.block_cipher.DESTest.feistelFunctionReturnCorrect(tiralab.jcr.logic.block_cipher.DESTest) (0 ms)</li><li>tiralab.jcr.logic.block_cipher.key_schedule.DESKeyScheduleTest.encryptionSubKeysReturnCorrectKeys2(tiralab.jcr.logic.block_cipher.key_schedule.DESKeyScheduleTest) (0 ms)</li><li>tiralab.jcr.logic.BitFunctionsTest.concatBitsReturnCorrect2(tiralab.jcr.logic.BitFunctionsTest) (1 ms)</li><li>tiralab.jcr.logic.BitFunctionsTest.nBitByteArrayReturnCorrectLengthArray3(tiralab.jcr.logic.BitFunctionsTest) (1 ms)</li><li>tiralab.jcr.logic.BitFunctionsTest.chBitsPerByteReturnCorrect2(tiralab.jcr.logic.BitFunctionsTest) (1 ms)</li><li>tiralab.jcr.logic.mode_of_operation.ECBTest.makeUnmakeBlocksReturnOriginalBytes2(tiralab.jcr.logic.mode_of_operation.ECBTest) (0 ms)</li><li>tiralab.jcr.logic.mode_of_operation.ECBTest.encryptDecryptReturnOriginalBytes1(tiralab.jcr.logic.mode_of_operation.ECBTest) (3 ms)</li><li>tiralab.jcr.logic.BitFunctionsTest.rotateLeftIgnoresLengthLessThanOne(tiralab.jcr.logic.BitFunctionsTest) (1 ms)</li><li>tiralab.jcr.logic.BitFunctionsTest.insertBitReturnCorrect3(tiralab.jcr.logic.BitFunctionsTest) (2 ms)</li><li>tiralab.jcr.logic.BitFunctionsTest.copyBitsReturnCorrect2(tiralab.jcr.logic.BitFunctionsTest) (1 ms)</li><li>tiralab.jcr.logic.CryptographerTest.decryptWithDifferentKeyReturnDifferentBytes2(tiralab.jcr.logic.CryptographerTest) (4 ms)</li><li>tiralab.jcr.logic.block_cipher.DESTest.substituteOutputCorrect3(tiralab.jcr.logic.block_cipher.DESTest) (0 ms)</li><li>tiralab.jcr.logic.block_cipher.DESTest.initialPermutationReturnCorrect(tiralab.jcr.logic.block_cipher.DESTest) (0 ms)</li><li>tiralab.jcr.logic.BitFunctionsTest.permuteBitsWorksCorrectly1(tiralab.jcr.logic.BitFunctionsTest) (1 ms)</li><li>tiralab.jcr.logic.block_cipher.DESTest.desEncryptionCorrect(tiralab.jcr.logic.block_cipher.DESTest) (0 ms)</li><li>tiralab.jcr.logic.BitFunctionsTest.insertBitReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest) (1 ms)</li><li>tiralab.jcr.logic.mode_of_operation.ECBTest.byteArrayPaddedCorrectlyWhenLengthNotMultipleOfBlockSize2(tiralab.jcr.logic.mode_of_operation.ECBTest) (1 ms)</li><li>tiralab.jcr.logic.block_cipher.DESTest.expandReturnCorrect(tiralab.jcr.logic.block_cipher.DESTest) (1 ms)</li><li>tiralab.jcr.logic.CryptographerTest.decryptWithDifferentKeyReturnDifferentBytes1(tiralab.jcr.logic.CryptographerTest) (10 ms)</li><li>tiralab.jcr.logic.mode_of_operation.ECBTest.blockSizeNotNegative(tiralab.jcr.logic.mode_of_operation.ECBTest) (1 ms)</li><li>tiralab.jcr.logic.BitFunctionsTest.copyBitsReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest) (1 ms)</li><li>tiralab.jcr.logic.BitFunctionsTest.concatBitsReturnCorrect3(tiralab.jcr.logic.BitFunctionsTest) (1 ms)</li><li>tiralab.jcr.logic.BitFunctionsTest.getBitByOffsetReturnsCorrectBit2(tiralab.jcr.logic.BitFunctionsTest) (1 ms)</li><li>tiralab.jcr.logic.BitFunctionsTest.nBitByteArrayReturnCorrectLengthArray2(tiralab.jcr.logic.BitFunctionsTest) (0 ms)</li><li>tiralab.jcr.logic.BitFunctionsTest.rotateLeftReturnsCorrect1(tiralab.jcr.logic.BitFunctionsTest) (1 ms)</li><li>tiralab.jcr.logic.BitFunctionsTest.chBitsPerByteReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest) (1 ms)</li><li>tiralab.jcr.logic.mode_of_operation.ECBTest.byteArrayPaddedCorrectlyWhenLengthNotMultipleOfBlockSize1(tiralab.jcr.logic.mode_of_operation.ECBTest) (0 ms)</li><li>tiralab.jcr.logic.BitFunctionsTest.rotateLeftReturnsCorrect2(tiralab.jcr.logic.BitFunctionsTest) (0 ms)</li><li>tiralab.jcr.logic.block_cipher.key_schedule.DESKeyScheduleTest.decryptionSubKeysReturnCorrectKeys1(tiralab.jcr.logic.block_cipher.key_schedule.DESKeyScheduleTest) (1 ms)</li><li>tiralab.jcr.logic.BitFunctionsTest.copyBitsReturnCorrect3(tiralab.jcr.logic.BitFunctionsTest) (1 ms)</li><li>tiralab.jcr.logic.mode_of_operation.ECBTest.padUnpadReturnOriginalBytes3(tiralab.jcr.logic.mode_of_operation.ECBTest) (0 ms)</li><li>tiralab.jcr.logic.CryptographerTest.encryptDecryptGivesOriginalBytes1(tiralab.jcr.logic.CryptographerTest) (2 ms)</li><li>tiralab.jcr.logic.mode_of_operation.ECBTest.makeUnmakeBlocksReturnOriginalBytes1(tiralab.jcr.logic.mode_of_operation.ECBTest) (1 ms)</li><li>tiralab.jcr.logic.BitFunctionsTest.bitwiseXORReturnCorrect(tiralab.jcr.logic.BitFunctionsTest) (11 ms)</li><li>tiralab.jcr.logic.BitFunctionsTest.permuteBitsWorksCorrectly2(tiralab.jcr.logic.BitFunctionsTest) (0 ms)</li><li>tiralab.jcr.logic.mode_of_operation.ECBTest.byteArrayPaddedCorrectlyWhenLengthIsMultipleOfBlockSize(tiralab.jcr.logic.mode_of_operation.ECBTest) (1 ms)</li><li>tiralab.jcr.logic.block_cipher.key_schedule.DESKeyScheduleTest.encryptionSubKeysReturnCorrectKeys1(tiralab.jcr.logic.block_cipher.key_schedule.DESKeyScheduleTest) (1 ms)</li><li>tiralab.jcr.logic.block_cipher.DESTest.finalPermutationReturnCorrect(tiralab.jcr.logic.block_cipher.DESTest) (1 ms)</li><li>tiralab.jcr.logic.block_cipher.DESTest.desEncryptDecryptGivesOriginalPlaintext(tiralab.jcr.logic.block_cipher.DESTest) (1 ms)</li><li>tiralab.jcr.logic.BitFunctionsTest.concatBitsReturnCorrect1(tiralab.jcr.logic.BitFunctionsTest) (1 ms)</li><li>tiralab.jcr.logic.BitFunctionsTest.getBitByOffsetReturnsCorrectBit1(tiralab.jcr.logic.BitFunctionsTest) (1 ms)</li><li>tiralab.jcr.logic.BitFunctionsTest.nBitByteArrayReturnCorrectLengthArray1(tiralab.jcr.logic.BitFunctionsTest) (1 ms)</li><li>tiralab.jcr.logic.block_cipher.DESTest.substituteOutputCorrect1(tiralab.jcr.logic.block_cipher.DESTest) (0 ms)</li><li>tiralab.jcr.logic.mode_of_operation.ECBTest.padUnpadReturnOriginalBytes2(tiralab.jcr.logic.mode_of_operation.ECBTest) (1 ms)</li><li>tiralab.jcr.logic.block_cipher.key_schedule.DESKeyScheduleTest.permutedChoice1ReturnCorrect(tiralab.jcr.logic.block_cipher.key_schedule.DESKeyScheduleTest) (0 ms)</li><li>tiralab.jcr.logic.BitFunctionsTest.chBitsPerByteReturnCorrect3(tiralab.jcr.logic.BitFunctionsTest) (1 ms)</li><li>tiralab.jcr.logic.mode_of_operation.ECBTest.blockSizeNotZero(tiralab.jcr.logic.mode_of_operation.ECBTest) (0 ms)</li><li>tiralab.jcr.logic.BitFunctionsTest.rotateLeftReturnsCorrect3(tiralab.jcr.logic.BitFunctionsTest) (0 ms)</li><li>tiralab.jcr.logic.BitFunctionsTest.getBitByOffsetReturnsCorrectBit3(tiralab.jcr.logic.BitFunctionsTest) (1 ms)</li><li>tiralab.jcr.logic.BitFunctionsTest.insertBitReturnCorrect2(tiralab.jcr.logic.BitFunctionsTest) (0 ms)</li><li>tiralab.jcr.logic.CryptographerTest.encryptDecryptGivesOriginalBytes2(tiralab.jcr.logic.CryptographerTest) (3 ms)</li><li>tiralab.jcr.logic.mode_of_operation.ECBTest.padUnpadReturnOriginalBytes1(tiralab.jcr.logic.mode_of_operation.ECBTest) (0 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 1.2.0
+
+</body>
+</html>

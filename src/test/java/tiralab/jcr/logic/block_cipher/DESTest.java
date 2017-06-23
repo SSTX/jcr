@@ -232,4 +232,9 @@ public class DESTest {
         };
         assertArrayEquals(input, des.decrypt(des.encrypt(input)));
     }
+
+    @Test
+    public void desEncryptEqualResultToJavax {
+
+    }
 }

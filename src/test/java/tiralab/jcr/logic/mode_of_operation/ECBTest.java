@@ -19,6 +19,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import tiralab.jcr.logic.block_cipher.DES;
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.DESKeySpec;
+import java.security.Key;
+import java.security.KeyFactory;
+import static org.junit.Assert.*;
 
 /**
  *
@@ -152,4 +159,18 @@ public class ECBTest {
     public void encryptDecryptReturnOriginalBytes1() {
         assertArrayEquals(testBytes, ecb.decrypt(ecb.encrypt(testBytes)));
     }
+
+    @Test
+    public void ecbEncryptEqualResultToJavax() {
+	try {
+            Cipher cipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
+            SecretKeyFactory gen = SecretKeyFactory.getInstance("DES");
+            Key keyComp = gen.generateSecret(new DESKeySpec("aaaaaaaa".getBytes()));
+            cipher.init(Cipher.ENCRYPT_MODE, keyComp);
+	    assertArrayEquals(cipher.doFinal(testBytes), ecb.encrypt(testBytes));	
+	} catch (Exception e) {
+		fail("Error initializing cipher");
+	}
+    }
+
 }

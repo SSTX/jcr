@@ -5,6 +5,12 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.DESKeySpec;
+import java.security.Key;
+import java.security.KeyFactory;
 
 /**
  *
@@ -233,8 +239,4 @@ public class DESTest {
         assertArrayEquals(input, des.decrypt(des.encrypt(input)));
     }
 
-    @Test
-    public void desEncryptEqualResultToJavax {
-
-    }
 }

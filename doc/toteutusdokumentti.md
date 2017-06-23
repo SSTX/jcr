@@ -2,8 +2,11 @@
 Ohjelmaa käytetään komentoriviltä. Argumentteina annetaan tiedostojen sijainnit 
 ja muut tarvittavat tiedot, jotka välitetään Cryptographer-oliolle. Se hoitaa 
 tiedostojen lukemisen, sekä algoritmin ja toimintatavan valinnan. Luettu tieto 
-annetaan seuraavaksi ModeOfOperation-luokan perivälle oliolle. Se lisää käsiteltävään
-dataan täytettä niin, että se on käytettävän algoritmin lohkokoon monikerta.
+annetaan seuraavaksi ModeOfOperation-luokan perivälle oliolle (toteutettuna vain ECB). Se lisää käsiteltävään
+dataan täytettä niin, että se on käytettävän algoritmin lohkokoon monikerta. Tähän
+käytetään PKCS#7 padding -menetelmää. Sen toimintaperiaate on seuraava: datan loppuun
+lisätään tavuja niin monta, että lohkokoon monikerta saavutetaan. Jokaisen lisätyn tavun
+arvo on lisättyjen tavujen kokonaismäärä. 
 Sitten data annetaan lohko kerrallaan salausalgoritmille ja lopuksi se palautetaan
  Cryptographer:lle joka kirjoittaa sen tiedostoon.
 

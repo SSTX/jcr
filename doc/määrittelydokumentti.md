@@ -1,11 +1,13 @@
 # Yleiskuvaus
 Toteutus Data Encryption Standardille (DES), ja algoritmin käyttämiseen tarvittavat komponentit
-ja työkalut: Electronic Code Book (ECB), tiedostojen lukeminen/kirjoittaminen, komentorivikäyttöliittymä.
+ja työkalut: Electronic Code Book (ECB), tiedostojen lukeminen/kirjoittaminen, komentorivikäyttöliittymä,
+taulukon täyttäminen oikean pituiseksi (PKCS#7 padding).
 Käytän toteutuksessa Javaa ja Mavenia.
 
 # Ohjelman toiminta
 Ohjelmaa käytetään komentoriviltä. Syötteenä annetaan luettavien ja kirjoitettavien tiedostojen sijainnit
-ja valitsin salaamiselle/purkamiselle.
+ja valitsin salaamiselle/purkamiselle. Ohjelma lukee syötteen ja salausavaimen tiedostosta, prosessoi sen
+ja tallentaa tuloksen toiseen tiedostoon.
 
 # Aika- ja tilavaativuus
 ## Tavoitteellinen vaativuus
